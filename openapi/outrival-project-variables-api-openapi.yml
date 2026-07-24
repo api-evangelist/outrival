@@ -1,0 +1,152 @@
+openapi: 3.0.0
+info:
+  title: OutRival Ai Chat Sessions Project variables API
+  description: OutRival API documentation.
+  version: '1.0'
+  contact: {}
+servers:
+- url: https://api.outrival.com
+tags:
+- name: Project variables
+paths:
+  /rest/v2/projects/{projectId}/variables:
+    get:
+      operationId: VariableController_getAllVariables
+      parameters:
+      - name: projectId
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of project variables.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VariableDto'
+      tags:
+      - Project variables
+      security:
+      - api_key: []
+      - bearer: []
+    post:
+      operationId: VariableController_createVariable
+      parameters:
+      - name: projectId
+        required: true
+        in: path
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVariableDto'
+      responses:
+        '200':
+          description: Create a new variable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VariableDto'
+      tags:
+      - Project variables
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v2/projects/{projectId}/variables/{variableId}:
+    patch:
+      operationId: VariableController_updateVariable
+      parameters:
+      - name: projectId
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: variableId
+        required: true
+        in: path
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateVariableDto'
+      responses:
+        '200':
+          description: Update variable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VariableDto'
+      tags:
+      - Project variables
+      security:
+      - api_key: []
+      - bearer: []
+    delete:
+      operationId: VariableController_deleteVariable
+      parameters:
+      - name: projectId
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: variableId
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Delete variable.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VariableDto'
+      tags:
+      - Project variables
+      security:
+      - api_key: []
+      - bearer: []
+components:
+  schemas:
+    UpdateVariableDto:
+      type: object
+      properties:
+        name:
+          type: string
+        testValue:
+          type: string
+    VariableDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        testValue:
+          type: string
+      required:
+      - id
+      - name
+    CreateVariableDto:
+      type: object
+      properties:
+        name:
+          type: string
+        testValue:
+          type: string
+      required:
+      - name
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-Key

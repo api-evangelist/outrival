@@ -1,0 +1,301 @@
+openapi: 3.0.0
+info:
+  title: OutRival Ai Chat Sessions Assistants API
+  description: OutRival API documentation.
+  version: '1.0'
+  contact: {}
+servers:
+- url: https://api.outrival.com
+tags:
+- name: Assistants
+paths:
+  /rest/v1/assistants:
+    post:
+      operationId: AssistantsController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAssistantDto'
+      responses:
+        '200':
+          description: Create AI Assistant.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Assistant'
+      tags:
+      - Assistants
+      security:
+      - api_key: []
+      - bearer: []
+    get:
+      operationId: AssistantsController_findAll
+      parameters:
+      - name: order
+        required: false
+        in: query
+        schema:
+          default: desc
+          enum:
+          - asc
+          - desc
+          type: string
+      - name: page
+        required: false
+        in: query
+        schema:
+          minimum: 1
+          default: 1
+          type: number
+      - name: take
+        required: false
+        in: query
+        schema:
+          minimum: 1
+          maximum: 100
+          default: 20
+          type: number
+      responses:
+        '200':
+          description: Paginated list of AI Assistant.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/PageDto'
+                - properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Assistant'
+      tags:
+      - Assistants
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v1/assistants/templates:
+    get:
+      operationId: AssistantsController_findAllTemplates
+      parameters:
+      - name: order
+        required: false
+        in: query
+        schema:
+          default: desc
+          enum:
+          - asc
+          - desc
+          type: string
+      - name: page
+        required: false
+        in: query
+        schema:
+          minimum: 1
+          default: 1
+          type: number
+      - name: take
+        required: false
+        in: query
+        schema:
+          minimum: 1
+          maximum: 100
+          default: 20
+          type: number
+      responses:
+        '200':
+          description: List of AI Assistant templates.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/PageDto'
+                - properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Assistant'
+      tags:
+      - Assistants
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v1/assistants/{id}:
+    get:
+      operationId: AssistantsController_findOne
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: AI Assistant by Assistant ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Assistant'
+        '400':
+          description: Assistant not found.
+      tags:
+      - Assistants
+      security:
+      - api_key: []
+      - bearer: []
+    patch:
+      operationId: AssistantsController_update
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAssistantDto'
+      responses:
+        '200':
+          description: Update specific AI Assistant.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Assistant'
+        '400':
+          description: ''
+      tags:
+      - Assistants
+      security:
+      - api_key: []
+      - bearer: []
+    delete:
+      operationId: AssistantsController_remove
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Delete specific AI Assistant.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAssistant'
+      tags:
+      - Assistants
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v1/assistants/duplicate/{id}:
+    post:
+      operationId: AssistantsController_duplicate
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Update specific AI Assistant.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Assistant'
+      tags:
+      - Assistants
+      security:
+      - api_key: []
+      - bearer: []
+components:
+  schemas:
+    CreateAssistantDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        variables:
+          type: object
+      required:
+      - name
+    UpdateAssistantDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        variables:
+          type: object
+    PageMetaDto:
+      type: object
+      properties:
+        page:
+          type: number
+        take:
+          type: number
+        itemCount:
+          type: number
+        pageCount:
+          type: number
+        hasPreviousPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+      required:
+      - page
+      - take
+      - itemCount
+      - pageCount
+      - hasPreviousPage
+      - hasNextPage
+    Assistant:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        template:
+          type: boolean
+          default: false
+        variables:
+          type: object
+      required:
+      - id
+      - name
+    DeleteAssistant:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+      - id
+    PageDto:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: array
+        meta:
+          $ref: '#/components/schemas/PageMetaDto'
+      required:
+      - data
+      - meta
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-Key

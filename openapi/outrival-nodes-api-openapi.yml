@@ -1,0 +1,573 @@
+openapi: 3.0.0
+info:
+  title: OutRival Ai Chat Sessions Nodes API
+  description: OutRival API documentation.
+  version: '1.0'
+  contact: {}
+servers:
+- url: https://api.outrival.com
+tags:
+- name: Nodes
+paths:
+  /rest/v2/nodes:
+    get:
+      operationId: NodeController_findAll
+      parameters:
+      - name: order
+        required: false
+        in: query
+        schema:
+          default: desc
+          enum:
+          - asc
+          - desc
+          type: string
+      - name: page
+        required: false
+        in: query
+        schema:
+          minimum: 1
+          default: 1
+          type: number
+      - name: take
+        required: false
+        in: query
+        schema:
+          minimum: 1
+          maximum: 100
+          default: 20
+          type: number
+      responses:
+        '200':
+          description: Paginated list of Workflow Nodes.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/PageDto'
+                - properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/NodeDto'
+      tags:
+      - Nodes
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v2/nodes/{id}:
+    get:
+      operationId: NodeController_findOne
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Workflow Node by ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeDto'
+        '400':
+          description: Workflow Node not found.
+      tags:
+      - Nodes
+      security:
+      - api_key: []
+      - bearer: []
+    patch:
+      operationId: NodeController_update
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateNodeDto'
+      responses:
+        '200':
+          description: Update specific Workflow Node.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeDto'
+        '400':
+          description: ''
+      tags:
+      - Nodes
+      security:
+      - api_key: []
+      - bearer: []
+    delete:
+      operationId: NodeController_remove
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Delete specific Workflow Node.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteNodeDto'
+      tags:
+      - Nodes
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v2/nodes/duplicate/{id}:
+    post:
+      operationId: NodeController_duplicate
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Duplicate specific Workflow Node.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeDto'
+      tags:
+      - Nodes
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v2/nodes/{id}/config:
+    get:
+      operationId: NodeController_nodeWithConfig
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Get workflow node with configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeWithConfigDto'
+      tags:
+      - Nodes
+      security:
+      - api_key: []
+      - bearer: []
+components:
+  schemas:
+    NodeType:
+      type: string
+      enum:
+      - START
+      - END
+      - PROMPT
+      - ACTION
+      - CONDITION
+    Provider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
+      - ANTHROPIC
+    VoiceConfiguration:
+      type: object
+      properties:
+        initialMessage:
+          type: string
+        prompt:
+          type: string
+        provider:
+          $ref: '#/components/schemas/Provider'
+        resources:
+          type: string
+        model:
+          $ref: '#/components/schemas/Model'
+        voiceProvider:
+          $ref: '#/components/schemas/VoiceProvider'
+        voice:
+          type: string
+          enum:
+          - burt
+          - marissa
+          - andrea
+          - sarah
+          - phillip
+          - steve
+          - joseph
+          - myra
+          - paula
+          - ryan
+          - drew
+          - paul
+          - mrb
+          - matilda
+          - mark
+          - alloy
+          - echo
+          - fable
+          - onyx
+          - nova
+          - shimmer
+          - jennifer
+          - melissa
+          - will
+          - chris
+          - matt
+          - jack
+          - ruby
+          - davis
+          - donna
+          - michael
+        temperature:
+          type: number
+        maxTokensOutput:
+          type: number
+        backgroundSound:
+          $ref: '#/components/schemas/BackgroundSound'
+        backchanneling:
+          type: boolean
+        functions:
+          type: array
+          items:
+            type: object
+        endCallFunction:
+          type: boolean
+        dialKeypadFunction:
+          type: boolean
+        endCallMessage:
+          type: string
+        endCallPhrases:
+          type: string
+        isRagEnabled:
+          type: boolean
+        forceRag:
+          type: boolean
+        ragTriggerTopics:
+          type: string
+        preserveRagResult:
+          type: boolean
+        isCallTransferEnabled:
+          type: boolean
+        callTransferPhoneNumber:
+          type: string
+        callTransferCondition:
+          type: string
+        callTransferForce:
+          type: boolean
+      required:
+      - initialMessage
+      - prompt
+      - provider
+      - resources
+      - model
+      - voiceProvider
+      - voice
+      - temperature
+      - maxTokensOutput
+      - backgroundSound
+      - backchanneling
+      - functions
+      - endCallFunction
+      - dialKeypadFunction
+      - endCallMessage
+      - endCallPhrases
+      - isRagEnabled
+      - forceRag
+      - ragTriggerTopics
+      - preserveRagResult
+      - isCallTransferEnabled
+      - callTransferPhoneNumber
+      - callTransferCondition
+      - callTransferForce
+    DeleteNodeDto:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+      - id
+    ChatProvider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
+    SmsModel:
+      type: string
+      enum:
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
+    UpdateNodeDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          $ref: '#/components/schemas/NodeType'
+        builderPositionX:
+          type: number
+        builderPositionY:
+          type: number
+    SmsProvider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
+    ChatConfiguration:
+      type: object
+      properties:
+        initialMessage:
+          type: string
+        prompt:
+          type: string
+        resources:
+          type: string
+        provider:
+          $ref: '#/components/schemas/ChatProvider'
+        model:
+          $ref: '#/components/schemas/ChatModel'
+        temperature:
+          type: number
+        maxTokensOutput:
+          type: number
+        chatMode:
+          type: boolean
+        quickRepliesEnabled:
+          type: boolean
+        isRagEnabled:
+          type: boolean
+        forceRag:
+          type: boolean
+        ragTriggerTopics:
+          type: string
+        preserveRagResult:
+          type: boolean
+        functions:
+          type: array
+          items:
+            type: object
+      required:
+      - initialMessage
+      - prompt
+      - resources
+      - provider
+      - model
+      - temperature
+      - maxTokensOutput
+      - chatMode
+      - quickRepliesEnabled
+      - isRagEnabled
+      - forceRag
+      - ragTriggerTopics
+      - preserveRagResult
+      - functions
+    BackgroundSound:
+      type: string
+      enum:
+      - DEFAULT
+      - 'OFF'
+      - OFFICE
+    PageMetaDto:
+      type: object
+      properties:
+        page:
+          type: number
+        take:
+          type: number
+        itemCount:
+          type: number
+        pageCount:
+          type: number
+        hasPreviousPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+      required:
+      - page
+      - take
+      - itemCount
+      - pageCount
+      - hasPreviousPage
+      - hasNextPage
+    NodeWithConfigDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        workflowId:
+          type: string
+        type:
+          $ref: '#/components/schemas/NodeType'
+        builderPositionX:
+          type: number
+        builderPositionY:
+          type: number
+        error:
+          type: string
+        config:
+          oneOf:
+          - $ref: '#/components/schemas/ChatConfiguration'
+          - $ref: '#/components/schemas/SmsConfiguration'
+          - $ref: '#/components/schemas/VoiceConfiguration'
+      required:
+      - id
+      - name
+      - workflowId
+      - type
+      - builderPositionX
+      - builderPositionY
+      - error
+      - config
+    SmsConfiguration:
+      type: object
+      properties:
+        initialMessage:
+          type: string
+        prompt:
+          type: string
+        resources:
+          type: string
+        provider:
+          $ref: '#/components/schemas/SmsProvider'
+        model:
+          $ref: '#/components/schemas/SmsModel'
+        temperature:
+          type: number
+        maxTokensOutput:
+          type: number
+        smsMode:
+          type: boolean
+        phoneCallbackEnabled:
+          type: boolean
+        keywords:
+          type: string
+        isRagEnabled:
+          type: boolean
+        forceRag:
+          type: boolean
+        ragTriggerTopics:
+          type: string
+        preserveRagResult:
+          type: boolean
+        functions:
+          type: array
+          items:
+            type: object
+      required:
+      - initialMessage
+      - prompt
+      - resources
+      - provider
+      - model
+      - temperature
+      - maxTokensOutput
+      - smsMode
+      - phoneCallbackEnabled
+      - keywords
+      - isRagEnabled
+      - forceRag
+      - ragTriggerTopics
+      - preserveRagResult
+      - functions
+    NodeDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        workflowId:
+          type: string
+        type:
+          $ref: '#/components/schemas/NodeType'
+        builderPositionX:
+          type: number
+        builderPositionY:
+          type: number
+        error:
+          type: string
+      required:
+      - id
+      - name
+      - workflowId
+      - type
+      - builderPositionX
+      - builderPositionY
+      - error
+    ChatModel:
+      type: string
+      enum:
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
+    Model:
+      type: string
+      enum:
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
+      - CLAUDE_3_OPUS
+      - CLAUDE_3_SONNET
+      - CLAUDE_3_HAIKU
+      - CLAUDE_3_5_SONNET
+    VoiceProvider:
+      type: string
+      enum:
+      - ELEVENLABS
+      - PLAYHT
+      - OPENAI
+    PageDto:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: array
+        meta:
+          $ref: '#/components/schemas/PageMetaDto'
+      required:
+      - data
+      - meta
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-Key

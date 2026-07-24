@@ -1,0 +1,209 @@
+openapi: 3.0.0
+info:
+  title: OutRival Ai Chat Sessions Files API
+  description: OutRival API documentation.
+  version: '1.0'
+  contact: {}
+servers:
+- url: https://api.outrival.com
+tags:
+- name: Files
+paths:
+  /rest/v1/files/upload:
+    post:
+      operationId: FilesController_upload
+      parameters: []
+      requestBody:
+        required: true
+        description: File to upload
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FileUploadDto'
+      responses:
+        '201':
+          description: ''
+        '400':
+          description: Invalid upload request.
+      tags:
+      - Files
+      security:
+      - api_key: []
+  /rest/v1/files:
+    get:
+      operationId: FilesController_findAll
+      parameters:
+      - name: order
+        required: false
+        in: query
+        schema:
+          default: desc
+          enum:
+          - asc
+          - desc
+          type: string
+      - name: page
+        required: false
+        in: query
+        schema:
+          minimum: 1
+          default: 1
+          type: number
+      - name: take
+        required: false
+        in: query
+        schema:
+          minimum: 1
+          maximum: 100
+          default: 20
+          type: number
+      responses:
+        '200':
+          description: Paginated list of AI Assistant.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/PageDto'
+                - properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/File'
+      tags:
+      - Files
+      security:
+      - api_key: []
+  /rest/v1/files/{id}/download:
+    get:
+      operationId: FilesController_getDownloadLink
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Download link
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileDownloadLinkDto'
+        '404':
+          description: File not found
+      tags:
+      - Files
+      security:
+      - api_key: []
+  /rest/v1/files/{id}:
+    delete:
+      operationId: FilesController_deleteFile
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Delete file
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletedFile'
+      tags:
+      - Files
+      security:
+      - api_key: []
+components:
+  schemas:
+    FileDownloadLinkDto:
+      type: object
+      properties:
+        url:
+          type: string
+      required:
+      - url
+    DeletedFile:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+      - id
+    FileUploadDto:
+      type: object
+      properties:
+        file:
+          type: string
+          format: binary
+        metadata:
+          type: object
+      required:
+      - file
+    PageMetaDto:
+      type: object
+      properties:
+        page:
+          type: number
+        take:
+          type: number
+        itemCount:
+          type: number
+        pageCount:
+          type: number
+        hasPreviousPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+      required:
+      - page
+      - take
+      - itemCount
+      - pageCount
+      - hasPreviousPage
+      - hasNextPage
+    File:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        organizationId:
+          type: string
+        size:
+          type: number
+        metadata:
+          type: object
+        mimeType:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+      required:
+      - id
+      - name
+      - organizationId
+      - size
+      - metadata
+      - mimeType
+      - createdAt
+    PageDto:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: array
+        meta:
+          $ref: '#/components/schemas/PageMetaDto'
+      required:
+      - data
+      - meta
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-Key

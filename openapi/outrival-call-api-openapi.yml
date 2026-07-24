@@ -1,0 +1,145 @@
+openapi: 3.0.0
+info:
+  title: OutRival Ai Chat Sessions Call API
+  description: OutRival API documentation.
+  version: '1.0'
+  contact: {}
+servers:
+- url: https://api.outrival.com
+tags:
+- name: Call
+paths:
+  /rest/v1/call/phone:
+    post:
+      operationId: VapiController_phoneCallInitiate
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePhoneCallConfiguration'
+      responses:
+        '200':
+          description: Initiate phone call.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhoneCallConfiguration'
+        '400':
+          description: Assistant not found or invalid organization ID.
+      tags:
+      - Call
+      security:
+      - api_key: []
+  /rest/v2/call/phone:
+    post:
+      operationId: VapiController_phoneCallInitiate
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePhoneCallConfiguration_2'
+      responses:
+        '200':
+          description: Initiate phone call.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PhoneCallConfiguration'
+        '400':
+          description: Workflow not found or invalid organization ID.
+      tags:
+      - Call
+      security:
+      - api_key: []
+  /rest/v2/call/phone-numbers:
+    get:
+      operationId: VapiController_getActivePhoneNumbers
+      parameters: []
+      responses:
+        '200':
+          description: Get organization active phone numbers.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PhoneCallConfigurationNumberDto'
+      tags:
+      - Call
+components:
+  schemas:
+    PhoneCallConfigurationNumberDto:
+      type: object
+      properties:
+        id:
+          type: string
+        number:
+          type: string
+      required:
+      - id
+      - number
+    PhoneCallConfiguration:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+      - id
+    CreatePhoneCallConfiguration_2:
+      type: object
+      properties:
+        workflowId:
+          type: string
+        deploymentId:
+          type: string
+        phoneNumber:
+          type: string
+        userName:
+          type: string
+        userId:
+          type: string
+        variables:
+          type: object
+        metadata:
+          type: object
+          description: Metadata
+        externalId:
+          type: string
+        anonymousId:
+          type: string
+      required:
+      - phoneNumber
+      - metadata
+    CreatePhoneCallConfiguration:
+      type: object
+      properties:
+        assistantId:
+          type: string
+        phoneNumber:
+          type: string
+        userName:
+          type: string
+        userId:
+          type: string
+        variables:
+          type: object
+        metadata:
+          type: object
+          description: Metadata
+        externalId:
+          type: string
+        anonymousId:
+          type: string
+      required:
+      - assistantId
+      - phoneNumber
+      - metadata
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-Key

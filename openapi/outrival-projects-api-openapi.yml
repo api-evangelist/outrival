@@ -1,0 +1,327 @@
+openapi: 3.0.0
+info:
+  title: OutRival Ai Chat Sessions Projects API
+  description: OutRival API documentation.
+  version: '1.0'
+  contact: {}
+servers:
+- url: https://api.outrival.com
+tags:
+- name: Projects
+paths:
+  /rest/v2/projects:
+    get:
+      operationId: WorkflowProjectController_findAll
+      parameters:
+      - name: order
+        required: false
+        in: query
+        schema:
+          default: desc
+          enum:
+          - asc
+          - desc
+          type: string
+      - name: page
+        required: false
+        in: query
+        schema:
+          minimum: 1
+          default: 1
+          type: number
+      - name: take
+        required: false
+        in: query
+        schema:
+          minimum: 1
+          maximum: 100
+          default: 20
+          type: number
+      responses:
+        '200':
+          description: Paginated list of Projects.
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/PageDto'
+                - properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/ProjectDto'
+      tags:
+      - Projects
+      security:
+      - api_key: []
+      - bearer: []
+    post:
+      operationId: WorkflowProjectController_createProject
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectDto'
+      responses:
+        '200':
+          description: Create a new project.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDto'
+      tags:
+      - Projects
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v2/projects/{id}:
+    get:
+      operationId: WorkflowProjectController_findOne
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Project by Project ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDto'
+        '400':
+          description: Project not found.
+      tags:
+      - Projects
+      security:
+      - api_key: []
+      - bearer: []
+    patch:
+      operationId: WorkflowProjectController_updateProject
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProjectDto'
+      responses:
+        '200':
+          description: Update project by Project ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDto'
+      tags:
+      - Projects
+      security:
+      - api_key: []
+      - bearer: []
+    delete:
+      operationId: WorkflowProjectController_deleteProject
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Delete project by Project ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectDto'
+      tags:
+      - Projects
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v2/projects/{id}/workflows:
+    get:
+      operationId: WorkflowProjectController_projectWorkflows
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of project workflows.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkflowDto'
+      tags:
+      - Projects
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v2/projects/{id}/deployments:
+    get:
+      operationId: WorkflowProjectController_projectWorkflowDeployments
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of project workflow deployments.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkflowDeploymentDto'
+      tags:
+      - Projects
+      security:
+      - api_key: []
+      - bearer: []
+components:
+  schemas:
+    WorkflowType:
+      type: string
+      enum:
+      - SIMPLE
+      - ADVANCED
+    WorkflowDeploymentDto:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/WorkflowDeploymentType'
+        workflowId:
+          type: string
+        enabled:
+          type: boolean
+        phoneNumberId:
+          type: string
+      required:
+      - id
+      - type
+    ProjectDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        template:
+          type: boolean
+          default: false
+      required:
+      - id
+      - name
+    WorkflowModality:
+      type: string
+      enum:
+      - TEXT
+      - VOICE
+      - SMS
+    CreateProjectDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+      required:
+      - name
+    UpdateProjectDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+    PageMetaDto:
+      type: object
+      properties:
+        page:
+          type: number
+        take:
+          type: number
+        itemCount:
+          type: number
+        pageCount:
+          type: number
+        hasPreviousPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+      required:
+      - page
+      - take
+      - itemCount
+      - pageCount
+      - hasPreviousPage
+      - hasNextPage
+    WorkflowDeploymentType:
+      type: string
+      enum:
+      - TEXT_IFRAME
+      - TEXT_BUBBLE
+      - VOICE_BUBBLE
+      - VOICE_IFRAME
+      - SMS
+      - PHONE_OUTBOUND
+      - PHONE_INBOUND
+      - SLACK
+      - API
+    WorkflowDto:
+      type: object
+      properties:
+        workflowDeploymentId:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        template:
+          type: boolean
+          default: false
+        type:
+          $ref: '#/components/schemas/WorkflowType'
+        modality:
+          $ref: '#/components/schemas/WorkflowModality'
+      required:
+      - id
+      - name
+      - type
+      - modality
+    PageDto:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: array
+        meta:
+          $ref: '#/components/schemas/PageMetaDto'
+      required:
+      - data
+      - meta
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-Key

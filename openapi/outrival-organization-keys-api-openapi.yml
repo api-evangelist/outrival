@@ -1,0 +1,192 @@
+openapi: 3.0.0
+info:
+  title: OutRival Ai Chat Sessions Organization Keys API
+  description: OutRival API documentation.
+  version: '1.0'
+  contact: {}
+servers:
+- url: https://api.outrival.com
+tags:
+- name: Organization Keys
+paths:
+  /rest/v1/organization/keys:
+    get:
+      operationId: OrganizationKeysController_getOrganizationKeys
+      parameters: []
+      responses:
+        '200':
+          description: Get organization keys.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrganizationKey'
+      tags:
+      - Organization Keys
+      security:
+      - api_key: []
+      - bearer: []
+    post:
+      operationId: OrganizationKeysController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrganizationKeyDTO'
+      responses:
+        '200':
+          description: Create organization key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationKey'
+      tags:
+      - Organization Keys
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v1/organization/keys/public:
+    get:
+      operationId: OrganizationKeysController_getOrganizationPublicKey
+      parameters: []
+      responses:
+        '200':
+          description: Get organization active public key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationKey'
+      tags:
+      - Organization Keys
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v1/organization/keys/{keyId}:
+    get:
+      operationId: OrganizationKeysController_getOrganizationKey
+      parameters:
+      - name: keyId
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Get organization key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationKey'
+      tags:
+      - Organization Keys
+      security:
+      - api_key: []
+      - bearer: []
+    patch:
+      operationId: OrganizationKeysController_update
+      parameters:
+      - name: keyId
+        required: true
+        in: path
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOrganizationKeyDTO'
+      responses:
+        '200':
+          description: Update organization key status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationKey'
+      tags:
+      - Organization Keys
+      security:
+      - api_key: []
+      - bearer: []
+    delete:
+      operationId: OrganizationKeysController_remove
+      parameters:
+      - name: keyId
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Delete specific organization key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteOrganizationKey'
+      tags:
+      - Organization Keys
+      security:
+      - api_key: []
+      - bearer: []
+components:
+  schemas:
+    OrganizationKey:
+      type: object
+      properties:
+        id:
+          type: string
+        value:
+          type: string
+        type:
+          type: string
+          enum:
+          - SECRET
+          - PUBLIC
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+      required:
+      - id
+      - value
+      - type
+      - status
+    UpdateOrganizationKeyDTO:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+      required:
+      - status
+    DeleteOrganizationKey:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+      - id
+    CreateOrganizationKeyDTO:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - SECRET
+          - PUBLIC
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-Key

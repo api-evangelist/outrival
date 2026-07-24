@@ -1,0 +1,83 @@
+openapi: 3.0.0
+info:
+  title: OutRival Ai Chat Sessions Organization API
+  description: OutRival API documentation.
+  version: '1.0'
+  contact: {}
+servers:
+- url: https://api.outrival.com
+tags:
+- name: Organization
+paths:
+  /rest/v1/organization:
+    get:
+      operationId: OrganizationController_getOrganization
+      parameters: []
+      responses:
+        '200':
+          description: Get organization.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationDTO'
+      tags:
+      - Organization
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v1/organization/token:
+    post:
+      operationId: OrganizationController_generateOrganizationToken
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateTokenConfig'
+      responses:
+        '200':
+          description: Get auth token for organization.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationTokenDTO'
+      tags:
+      - Organization
+      security:
+      - api_key: []
+      - bearer: []
+components:
+  schemas:
+    OrganizationTokenDTO:
+      type: object
+      properties:
+        token:
+          type: string
+        expiresAt:
+          format: date-time
+          type: string
+      required:
+      - token
+      - expiresAt
+    OrganizationDTO:
+      type: object
+      properties:
+        id:
+          type: string
+        analyticUrl:
+          type: string
+      required:
+      - id
+    GenerateTokenConfig:
+      type: object
+      properties:
+        userId:
+          type: string
+        expiresIn:
+          type: string
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-Key

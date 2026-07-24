@@ -1,0 +1,122 @@
+openapi: 3.0.0
+info:
+  title: OutRival Ai Chat Sessions Chat with Ai Assistant API
+  description: OutRival API documentation.
+  version: '1.0'
+  contact: {}
+servers:
+- url: https://api.outrival.com
+tags:
+- name: Chat with Ai Assistant
+paths:
+  /rest/v1/ai-chats/messages:
+    post:
+      operationId: MessagesController_create
+      summary: Create new message
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMessageDto'
+      responses:
+        '404':
+          description: Ai Chat doesn't exist
+      tags:
+      - Chat with Ai Assistant
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v2/ai-chats/messages:
+    post:
+      operationId: MessagesController_create
+      summary: Create new message
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMessageDto_2'
+      responses:
+        '404':
+          description: Ai Chat doesn't exist
+      tags:
+      - Chat with Ai Assistant
+      security:
+      - api_key: []
+      - bearer: []
+components:
+  schemas:
+    AiChatChannel:
+      type: string
+      description: Message channel (text | voice | video)
+      enum:
+      - SMS
+      - VOICE
+      - TEXT
+    AiChatChannel_2:
+      type: string
+      enum:
+      - SMS
+      - VOICE
+      - TEXT
+    CreateMessageDto:
+      type: object
+      properties:
+        aiChatId:
+          type: string
+          description: AI Chat ID
+        role:
+          $ref: '#/components/schemas/AiChatMessageRole'
+        channel:
+          $ref: '#/components/schemas/AiChatChannel'
+        content:
+          type: string
+          description: Message content
+        metadata:
+          type: object
+          description: Metadata
+      required:
+      - aiChatId
+      - role
+      - channel
+      - metadata
+    AiChatMessageRole:
+      type: string
+      description: Role of the sender (user | assistant| system | tool)
+      enum:
+      - ASSISTANT
+      - TOOL
+      - USER
+      - SYSTEM
+    CreateMessageDto_2:
+      type: object
+      properties:
+        aiChatId:
+          type: string
+          description: AI Chat ID
+        role:
+          $ref: '#/components/schemas/AiChatMessageRole_2'
+        channel:
+          $ref: '#/components/schemas/AiChatChannel_2'
+        content:
+          type: string
+          description: Message content
+      required:
+      - aiChatId
+      - role
+      - channel
+    AiChatMessageRole_2:
+      type: string
+      enum:
+      - ASSISTANT
+      - TOOL
+      - USER
+      - SYSTEM
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-Key

@@ -1,0 +1,157 @@
+openapi: 3.0.0
+info:
+  title: OutRival Ai Chat Sessions Workflow Deployment API
+  description: OutRival API documentation.
+  version: '1.0'
+  contact: {}
+servers:
+- url: https://api.outrival.com
+tags:
+- name: Workflow Deployment
+paths:
+  /rest/v2/deployments/{id}:
+    get:
+      operationId: WorkflowDeploymentController_projectWorkflowDeployment
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: deployment data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowDeploymentDto'
+      tags:
+      - Workflow Deployment
+      security:
+      - api_key: []
+      - bearer: []
+    delete:
+      operationId: WorkflowDeploymentController_deleteWorkflowDeployment
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Delete workflow's deployment by Workflow ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowDeploymentDto'
+      tags:
+      - Workflow Deployment
+      security:
+      - api_key: []
+      - bearer: []
+    post:
+      operationId: WorkflowDeploymentController_updateWorkflowDeployment
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkflowDeploymentUpdateDto'
+      responses:
+        '200':
+          description: Update a new workflow deployment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowDeploymentDto'
+      tags:
+      - Workflow Deployment
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v2/deployments:
+    post:
+      operationId: WorkflowDeploymentController_createWorkflowDeployment
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkflowDeploymentDto'
+      responses:
+        '200':
+          description: Create a new workflow deployment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowDeploymentDto'
+      tags:
+      - Workflow Deployment
+      security:
+      - api_key: []
+      - bearer: []
+components:
+  schemas:
+    WorkflowDeploymentDto:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/WorkflowDeploymentType'
+        workflowId:
+          type: string
+        enabled:
+          type: boolean
+        phoneNumberId:
+          type: string
+      required:
+      - id
+      - type
+    WorkflowDeploymentUpdateDto:
+      type: object
+      properties:
+        workflowId:
+          type: string
+        enabled:
+          type: boolean
+        phoneNumberId:
+          type: string
+    WorkflowDeploymentType:
+      type: string
+      enum:
+      - TEXT_IFRAME
+      - TEXT_BUBBLE
+      - VOICE_BUBBLE
+      - VOICE_IFRAME
+      - SMS
+      - PHONE_OUTBOUND
+      - PHONE_INBOUND
+      - SLACK
+      - API
+    CreateWorkflowDeploymentDto:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/WorkflowDeploymentType'
+        projectId:
+          type: string
+        enabled:
+          type: boolean
+      required:
+      - type
+      - projectId
+      - enabled
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-Key

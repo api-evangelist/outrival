@@ -1,0 +1,156 @@
+openapi: 3.0.0
+info:
+  title: OutRival Ai Chat Sessions Assistants Logs API
+  description: OutRival API documentation.
+  version: '1.0'
+  contact: {}
+servers:
+- url: https://api.outrival.com
+tags:
+- name: Assistants Logs
+paths:
+  /rest/v1/assistants/{assistantId}/logs:
+    get:
+      operationId: AssistantLogsController_logs
+      parameters:
+      - name: assistantId
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: order
+        required: false
+        in: query
+        schema:
+          default: desc
+          enum:
+          - asc
+          - desc
+          type: string
+      - name: page
+        required: false
+        in: query
+        schema:
+          minimum: 1
+          default: 1
+          type: number
+      - name: take
+        required: false
+        in: query
+        schema:
+          minimum: 1
+          maximum: 100
+          default: 20
+          type: number
+      - name: type
+        required: false
+        in: query
+        schema:
+          enum:
+          - VOICE
+          - TEXT
+          - SMS
+          type: string
+      - name: search
+        required: false
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Get assistant logs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AssistantLogsList'
+      tags:
+      - Assistants Logs
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v1/assistants/{assistantId}/log/{logId}:
+    get:
+      operationId: AssistantLogsController_log
+      parameters:
+      - name: assistantId
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: logId
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Get assistant log
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssistantLog'
+      tags:
+      - Assistants Logs
+      security:
+      - api_key: []
+      - bearer: []
+components:
+  schemas:
+    AssistantLog:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - VOICE
+          - TEXT
+          - SMS
+        recordingUrl:
+          type: string
+        messages:
+          type: object
+        metadata:
+          type: object
+        customerMetadata:
+          type: object
+        createdAt:
+          format: date-time
+          type: string
+      required:
+      - id
+      - type
+      - recordingUrl
+      - messages
+      - metadata
+      - customerMetadata
+      - createdAt
+    AssistantLogsList:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - VOICE
+          - TEXT
+          - SMS
+        label:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+      required:
+      - id
+      - type
+      - label
+      - createdAt
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-Key

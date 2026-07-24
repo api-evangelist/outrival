@@ -1,0 +1,277 @@
+openapi: 3.0.0
+info:
+  title: OutRival Ai Chat Sessions Nodes Voice Configuration API
+  description: OutRival API documentation.
+  version: '1.0'
+  contact: {}
+servers:
+- url: https://api.outrival.com
+tags:
+- name: Nodes Voice Configuration
+paths:
+  /rest/v2/nodes/{nodeId}/voice:
+    patch:
+      operationId: VoiceConfigController_create
+      parameters:
+      - name: nodeId
+        required: true
+        in: path
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoiceConfigurationUpdateDto'
+      responses:
+        '200':
+          description: Update voice configuration of the Node.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceConfiguration'
+      tags:
+      - Nodes Voice Configuration
+      security:
+      - api_key: []
+      - bearer: []
+    get:
+      operationId: VoiceConfigController_config
+      parameters:
+      - name: nodeId
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Get voice configuration of the Node.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoiceConfiguration'
+      tags:
+      - Nodes Voice Configuration
+      security:
+      - api_key: []
+      - bearer: []
+components:
+  schemas:
+    Provider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
+      - ANTHROPIC
+    BackgroundSound:
+      type: string
+      enum:
+      - DEFAULT
+      - 'OFF'
+      - OFFICE
+    VoiceConfigurationUpdateDto:
+      type: object
+      properties:
+        initialMessage:
+          type: string
+        prompt:
+          type: string
+        resources:
+          type: string
+        provider:
+          $ref: '#/components/schemas/Provider'
+        model:
+          $ref: '#/components/schemas/Model'
+        voiceProvider:
+          $ref: '#/components/schemas/VoiceProvider'
+        voice:
+          type: string
+          enum:
+          - burt
+          - marissa
+          - andrea
+          - sarah
+          - phillip
+          - steve
+          - joseph
+          - myra
+          - paula
+          - ryan
+          - drew
+          - paul
+          - mrb
+          - matilda
+          - mark
+          - alloy
+          - echo
+          - fable
+          - onyx
+          - nova
+          - shimmer
+          - jennifer
+          - melissa
+          - will
+          - chris
+          - matt
+          - jack
+          - ruby
+          - davis
+          - donna
+          - michael
+        temperature:
+          type: number
+        maxTokensOutput:
+          type: number
+        backgroundSound:
+          $ref: '#/components/schemas/BackgroundSound'
+        backchanneling:
+          type: boolean
+        functions:
+          type: array
+          items:
+            type: object
+        endCallFunction:
+          type: boolean
+        dialKeypadFunction:
+          type: boolean
+        endCallMessage:
+          type: string
+        endCallPhrases:
+          type: string
+    VoiceConfiguration:
+      type: object
+      properties:
+        initialMessage:
+          type: string
+        prompt:
+          type: string
+        provider:
+          $ref: '#/components/schemas/Provider'
+        resources:
+          type: string
+        model:
+          $ref: '#/components/schemas/Model'
+        voiceProvider:
+          $ref: '#/components/schemas/VoiceProvider'
+        voice:
+          type: string
+          enum:
+          - burt
+          - marissa
+          - andrea
+          - sarah
+          - phillip
+          - steve
+          - joseph
+          - myra
+          - paula
+          - ryan
+          - drew
+          - paul
+          - mrb
+          - matilda
+          - mark
+          - alloy
+          - echo
+          - fable
+          - onyx
+          - nova
+          - shimmer
+          - jennifer
+          - melissa
+          - will
+          - chris
+          - matt
+          - jack
+          - ruby
+          - davis
+          - donna
+          - michael
+        temperature:
+          type: number
+        maxTokensOutput:
+          type: number
+        backgroundSound:
+          $ref: '#/components/schemas/BackgroundSound'
+        backchanneling:
+          type: boolean
+        functions:
+          type: array
+          items:
+            type: object
+        endCallFunction:
+          type: boolean
+        dialKeypadFunction:
+          type: boolean
+        endCallMessage:
+          type: string
+        endCallPhrases:
+          type: string
+        isRagEnabled:
+          type: boolean
+        forceRag:
+          type: boolean
+        ragTriggerTopics:
+          type: string
+        preserveRagResult:
+          type: boolean
+        isCallTransferEnabled:
+          type: boolean
+        callTransferPhoneNumber:
+          type: string
+        callTransferCondition:
+          type: string
+        callTransferForce:
+          type: boolean
+      required:
+      - initialMessage
+      - prompt
+      - provider
+      - resources
+      - model
+      - voiceProvider
+      - voice
+      - temperature
+      - maxTokensOutput
+      - backgroundSound
+      - backchanneling
+      - functions
+      - endCallFunction
+      - dialKeypadFunction
+      - endCallMessage
+      - endCallPhrases
+      - isRagEnabled
+      - forceRag
+      - ragTriggerTopics
+      - preserveRagResult
+      - isCallTransferEnabled
+      - callTransferPhoneNumber
+      - callTransferCondition
+      - callTransferForce
+    Model:
+      type: string
+      enum:
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
+      - CLAUDE_3_OPUS
+      - CLAUDE_3_SONNET
+      - CLAUDE_3_HAIKU
+      - CLAUDE_3_5_SONNET
+    VoiceProvider:
+      type: string
+      enum:
+      - ELEVENLABS
+      - PLAYHT
+      - OPENAI
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-Key

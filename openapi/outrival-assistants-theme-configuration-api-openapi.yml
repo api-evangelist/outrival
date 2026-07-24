@@ -1,0 +1,86 @@
+openapi: 3.0.0
+info:
+  title: OutRival Ai Chat Sessions Assistants Theme Configuration API
+  description: OutRival API documentation.
+  version: '1.0'
+  contact: {}
+servers:
+- url: https://api.outrival.com
+tags:
+- name: Assistants Theme Configuration
+paths:
+  /rest/v1/assistants/{assistantId}/theme:
+    patch:
+      operationId: ThemeController_create
+      parameters:
+      - name: assistantId
+        required: true
+        in: path
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThemeConfigurationUpdateDto'
+      responses:
+        '200':
+          description: Update theme configuration of AI Assistant.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThemeConfiguration'
+      tags:
+      - Assistants Theme Configuration
+      security:
+      - api_key: []
+      - bearer: []
+    get:
+      operationId: ThemeController_config
+      parameters:
+      - name: assistantId
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Get theme configuration of AI Assistant.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThemeConfiguration'
+      tags:
+      - Assistants Theme Configuration
+      security:
+      - api_key: []
+      - bearer: []
+components:
+  schemas:
+    AssistantMode:
+      type: string
+      enum:
+      - CHAT_ONLY
+      - VOICE_ONLY
+      - VOICE_AND_CHAT
+    ThemeConfiguration:
+      type: object
+      properties:
+        theme:
+          type: object
+        mode:
+          $ref: '#/components/schemas/AssistantMode'
+      required:
+      - theme
+      - mode
+    ThemeConfigurationUpdateDto:
+      type: object
+      properties:
+        theme:
+          type: object
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-Key

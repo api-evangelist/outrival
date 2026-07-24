@@ -1,0 +1,154 @@
+openapi: 3.0.0
+info:
+  title: OutRival Ai Chat Sessions Nodes Chat Configuration API
+  description: OutRival API documentation.
+  version: '1.0'
+  contact: {}
+servers:
+- url: https://api.outrival.com
+tags:
+- name: Nodes Chat Configuration
+paths:
+  /rest/v2/nodes/{nodeId}/chat:
+    patch:
+      operationId: ChatConfigController_create
+      parameters:
+      - name: nodeId
+        required: true
+        in: path
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatConfigurationUpdateDto'
+      responses:
+        '200':
+          description: Update chat configuration of the Node.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatConfiguration'
+      tags:
+      - Nodes Chat Configuration
+      security:
+      - api_key: []
+      - bearer: []
+    get:
+      operationId: ChatConfigController_config
+      parameters:
+      - name: nodeId
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Get chat configuration of the Node.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatConfiguration'
+      tags:
+      - Nodes Chat Configuration
+      security:
+      - api_key: []
+      - bearer: []
+components:
+  schemas:
+    ChatProvider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
+    ChatConfigurationUpdateDto:
+      type: object
+      properties:
+        initialMessage:
+          type: string
+        prompt:
+          type: string
+        resources:
+          type: string
+        provider:
+          $ref: '#/components/schemas/ChatProvider'
+        model:
+          $ref: '#/components/schemas/ChatModel'
+        temperature:
+          type: number
+        maxTokensOutput:
+          type: number
+        chatMode:
+          type: boolean
+        quickRepliesEnabled:
+          type: boolean
+        functions:
+          type: array
+          items:
+            type: object
+    ChatModel:
+      type: string
+      enum:
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
+    ChatConfiguration:
+      type: object
+      properties:
+        initialMessage:
+          type: string
+        prompt:
+          type: string
+        resources:
+          type: string
+        provider:
+          $ref: '#/components/schemas/ChatProvider'
+        model:
+          $ref: '#/components/schemas/ChatModel'
+        temperature:
+          type: number
+        maxTokensOutput:
+          type: number
+        chatMode:
+          type: boolean
+        quickRepliesEnabled:
+          type: boolean
+        isRagEnabled:
+          type: boolean
+        forceRag:
+          type: boolean
+        ragTriggerTopics:
+          type: string
+        preserveRagResult:
+          type: boolean
+        functions:
+          type: array
+          items:
+            type: object
+      required:
+      - initialMessage
+      - prompt
+      - resources
+      - provider
+      - model
+      - temperature
+      - maxTokensOutput
+      - chatMode
+      - quickRepliesEnabled
+      - isRagEnabled
+      - forceRag
+      - ragTriggerTopics
+      - preserveRagResult
+      - functions
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-Key

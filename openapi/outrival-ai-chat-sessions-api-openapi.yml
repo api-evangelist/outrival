@@ -1,0 +1,364 @@
+openapi: 3.0.0
+info:
+  title: OutRival Ai Chat Sessions API
+  description: OutRival API documentation.
+  version: '1.0'
+  contact: {}
+servers:
+- url: https://api.outrival.com
+tags:
+- name: Ai Chat Sessions
+paths:
+  /rest/v2/ai-chats/{aiChatId}/sessions:
+    get:
+      operationId: SessionsController_getByChatId
+      summary: Get a list of sessions by aiChatId
+      parameters:
+      - name: aiChatId
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Ai Chat Sessions
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v2/ai-chats/project/{projectId}/sessions:
+    get:
+      operationId: SessionsController_getByProjectId
+      summary: Get a list of sessions by projectId
+      parameters:
+      - name: projectId
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: aiChatId
+        required: false
+        in: query
+        description: AI Chat ID
+        schema:
+          type: string
+      - name: deployment
+        required: false
+        in: query
+        description: Ai Chat deployment
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/AiChatChannel'
+      - name: limit
+        required: false
+        in: query
+        description: Limit of sessions
+        schema:
+          default: 20
+          type: number
+      - name: startingAfter
+        required: false
+        in: query
+        description: Starting after session id
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/CursorBasedPageDto'
+                - properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Session'
+      tags:
+      - Ai Chat Sessions
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v2/ai-chats/sessions/{sessionId}/logs:
+    get:
+      operationId: SessionsController_getBySession
+      summary: Get a list of logs by session
+      parameters:
+      - name: sessionId
+        required: true
+        in: path
+        schema:
+          type: string
+      - name: types
+        required: false
+        in: query
+        description: Ai Chat Log type
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/AiChatLogsType'
+      - name: limit
+        required: false
+        in: query
+        description: Limit of logs
+        schema:
+          default: 20
+          type: number
+      - name: startingAfter
+        required: false
+        in: query
+        description: Starting after log id
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/CursorBasedPageDto'
+                - properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Log'
+      tags:
+      - Ai Chat Sessions
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v2/ai-chats/{AiChatId}/logs:
+    get:
+      operationId: SessionsController_getByAiChat
+      summary: Get a list of all logs by chat
+      parameters:
+      - name: AiChatId
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/CursorBasedPageDto'
+                - properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Log'
+      tags:
+      - Ai Chat Sessions
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v2/ai-chats/user/{userId}/logs:
+    get:
+      operationId: SessionsController_getByUserId
+      summary: Get a list of all logs by userId
+      parameters:
+      - name: userId
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/CursorBasedPageDto'
+                - properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Log'
+      tags:
+      - Ai Chat Sessions
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v2/ai-chats/workflow/{workflowId}/logs:
+    get:
+      operationId: SessionsController_getByWorkflowId
+      summary: Get a list of all logs by workflowId
+      parameters:
+      - name: workflowId
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/CursorBasedPageDto'
+                - properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Log'
+      tags:
+      - Ai Chat Sessions
+      security:
+      - api_key: []
+      - bearer: []
+components:
+  schemas:
+    AiChatChannel:
+      type: string
+      enum:
+      - SMS
+      - VOICE
+      - TEXT
+    Session:
+      type: object
+      properties:
+        id:
+          type: string
+        aiChatId:
+          type: string
+        startedAt:
+          format: date-time
+          type: string
+        endedAt:
+          format: date-time
+          type: string
+          nullable: true
+        customerMetadata:
+          type: object
+          nullable: true
+        callRecording:
+          type: object
+          nullable: true
+        deployment:
+          nullable: true
+          $ref: '#/components/schemas/AiChatChannel'
+      required:
+      - id
+      - aiChatId
+      - startedAt
+      - endedAt
+      - customerMetadata
+      - callRecording
+      - deployment
+    Log:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/AiChatLogsType'
+        createdAt:
+          format: date-time
+          type: string
+        sessionId:
+          type: string
+        aiChatId:
+          type: string
+        workflowId:
+          type: string
+        workflowNodeId:
+          type: string
+        messageId:
+          type: string
+          nullable: true
+        message:
+          nullable: true
+          allOf:
+          - $ref: '#/components/schemas/Message'
+        aiUserId:
+          type: string
+          nullable: true
+      required:
+      - id
+      - type
+      - createdAt
+      - sessionId
+      - aiChatId
+      - workflowId
+      - workflowNodeId
+      - messageId
+      - message
+      - aiUserId
+    AiChatLogsType:
+      type: string
+      enum:
+      - SESSION_START
+      - SESSION_END
+      - SEND_MESSAGE
+      - RECEIVE_MESSAGE
+      - FUNCTION_CALL
+      - FUNCTION_RESPONSE
+      - CHANGE_WORKFLOW
+      - CHANGE_NODE_WORKFLOW
+      - CALL_RECORDING
+      - ERROR
+    AiChatMessageRole:
+      type: string
+      enum:
+      - ASSISTANT
+      - TOOL
+      - USER
+      - SYSTEM
+    CursorBasedPageDto:
+      type: object
+      properties:
+        hasMore:
+          type: boolean
+        data:
+          type: array
+          items:
+            type: string
+      required:
+      - hasMore
+      - data
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+        seqId:
+          type: number
+        role:
+          $ref: '#/components/schemas/AiChatMessageRole'
+        channel:
+          $ref: '#/components/schemas/AiChatChannel'
+        content:
+          type: string
+          nullable: true
+        toolCallId:
+          type: string
+          nullable: true
+        toolCalls:
+          type: object
+          nullable: true
+        createdAt:
+          format: date-time
+          type: string
+      required:
+      - id
+      - seqId
+      - role
+      - channel
+      - content
+      - toolCallId
+      - toolCalls
+      - createdAt
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-Key

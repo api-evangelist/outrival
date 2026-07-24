@@ -1,0 +1,80 @@
+openapi: 3.0.0
+info:
+  title: OutRival Ai Chat Sessions Projects Theme Configuration API
+  description: OutRival API documentation.
+  version: '1.0'
+  contact: {}
+servers:
+- url: https://api.outrival.com
+tags:
+- name: Projects Theme Configuration
+paths:
+  /rest/v2/deployments/{workflowDeploymentId}/theme:
+    patch:
+      operationId: ThemeController_create
+      parameters:
+      - name: workflowDeploymentId
+        required: true
+        in: path
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThemeConfigurationUpdateDto'
+      responses:
+        '200':
+          description: Update theme configuration of the Project.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThemeConfiguration'
+      tags:
+      - Projects Theme Configuration
+      security:
+      - api_key: []
+      - bearer: []
+    get:
+      operationId: ThemeController_config
+      parameters:
+      - name: workflowDeploymentId
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Get theme configuration of the Project.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThemeConfiguration'
+      tags:
+      - Projects Theme Configuration
+      security:
+      - api_key: []
+      - bearer: []
+components:
+  schemas:
+    ThemeConfiguration:
+      type: object
+      properties:
+        theme:
+          type: object
+        workflowDeploymentId:
+          type: string
+      required:
+      - theme
+      - workflowDeploymentId
+    ThemeConfigurationUpdateDto:
+      type: object
+      properties:
+        theme:
+          type: object
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-Key

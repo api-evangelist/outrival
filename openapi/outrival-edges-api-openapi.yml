@@ -1,0 +1,187 @@
+openapi: 3.0.0
+info:
+  title: OutRival Ai Chat Sessions Edges API
+  description: OutRival API documentation.
+  version: '1.0'
+  contact: {}
+servers:
+- url: https://api.outrival.com
+tags:
+- name: Edges
+paths:
+  /rest/v2/edges:
+    get:
+      operationId: EdgeController_findAll
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+      - Edges
+      security:
+      - api_key: []
+      - bearer: []
+    post:
+      operationId: EdgeController_createEdge
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEdgeDto'
+      responses:
+        '200':
+          description: Create new edge.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EdgeDto'
+      tags:
+      - Edges
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v2/edges/{id}:
+    get:
+      operationId: EdgeController_findOne
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Get by Edge ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EdgeDto'
+      tags:
+      - Edges
+      security:
+      - api_key: []
+      - bearer: []
+    patch:
+      operationId: EdgeController_updateEdge
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEdgeDto'
+      responses:
+        '200':
+          description: Update by Edge ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EdgeDto'
+      tags:
+      - Edges
+      security:
+      - api_key: []
+      - bearer: []
+    delete:
+      operationId: EdgeController_deleteEdge
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Delete by Edge ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EdgeDto'
+      tags:
+      - Edges
+      security:
+      - api_key: []
+      - bearer: []
+components:
+  schemas:
+    EdgeDto:
+      type: object
+      properties:
+        id:
+          type: string
+        workflowId:
+          type: string
+        sourceNodeId:
+          type: string
+        targetNodeId:
+          type: string
+        name:
+          type: string
+        functionCondition:
+          type: string
+        sourceHandlePosition:
+          $ref: '#/components/schemas/HandlePosition'
+        targetHandlePosition:
+          $ref: '#/components/schemas/HandlePosition'
+      required:
+      - id
+      - workflowId
+      - sourceNodeId
+      - targetNodeId
+    CreateEdgeDto:
+      type: object
+      properties:
+        workflowId:
+          type: string
+        sourceNodeId:
+          type: string
+        targetNodeId:
+          type: string
+        name:
+          type: string
+        functionCondition:
+          type: string
+        sourceHandlePosition:
+          $ref: '#/components/schemas/HandlePosition'
+        targetHandlePosition:
+          $ref: '#/components/schemas/HandlePosition'
+      required:
+      - workflowId
+      - sourceNodeId
+      - targetNodeId
+    HandlePosition:
+      type: string
+      enum:
+      - LEFT
+      - RIGHT
+      - TOP
+      - BOTTOM
+    UpdateEdgeDto:
+      type: object
+      properties:
+        workflowId:
+          type: string
+        sourceNodeId:
+          type: string
+        targetNodeId:
+          type: string
+        name:
+          type: string
+        functionCondition:
+          type: string
+        sourceHandlePosition:
+          $ref: '#/components/schemas/HandlePosition'
+        targetHandlePosition:
+          $ref: '#/components/schemas/HandlePosition'
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-Key

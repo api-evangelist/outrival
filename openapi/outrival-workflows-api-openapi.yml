@@ -1,0 +1,685 @@
+openapi: 3.0.0
+info:
+  title: OutRival Ai Chat Sessions Workflows API
+  description: OutRival API documentation.
+  version: '1.0'
+  contact: {}
+servers:
+- url: https://api.outrival.com
+tags:
+- name: Workflows
+paths:
+  /rest/v2/workflows:
+    get:
+      operationId: WorkflowController_findAll
+      parameters:
+      - name: projectId
+        required: false
+        in: query
+        schema:
+          type: string
+      - name: modality
+        required: false
+        in: query
+        schema:
+          $ref: '#/components/schemas/WorkflowModality'
+      responses:
+        '200':
+          description: List of workflows.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkflowDto'
+      tags:
+      - Workflows
+      security:
+      - api_key: []
+      - bearer: []
+    post:
+      operationId: WorkflowController_createWorkflow
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkflowDto'
+      responses:
+        '200':
+          description: Create a new workflow
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowDto'
+      tags:
+      - Workflows
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v2/workflows/{id}:
+    get:
+      operationId: WorkflowController_findOne
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Workflow by Workflow ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowDto'
+      tags:
+      - Workflows
+      security:
+      - api_key: []
+      - bearer: []
+    patch:
+      operationId: WorkflowController_updateWorkflow
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWorkflowDto'
+      responses:
+        '200':
+          description: Update workflow by Workflow ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowDto'
+      tags:
+      - Workflows
+      security:
+      - api_key: []
+      - bearer: []
+    delete:
+      operationId: WorkflowController_deleteWorkflow
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Delete workflow by Workflow ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowDto'
+      tags:
+      - Workflows
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v2/workflows/{id}/nodes:
+    get:
+      operationId: WorkflowController_nodes
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Get workflow nodes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NodeDto'
+      tags:
+      - Workflows
+      security:
+      - api_key: []
+      - bearer: []
+    post:
+      operationId: WorkflowController_addNode
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNodeDto'
+      responses:
+        '200':
+          description: Add node to workflow.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeDto'
+      tags:
+      - Workflows
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v2/workflows/{id}/nodes/config:
+    get:
+      operationId: WorkflowController_nodesWithConfig
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Get workflow nodes with configuration.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NodeWithConfigDto'
+      tags:
+      - Workflows
+      security:
+      - api_key: []
+      - bearer: []
+  /rest/v2/workflows/{id}/edges:
+    get:
+      operationId: WorkflowController_edges
+      parameters:
+      - name: id
+        required: true
+        in: path
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Get workflow edges.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EdgeDto'
+      tags:
+      - Workflows
+      security:
+      - api_key: []
+      - bearer: []
+components:
+  schemas:
+    CreateNodeDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          $ref: '#/components/schemas/NodeType'
+        builderPositionX:
+          type: number
+        builderPositionY:
+          type: number
+      required:
+      - name
+      - type
+      - builderPositionX
+      - builderPositionY
+    WorkflowModality:
+      type: string
+      enum:
+      - TEXT
+      - VOICE
+      - SMS
+    BackgroundSound:
+      type: string
+      enum:
+      - DEFAULT
+      - 'OFF'
+      - OFFICE
+    EdgeDto:
+      type: object
+      properties:
+        id:
+          type: string
+        workflowId:
+          type: string
+        sourceNodeId:
+          type: string
+        targetNodeId:
+          type: string
+        name:
+          type: string
+        functionCondition:
+          type: string
+        sourceHandlePosition:
+          $ref: '#/components/schemas/HandlePosition'
+        targetHandlePosition:
+          $ref: '#/components/schemas/HandlePosition'
+      required:
+      - id
+      - workflowId
+      - sourceNodeId
+      - targetNodeId
+    Provider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
+      - ANTHROPIC
+    WorkflowType:
+      type: string
+      enum:
+      - SIMPLE
+      - ADVANCED
+    ChatConfiguration:
+      type: object
+      properties:
+        initialMessage:
+          type: string
+        prompt:
+          type: string
+        resources:
+          type: string
+        provider:
+          $ref: '#/components/schemas/ChatProvider'
+        model:
+          $ref: '#/components/schemas/ChatModel'
+        temperature:
+          type: number
+        maxTokensOutput:
+          type: number
+        chatMode:
+          type: boolean
+        quickRepliesEnabled:
+          type: boolean
+        isRagEnabled:
+          type: boolean
+        forceRag:
+          type: boolean
+        ragTriggerTopics:
+          type: string
+        preserveRagResult:
+          type: boolean
+        functions:
+          type: array
+          items:
+            type: object
+      required:
+      - initialMessage
+      - prompt
+      - resources
+      - provider
+      - model
+      - temperature
+      - maxTokensOutput
+      - chatMode
+      - quickRepliesEnabled
+      - isRagEnabled
+      - forceRag
+      - ragTriggerTopics
+      - preserveRagResult
+      - functions
+    NodeDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        workflowId:
+          type: string
+        type:
+          $ref: '#/components/schemas/NodeType'
+        builderPositionX:
+          type: number
+        builderPositionY:
+          type: number
+        error:
+          type: string
+      required:
+      - id
+      - name
+      - workflowId
+      - type
+      - builderPositionX
+      - builderPositionY
+      - error
+    WorkflowDto:
+      type: object
+      properties:
+        workflowDeploymentId:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        template:
+          type: boolean
+          default: false
+        type:
+          $ref: '#/components/schemas/WorkflowType'
+        modality:
+          $ref: '#/components/schemas/WorkflowModality'
+      required:
+      - id
+      - name
+      - type
+      - modality
+    VoiceProvider:
+      type: string
+      enum:
+      - ELEVENLABS
+      - PLAYHT
+      - OPENAI
+    SmsModel:
+      type: string
+      enum:
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
+    SmsProvider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
+    CreateWorkflowDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        projectId:
+          type: string
+        type:
+          $ref: '#/components/schemas/WorkflowType'
+        modality:
+          $ref: '#/components/schemas/WorkflowModality'
+      required:
+      - name
+      - projectId
+      - type
+      - modality
+    VoiceConfiguration:
+      type: object
+      properties:
+        initialMessage:
+          type: string
+        prompt:
+          type: string
+        provider:
+          $ref: '#/components/schemas/Provider'
+        resources:
+          type: string
+        model:
+          $ref: '#/components/schemas/Model'
+        voiceProvider:
+          $ref: '#/components/schemas/VoiceProvider'
+        voice:
+          type: string
+          enum:
+          - burt
+          - marissa
+          - andrea
+          - sarah
+          - phillip
+          - steve
+          - joseph
+          - myra
+          - paula
+          - ryan
+          - drew
+          - paul
+          - mrb
+          - matilda
+          - mark
+          - alloy
+          - echo
+          - fable
+          - onyx
+          - nova
+          - shimmer
+          - jennifer
+          - melissa
+          - will
+          - chris
+          - matt
+          - jack
+          - ruby
+          - davis
+          - donna
+          - michael
+        temperature:
+          type: number
+        maxTokensOutput:
+          type: number
+        backgroundSound:
+          $ref: '#/components/schemas/BackgroundSound'
+        backchanneling:
+          type: boolean
+        functions:
+          type: array
+          items:
+            type: object
+        endCallFunction:
+          type: boolean
+        dialKeypadFunction:
+          type: boolean
+        endCallMessage:
+          type: string
+        endCallPhrases:
+          type: string
+        isRagEnabled:
+          type: boolean
+        forceRag:
+          type: boolean
+        ragTriggerTopics:
+          type: string
+        preserveRagResult:
+          type: boolean
+        isCallTransferEnabled:
+          type: boolean
+        callTransferPhoneNumber:
+          type: string
+        callTransferCondition:
+          type: string
+        callTransferForce:
+          type: boolean
+      required:
+      - initialMessage
+      - prompt
+      - provider
+      - resources
+      - model
+      - voiceProvider
+      - voice
+      - temperature
+      - maxTokensOutput
+      - backgroundSound
+      - backchanneling
+      - functions
+      - endCallFunction
+      - dialKeypadFunction
+      - endCallMessage
+      - endCallPhrases
+      - isRagEnabled
+      - forceRag
+      - ragTriggerTopics
+      - preserveRagResult
+      - isCallTransferEnabled
+      - callTransferPhoneNumber
+      - callTransferCondition
+      - callTransferForce
+    Model:
+      type: string
+      enum:
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
+      - CLAUDE_3_OPUS
+      - CLAUDE_3_SONNET
+      - CLAUDE_3_HAIKU
+      - CLAUDE_3_5_SONNET
+    NodeType:
+      type: string
+      enum:
+      - START
+      - END
+      - PROMPT
+      - ACTION
+      - CONDITION
+    HandlePosition:
+      type: string
+      enum:
+      - LEFT
+      - RIGHT
+      - TOP
+      - BOTTOM
+    ChatProvider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
+    NodeWithConfigDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        workflowId:
+          type: string
+        type:
+          $ref: '#/components/schemas/NodeType'
+        builderPositionX:
+          type: number
+        builderPositionY:
+          type: number
+        error:
+          type: string
+        config:
+          oneOf:
+          - $ref: '#/components/schemas/ChatConfiguration'
+          - $ref: '#/components/schemas/SmsConfiguration'
+          - $ref: '#/components/schemas/VoiceConfiguration'
+      required:
+      - id
+      - name
+      - workflowId
+      - type
+      - builderPositionX
+      - builderPositionY
+      - error
+      - config
+    SmsConfiguration:
+      type: object
+      properties:
+        initialMessage:
+          type: string
+        prompt:
+          type: string
+        resources:
+          type: string
+        provider:
+          $ref: '#/components/schemas/SmsProvider'
+        model:
+          $ref: '#/components/schemas/SmsModel'
+        temperature:
+          type: number
+        maxTokensOutput:
+          type: number
+        smsMode:
+          type: boolean
+        phoneCallbackEnabled:
+          type: boolean
+        keywords:
+          type: string
+        isRagEnabled:
+          type: boolean
+        forceRag:
+          type: boolean
+        ragTriggerTopics:
+          type: string
+        preserveRagResult:
+          type: boolean
+        functions:
+          type: array
+          items:
+            type: object
+      required:
+      - initialMessage
+      - prompt
+      - resources
+      - provider
+      - model
+      - temperature
+      - maxTokensOutput
+      - smsMode
+      - phoneCallbackEnabled
+      - keywords
+      - isRagEnabled
+      - forceRag
+      - ragTriggerTopics
+      - preserveRagResult
+      - functions
+    ChatModel:
+      type: string
+      enum:
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
+    UpdateWorkflowDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        projectId:
+          type: string
+        type:
+          $ref: '#/components/schemas/WorkflowType'
+        modality:
+          $ref: '#/components/schemas/WorkflowModality'
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-Key

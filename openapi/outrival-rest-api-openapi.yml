@@ -1,0 +1,35 @@
+openapi: 3.0.0
+info:
+  title: OutRival Ai Chat Sessions Rest API
+  description: OutRival API documentation.
+  version: '1.0'
+  contact: {}
+servers:
+- url: https://api.outrival.com
+tags:
+- name: Rest
+paths:
+  /rest/v1/webhooks/vapi/server-messages:
+    post:
+      operationId: VapiWebhooksController_onServerMessage
+      parameters: []
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Rest
+  /rest/v1/webhooks/vapi/custom-llm/chat/completions:
+    post:
+      operationId: VapiWebhooksController_onOpenAICustomLLMCall
+      parameters: []
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Rest
+components:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-Key
