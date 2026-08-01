@@ -1,0 +1,19 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/outrival-v1-openapi-original.json, openapi/outrival-v2-openapi-original.json
+note: >-
+  Agent Skills grounded in real OutRival operationIds (verified against the published OpenAPI).
+  No provider-published skills/AGENTS.md were found.
+skills:
+  - file: outrival-create-and-configure-companion.md
+    name: Create and configure an OutRival companion
+    api: openapi/outrival-v1-openapi-original.json
+    operations: [AssistantsController_create, VoiceController_create, SmsController_create, ChatController_create, ThemeController_create]
+  - file: outrival-initiate-phone-call.md
+    name: Initiate an outbound phone call
+    api: openapi/outrival-v1-openapi-original.json
+    operations: [VapiController_phoneCallInitiate, AssistantLogsController_logs, AssistantLogsController_log]
+  - file: outrival-build-and-deploy-workflow.md
+    name: Build and deploy a companion workflow
+    api: openapi/outrival-v2-openapi-original.json
+    operations: [WorkflowProjectController_createProject, WorkflowController_createWorkflow, WorkflowController_addNode, EdgeController_createEdge, WorkflowDeploymentController_createWorkflowDeployment]

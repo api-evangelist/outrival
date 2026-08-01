@@ -1,0 +1,27 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/outrival-v1-openapi-original.json, openapi/outrival-v2-openapi-original.json, https://outrival.com/security
+note: >-
+  Standards conformance derived from the OpenAPI security schemes, pagination shapes, and error
+  bodies, plus the published SOC 2 Type 2 attestation on the security page.
+standards:
+  - id: oauth2
+    conforms: false
+    evidence: OpenAPI declares only an apiKey (X-API-Key header) security scheme; no oauth2 flows.
+  - id: oidc
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Error responses return plain application/json bodies, not application/problem+json.
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: No /.well-known/security.txt published; disclosure via security@outrival.com on /security.
+  - id: cursor-pagination
+    conforms: true
+    evidence: v2 ai-chats session/log endpoints expose cursor pagination (startingAfter + limit, CursorBasedPageDto).
+  - id: offset-pagination
+    conforms: true
+    evidence: v2 list endpoints expose offset pagination (page + take + order, PageMetaDto/PageDto).
+  - id: soc2-type2
+    conforms: true
+    evidence: "Security page: 'we have completed SOC 2 Type 2 audit'."

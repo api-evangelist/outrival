@@ -1,0 +1,4144 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/rest/v2/projects": {
+      "get": {
+        "operationId": "WorkflowProjectController_findAll",
+        "parameters": [
+          {
+            "name": "order",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "desc",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "take",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of Projects.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/PageDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ProjectDto"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Projects"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "WorkflowProjectController_createProject",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProjectDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Create a new project.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Projects"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/projects/{id}": {
+      "get": {
+        "operationId": "WorkflowProjectController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project by Project ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Project not found."
+          }
+        },
+        "tags": [
+          "Projects"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "WorkflowProjectController_updateProject",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProjectDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update project by Project ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Projects"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "WorkflowProjectController_deleteProject",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete project by Project ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Projects"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/projects/{id}/workflows": {
+      "get": {
+        "operationId": "WorkflowProjectController_projectWorkflows",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of project workflows.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkflowDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Projects"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/projects/{id}/deployments": {
+      "get": {
+        "operationId": "WorkflowProjectController_projectWorkflowDeployments",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of project workflow deployments.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkflowDeploymentDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Projects"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/projects/{projectId}/variables": {
+      "get": {
+        "operationId": "VariableController_getAllVariables",
+        "parameters": [
+          {
+            "name": "projectId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of project variables.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VariableDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Project variables"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "VariableController_createVariable",
+        "parameters": [
+          {
+            "name": "projectId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVariableDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Create a new variable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VariableDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Project variables"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/projects/{projectId}/variables/{variableId}": {
+      "patch": {
+        "operationId": "VariableController_updateVariable",
+        "parameters": [
+          {
+            "name": "projectId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "variableId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateVariableDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update variable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VariableDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Project variables"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "VariableController_deleteVariable",
+        "parameters": [
+          {
+            "name": "projectId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "variableId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete variable.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VariableDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Project variables"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/workflows": {
+      "get": {
+        "operationId": "WorkflowController_findAll",
+        "parameters": [
+          {
+            "name": "projectId",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "modality",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/WorkflowModality"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of workflows.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkflowDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Workflows"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "WorkflowController_createWorkflow",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWorkflowDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Create a new workflow",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Workflows"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/workflows/{id}": {
+      "get": {
+        "operationId": "WorkflowController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workflow by Workflow ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Workflows"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "WorkflowController_updateWorkflow",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateWorkflowDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update workflow by Workflow ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Workflows"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "WorkflowController_deleteWorkflow",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete workflow by Workflow ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Workflows"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/workflows/{id}/nodes": {
+      "get": {
+        "operationId": "WorkflowController_nodes",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get workflow nodes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NodeDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Workflows"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "WorkflowController_addNode",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateNodeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Add node to workflow.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NodeDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Workflows"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/workflows/{id}/nodes/config": {
+      "get": {
+        "operationId": "WorkflowController_nodesWithConfig",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get workflow nodes with configuration.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NodeWithConfigDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Workflows"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/workflows/{id}/edges": {
+      "get": {
+        "operationId": "WorkflowController_edges",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get workflow edges.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EdgeDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Workflows"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/edges": {
+      "get": {
+        "operationId": "EdgeController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Edges"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "EdgeController_createEdge",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEdgeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Create new edge.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EdgeDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Edges"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/edges/{id}": {
+      "get": {
+        "operationId": "EdgeController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get by Edge ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EdgeDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Edges"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "EdgeController_updateEdge",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEdgeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update by Edge ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EdgeDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Edges"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "EdgeController_deleteEdge",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete by Edge ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EdgeDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Edges"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/nodes": {
+      "get": {
+        "operationId": "NodeController_findAll",
+        "parameters": [
+          {
+            "name": "order",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "desc",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "take",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of Workflow Nodes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/PageDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/NodeDto"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Nodes"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/nodes/{id}": {
+      "get": {
+        "operationId": "NodeController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workflow Node by ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NodeDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Workflow Node not found."
+          }
+        },
+        "tags": [
+          "Nodes"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "NodeController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateNodeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update specific Workflow Node.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NodeDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Nodes"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "NodeController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete specific Workflow Node.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteNodeDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Nodes"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/nodes/duplicate/{id}": {
+      "post": {
+        "operationId": "NodeController_duplicate",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Duplicate specific Workflow Node.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NodeDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Nodes"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/nodes/{id}/config": {
+      "get": {
+        "operationId": "NodeController_nodeWithConfig",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get workflow node with configuration.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NodeWithConfigDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Nodes"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/nodes/{nodeId}/voice": {
+      "patch": {
+        "operationId": "VoiceConfigController_create",
+        "parameters": [
+          {
+            "name": "nodeId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VoiceConfigurationUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update voice configuration of the Node.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceConfiguration"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Nodes Voice Configuration"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "VoiceConfigController_config",
+        "parameters": [
+          {
+            "name": "nodeId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get voice configuration of the Node.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceConfiguration"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Nodes Voice Configuration"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/nodes/{nodeId}/sms": {
+      "patch": {
+        "operationId": "SmsConfigController_create",
+        "parameters": [
+          {
+            "name": "nodeId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SmsConfigurationUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update sms configuration of the Node.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SmsConfiguration"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Nodes Sms Configuration"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "SmsConfigController_config",
+        "parameters": [
+          {
+            "name": "nodeId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get sms configuration of the Node.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SmsConfiguration"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Nodes Sms Configuration"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/nodes/{nodeId}/chat": {
+      "patch": {
+        "operationId": "ChatConfigController_create",
+        "parameters": [
+          {
+            "name": "nodeId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatConfigurationUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update chat configuration of the Node.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatConfiguration"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Nodes Chat Configuration"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "ChatConfigController_config",
+        "parameters": [
+          {
+            "name": "nodeId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get chat configuration of the Node.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatConfiguration"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Nodes Chat Configuration"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/deployments/{id}": {
+      "get": {
+        "operationId": "WorkflowDeploymentController_projectWorkflowDeployment",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "deployment data.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowDeploymentDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Workflow Deployment"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "WorkflowDeploymentController_deleteWorkflowDeployment",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete workflow's deployment by Workflow ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowDeploymentDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Workflow Deployment"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "WorkflowDeploymentController_updateWorkflowDeployment",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkflowDeploymentUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update a new workflow deployment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowDeploymentDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Workflow Deployment"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/deployments": {
+      "post": {
+        "operationId": "WorkflowDeploymentController_createWorkflowDeployment",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWorkflowDeploymentDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Create a new workflow deployment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowDeploymentDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Workflow Deployment"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/deployments/{workflowDeploymentId}/theme": {
+      "patch": {
+        "operationId": "ThemeController_create",
+        "parameters": [
+          {
+            "name": "workflowDeploymentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ThemeConfigurationUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update theme configuration of the Project.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThemeConfiguration"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Projects Theme Configuration"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "ThemeController_config",
+        "parameters": [
+          {
+            "name": "workflowDeploymentId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get theme configuration of the Project.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThemeConfiguration"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Projects Theme Configuration"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/organization": {
+      "get": {
+        "operationId": "OrganizationController_getOrganization",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get organization.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Organization"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/organization/token": {
+      "post": {
+        "operationId": "OrganizationController_generateOrganizationToken",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateTokenConfig"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Get auth token for organization.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationTokenDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Organization"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/organization/keys": {
+      "get": {
+        "operationId": "OrganizationKeysController_getOrganizationKeys",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get organization keys.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrganizationKey"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Organization Keys"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "OrganizationKeysController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrganizationKeyDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Create organization key.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationKey"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Organization Keys"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/organization/keys/public": {
+      "get": {
+        "operationId": "OrganizationKeysController_getOrganizationPublicKey",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get organization active public key.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationKey"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Organization Keys"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/organization/keys/{keyId}": {
+      "get": {
+        "operationId": "OrganizationKeysController_getOrganizationKey",
+        "parameters": [
+          {
+            "name": "keyId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get organization key.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationKey"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Organization Keys"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "OrganizationKeysController_update",
+        "parameters": [
+          {
+            "name": "keyId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateOrganizationKeyDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update organization key status.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationKey"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Organization Keys"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "OrganizationKeysController_remove",
+        "parameters": [
+          {
+            "name": "keyId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete specific organization key.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteOrganizationKey"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Organization Keys"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/ai-chats/messages": {
+      "post": {
+        "operationId": "MessagesController_create",
+        "summary": "Create new message",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMessageDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "404": {
+            "description": "Ai Chat doesn't exist"
+          }
+        },
+        "tags": [
+          "Chat with Ai Assistant"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/ai-chats/{aiChatId}/sessions": {
+      "get": {
+        "operationId": "SessionsController_getByChatId",
+        "summary": "Get a list of sessions by aiChatId",
+        "parameters": [
+          {
+            "name": "aiChatId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Ai Chat Sessions"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/ai-chats/project/{projectId}/sessions": {
+      "get": {
+        "operationId": "SessionsController_getByProjectId",
+        "summary": "Get a list of sessions by projectId",
+        "parameters": [
+          {
+            "name": "projectId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "aiChatId",
+            "required": false,
+            "in": "query",
+            "description": "AI Chat ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "deployment",
+            "required": false,
+            "in": "query",
+            "description": "Ai Chat deployment",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/AiChatChannel"
+              }
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Limit of sessions",
+            "schema": {
+              "default": 20,
+              "type": "number"
+            }
+          },
+          {
+            "name": "startingAfter",
+            "required": false,
+            "in": "query",
+            "description": "Starting after session id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/CursorBasedPageDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Session"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Ai Chat Sessions"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/ai-chats/sessions/{sessionId}/logs": {
+      "get": {
+        "operationId": "SessionsController_getBySession",
+        "summary": "Get a list of logs by session",
+        "parameters": [
+          {
+            "name": "sessionId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "types",
+            "required": false,
+            "in": "query",
+            "description": "Ai Chat Log type",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/AiChatLogsType"
+              }
+            }
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Limit of logs",
+            "schema": {
+              "default": 20,
+              "type": "number"
+            }
+          },
+          {
+            "name": "startingAfter",
+            "required": false,
+            "in": "query",
+            "description": "Starting after log id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/CursorBasedPageDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Log"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Ai Chat Sessions"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/ai-chats/{AiChatId}/logs": {
+      "get": {
+        "operationId": "SessionsController_getByAiChat",
+        "summary": "Get a list of all logs by chat",
+        "parameters": [
+          {
+            "name": "AiChatId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/CursorBasedPageDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Log"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Ai Chat Sessions"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/ai-chats/user/{userId}/logs": {
+      "get": {
+        "operationId": "SessionsController_getByUserId",
+        "summary": "Get a list of all logs by userId",
+        "parameters": [
+          {
+            "name": "userId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/CursorBasedPageDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Log"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Ai Chat Sessions"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/ai-chats/workflow/{workflowId}/logs": {
+      "get": {
+        "operationId": "SessionsController_getByWorkflowId",
+        "summary": "Get a list of all logs by workflowId",
+        "parameters": [
+          {
+            "name": "workflowId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/CursorBasedPageDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Log"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Ai Chat Sessions"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/call/phone": {
+      "post": {
+        "operationId": "VapiController_phoneCallInitiate",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePhoneCallConfiguration"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Initiate phone call.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PhoneCallConfiguration"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Workflow not found or invalid organization ID."
+          }
+        },
+        "tags": [
+          "Call"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/rest/v2/call/phone-numbers": {
+      "get": {
+        "operationId": "VapiController_getActivePhoneNumbers",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get organization active phone numbers.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PhoneCallConfigurationNumberDto"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Call"
+        ]
+      }
+    },
+    "/rest/v2/webhooks/vapi/server-messages": {
+      "post": {
+        "operationId": "VapiWebhooksController_onServerMessage",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Webhooks Vapi"
+        ]
+      }
+    },
+    "/rest/v2/webhooks/vapi/custom-llm/chat/completions": {
+      "post": {
+        "operationId": "VapiWebhooksController_onOpenAICustomLLMCall",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Webhooks Vapi"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "OutRival API",
+    "description": "OutRival API documentation.",
+    "version": "2.0",
+    "contact": {
+
+    }
+  },
+  "tags": [],
+  "servers": [{
+    "url": "https://api.outrival.com"
+  }],
+  "components": {
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key"
+      }
+    },
+    "schemas": {
+      "PageMetaDto": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "number"
+          },
+          "take": {
+            "type": "number"
+          },
+          "itemCount": {
+            "type": "number"
+          },
+          "pageCount": {
+            "type": "number"
+          },
+          "hasPreviousPage": {
+            "type": "boolean"
+          },
+          "hasNextPage": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "page",
+          "take",
+          "itemCount",
+          "pageCount",
+          "hasPreviousPage",
+          "hasNextPage"
+        ]
+      },
+      "PageDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "array"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PageMetaDto"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ]
+      },
+      "ProjectDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "template": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "CreateProjectDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "UpdateProjectDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "WorkflowType": {
+        "type": "string",
+        "enum": [
+          "SIMPLE",
+          "ADVANCED"
+        ]
+      },
+      "WorkflowModality": {
+        "type": "string",
+        "enum": [
+          "TEXT",
+          "VOICE",
+          "SMS"
+        ]
+      },
+      "WorkflowDto": {
+        "type": "object",
+        "properties": {
+          "workflowDeploymentId": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "template": {
+            "type": "boolean",
+            "default": false
+          },
+          "type": {
+            "$ref": "#/components/schemas/WorkflowType"
+          },
+          "modality": {
+            "$ref": "#/components/schemas/WorkflowModality"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "type",
+          "modality"
+        ]
+      },
+      "WorkflowDeploymentType": {
+        "type": "string",
+        "enum": [
+          "TEXT_IFRAME",
+          "TEXT_BUBBLE",
+          "VOICE_BUBBLE",
+          "VOICE_IFRAME",
+          "SMS",
+          "PHONE_OUTBOUND",
+          "PHONE_INBOUND",
+          "SLACK",
+          "API"
+        ]
+      },
+      "WorkflowDeploymentDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WorkflowDeploymentType"
+          },
+          "workflowId": {
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "phoneNumberId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ]
+      },
+      "VariableDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "testValue": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "CreateVariableDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "testValue": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "UpdateVariableDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "testValue": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateWorkflowDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "projectId": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WorkflowType"
+          },
+          "modality": {
+            "$ref": "#/components/schemas/WorkflowModality"
+          }
+        },
+        "required": [
+          "name",
+          "projectId",
+          "type",
+          "modality"
+        ]
+      },
+      "UpdateWorkflowDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "projectId": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/WorkflowType"
+          },
+          "modality": {
+            "$ref": "#/components/schemas/WorkflowModality"
+          }
+        }
+      },
+      "NodeType": {
+        "type": "string",
+        "enum": [
+          "START",
+          "END",
+          "PROMPT",
+          "ACTION",
+          "CONDITION"
+        ]
+      },
+      "NodeDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "workflowId": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/NodeType"
+          },
+          "builderPositionX": {
+            "type": "number"
+          },
+          "builderPositionY": {
+            "type": "number"
+          },
+          "error": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "workflowId",
+          "type",
+          "builderPositionX",
+          "builderPositionY",
+          "error"
+        ]
+      },
+      "NodeWithConfigDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "workflowId": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/NodeType"
+          },
+          "builderPositionX": {
+            "type": "number"
+          },
+          "builderPositionY": {
+            "type": "number"
+          },
+          "error": {
+            "type": "string"
+          },
+          "config": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/ChatConfiguration"
+              },
+              {
+                "$ref": "#/components/schemas/SmsConfiguration"
+              },
+              {
+                "$ref": "#/components/schemas/VoiceConfiguration"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "workflowId",
+          "type",
+          "builderPositionX",
+          "builderPositionY",
+          "error",
+          "config"
+        ]
+      },
+      "CreateNodeDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/NodeType"
+          },
+          "builderPositionX": {
+            "type": "number"
+          },
+          "builderPositionY": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "name",
+          "type",
+          "builderPositionX",
+          "builderPositionY"
+        ]
+      },
+      "HandlePosition": {
+        "type": "string",
+        "enum": [
+          "LEFT",
+          "RIGHT",
+          "TOP",
+          "BOTTOM"
+        ]
+      },
+      "EdgeDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "workflowId": {
+            "type": "string"
+          },
+          "sourceNodeId": {
+            "type": "string"
+          },
+          "targetNodeId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "functionCondition": {
+            "type": "string"
+          },
+          "sourceHandlePosition": {
+            "$ref": "#/components/schemas/HandlePosition"
+          },
+          "targetHandlePosition": {
+            "$ref": "#/components/schemas/HandlePosition"
+          }
+        },
+        "required": [
+          "id",
+          "workflowId",
+          "sourceNodeId",
+          "targetNodeId"
+        ]
+      },
+      "CreateEdgeDto": {
+        "type": "object",
+        "properties": {
+          "workflowId": {
+            "type": "string"
+          },
+          "sourceNodeId": {
+            "type": "string"
+          },
+          "targetNodeId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "functionCondition": {
+            "type": "string"
+          },
+          "sourceHandlePosition": {
+            "$ref": "#/components/schemas/HandlePosition"
+          },
+          "targetHandlePosition": {
+            "$ref": "#/components/schemas/HandlePosition"
+          }
+        },
+        "required": [
+          "workflowId",
+          "sourceNodeId",
+          "targetNodeId"
+        ]
+      },
+      "UpdateEdgeDto": {
+        "type": "object",
+        "properties": {
+          "workflowId": {
+            "type": "string"
+          },
+          "sourceNodeId": {
+            "type": "string"
+          },
+          "targetNodeId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "functionCondition": {
+            "type": "string"
+          },
+          "sourceHandlePosition": {
+            "$ref": "#/components/schemas/HandlePosition"
+          },
+          "targetHandlePosition": {
+            "$ref": "#/components/schemas/HandlePosition"
+          }
+        }
+      },
+      "UpdateNodeDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/NodeType"
+          },
+          "builderPositionX": {
+            "type": "number"
+          },
+          "builderPositionY": {
+            "type": "number"
+          }
+        }
+      },
+      "DeleteNodeDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "Provider": {
+        "type": "string",
+        "enum": [
+          "OPENAI",
+          "GROQ",
+          "ANTHROPIC"
+        ]
+      },
+      "Model": {
+        "type": "string",
+        "enum": [
+          "GPT_4_O",
+          "GPT_3_5_TURBO",
+          "GPT_4_TURBO",
+          "GPT_4_O_MINI",
+          "LLAMA_3_70B",
+          "LLAMA_3_8B",
+          "LLAMA_3_1_405B_REASONING",
+          "MIXTRAL",
+          "CLAUDE_3_OPUS",
+          "CLAUDE_3_SONNET",
+          "CLAUDE_3_HAIKU",
+          "CLAUDE_3_5_SONNET"
+        ]
+      },
+      "VoiceProvider": {
+        "type": "string",
+        "enum": [
+          "ELEVENLABS",
+          "PLAYHT",
+          "OPENAI"
+        ]
+      },
+      "BackgroundSound": {
+        "type": "string",
+        "enum": [
+          "DEFAULT",
+          "OFF",
+          "OFFICE"
+        ]
+      },
+      "VoiceConfigurationUpdateDto": {
+        "type": "object",
+        "properties": {
+          "initialMessage": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "resources": {
+            "type": "string"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/Provider"
+          },
+          "model": {
+            "$ref": "#/components/schemas/Model"
+          },
+          "voiceProvider": {
+            "$ref": "#/components/schemas/VoiceProvider"
+          },
+          "voice": {
+            "type": "string",
+            "enum": [
+              "burt",
+              "marissa",
+              "andrea",
+              "sarah",
+              "phillip",
+              "steve",
+              "joseph",
+              "myra",
+              "paula",
+              "ryan",
+              "drew",
+              "paul",
+              "mrb",
+              "matilda",
+              "mark",
+              "alloy",
+              "echo",
+              "fable",
+              "onyx",
+              "nova",
+              "shimmer",
+              "jennifer",
+              "melissa",
+              "will",
+              "chris",
+              "matt",
+              "jack",
+              "ruby",
+              "davis",
+              "donna",
+              "michael"
+            ]
+          },
+          "temperature": {
+            "type": "number"
+          },
+          "maxTokensOutput": {
+            "type": "number"
+          },
+          "backgroundSound": {
+            "$ref": "#/components/schemas/BackgroundSound"
+          },
+          "backchanneling": {
+            "type": "boolean"
+          },
+          "functions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "endCallFunction": {
+            "type": "boolean"
+          },
+          "dialKeypadFunction": {
+            "type": "boolean"
+          },
+          "endCallMessage": {
+            "type": "string"
+          },
+          "endCallPhrases": {
+            "type": "string"
+          }
+        }
+      },
+      "VoiceConfiguration": {
+        "type": "object",
+        "properties": {
+          "initialMessage": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/Provider"
+          },
+          "resources": {
+            "type": "string"
+          },
+          "model": {
+            "$ref": "#/components/schemas/Model"
+          },
+          "voiceProvider": {
+            "$ref": "#/components/schemas/VoiceProvider"
+          },
+          "voice": {
+            "type": "string",
+            "enum": [
+              "burt",
+              "marissa",
+              "andrea",
+              "sarah",
+              "phillip",
+              "steve",
+              "joseph",
+              "myra",
+              "paula",
+              "ryan",
+              "drew",
+              "paul",
+              "mrb",
+              "matilda",
+              "mark",
+              "alloy",
+              "echo",
+              "fable",
+              "onyx",
+              "nova",
+              "shimmer",
+              "jennifer",
+              "melissa",
+              "will",
+              "chris",
+              "matt",
+              "jack",
+              "ruby",
+              "davis",
+              "donna",
+              "michael"
+            ]
+          },
+          "temperature": {
+            "type": "number"
+          },
+          "maxTokensOutput": {
+            "type": "number"
+          },
+          "backgroundSound": {
+            "$ref": "#/components/schemas/BackgroundSound"
+          },
+          "backchanneling": {
+            "type": "boolean"
+          },
+          "functions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "endCallFunction": {
+            "type": "boolean"
+          },
+          "dialKeypadFunction": {
+            "type": "boolean"
+          },
+          "endCallMessage": {
+            "type": "string"
+          },
+          "endCallPhrases": {
+            "type": "string"
+          },
+          "isRagEnabled": {
+            "type": "boolean"
+          },
+          "forceRag": {
+            "type": "boolean"
+          },
+          "ragTriggerTopics": {
+            "type": "string"
+          },
+          "preserveRagResult": {
+            "type": "boolean"
+          },
+          "isCallTransferEnabled": {
+            "type": "boolean"
+          },
+          "callTransferPhoneNumber": {
+            "type": "string"
+          },
+          "callTransferCondition": {
+            "type": "string"
+          },
+          "callTransferForce": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "initialMessage",
+          "prompt",
+          "provider",
+          "resources",
+          "model",
+          "voiceProvider",
+          "voice",
+          "temperature",
+          "maxTokensOutput",
+          "backgroundSound",
+          "backchanneling",
+          "functions",
+          "endCallFunction",
+          "dialKeypadFunction",
+          "endCallMessage",
+          "endCallPhrases",
+          "isRagEnabled",
+          "forceRag",
+          "ragTriggerTopics",
+          "preserveRagResult",
+          "isCallTransferEnabled",
+          "callTransferPhoneNumber",
+          "callTransferCondition",
+          "callTransferForce"
+        ]
+      },
+      "SmsProvider": {
+        "type": "string",
+        "enum": [
+          "OPENAI",
+          "GROQ"
+        ]
+      },
+      "SmsModel": {
+        "type": "string",
+        "enum": [
+          "GPT_4_O",
+          "GPT_3_5_TURBO",
+          "GPT_4_TURBO",
+          "GPT_4_O_MINI",
+          "LLAMA_3_70B",
+          "LLAMA_3_8B",
+          "LLAMA_3_1_405B_REASONING",
+          "MIXTRAL"
+        ]
+      },
+      "SmsConfigurationUpdateDto": {
+        "type": "object",
+        "properties": {
+          "initialMessage": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "resources": {
+            "type": "string"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/SmsProvider"
+          },
+          "model": {
+            "$ref": "#/components/schemas/SmsModel"
+          },
+          "temperature": {
+            "type": "number"
+          },
+          "maxTokensOutput": {
+            "type": "number"
+          },
+          "smsMode": {
+            "type": "boolean"
+          },
+          "voiceCallMode": {
+            "type": "boolean"
+          },
+          "keywords": {
+            "type": "string"
+          },
+          "functions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "SmsConfiguration": {
+        "type": "object",
+        "properties": {
+          "initialMessage": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "resources": {
+            "type": "string"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/SmsProvider"
+          },
+          "model": {
+            "$ref": "#/components/schemas/SmsModel"
+          },
+          "temperature": {
+            "type": "number"
+          },
+          "maxTokensOutput": {
+            "type": "number"
+          },
+          "smsMode": {
+            "type": "boolean"
+          },
+          "phoneCallbackEnabled": {
+            "type": "boolean"
+          },
+          "keywords": {
+            "type": "string"
+          },
+          "isRagEnabled": {
+            "type": "boolean"
+          },
+          "forceRag": {
+            "type": "boolean"
+          },
+          "ragTriggerTopics": {
+            "type": "string"
+          },
+          "preserveRagResult": {
+            "type": "boolean"
+          },
+          "functions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "initialMessage",
+          "prompt",
+          "resources",
+          "provider",
+          "model",
+          "temperature",
+          "maxTokensOutput",
+          "smsMode",
+          "phoneCallbackEnabled",
+          "keywords",
+          "isRagEnabled",
+          "forceRag",
+          "ragTriggerTopics",
+          "preserveRagResult",
+          "functions"
+        ]
+      },
+      "ChatProvider": {
+        "type": "string",
+        "enum": [
+          "OPENAI",
+          "GROQ"
+        ]
+      },
+      "ChatModel": {
+        "type": "string",
+        "enum": [
+          "GPT_4_O",
+          "GPT_3_5_TURBO",
+          "GPT_4_TURBO",
+          "GPT_4_O_MINI",
+          "LLAMA_3_70B",
+          "LLAMA_3_8B",
+          "LLAMA_3_1_405B_REASONING",
+          "MIXTRAL"
+        ]
+      },
+      "ChatConfigurationUpdateDto": {
+        "type": "object",
+        "properties": {
+          "initialMessage": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "resources": {
+            "type": "string"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/ChatProvider"
+          },
+          "model": {
+            "$ref": "#/components/schemas/ChatModel"
+          },
+          "temperature": {
+            "type": "number"
+          },
+          "maxTokensOutput": {
+            "type": "number"
+          },
+          "chatMode": {
+            "type": "boolean"
+          },
+          "quickRepliesEnabled": {
+            "type": "boolean"
+          },
+          "functions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "ChatConfiguration": {
+        "type": "object",
+        "properties": {
+          "initialMessage": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "resources": {
+            "type": "string"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/ChatProvider"
+          },
+          "model": {
+            "$ref": "#/components/schemas/ChatModel"
+          },
+          "temperature": {
+            "type": "number"
+          },
+          "maxTokensOutput": {
+            "type": "number"
+          },
+          "chatMode": {
+            "type": "boolean"
+          },
+          "quickRepliesEnabled": {
+            "type": "boolean"
+          },
+          "isRagEnabled": {
+            "type": "boolean"
+          },
+          "forceRag": {
+            "type": "boolean"
+          },
+          "ragTriggerTopics": {
+            "type": "string"
+          },
+          "preserveRagResult": {
+            "type": "boolean"
+          },
+          "functions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "initialMessage",
+          "prompt",
+          "resources",
+          "provider",
+          "model",
+          "temperature",
+          "maxTokensOutput",
+          "chatMode",
+          "quickRepliesEnabled",
+          "isRagEnabled",
+          "forceRag",
+          "ragTriggerTopics",
+          "preserveRagResult",
+          "functions"
+        ]
+      },
+      "WorkflowDeploymentUpdateDto": {
+        "type": "object",
+        "properties": {
+          "workflowId": {
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "phoneNumberId": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateWorkflowDeploymentDto": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/WorkflowDeploymentType"
+          },
+          "projectId": {
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "type",
+          "projectId",
+          "enabled"
+        ]
+      },
+      "ThemeConfigurationUpdateDto": {
+        "type": "object",
+        "properties": {
+          "theme": {
+            "type": "object"
+          }
+        }
+      },
+      "ThemeConfiguration": {
+        "type": "object",
+        "properties": {
+          "theme": {
+            "type": "object"
+          },
+          "workflowDeploymentId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "theme",
+          "workflowDeploymentId"
+        ]
+      },
+      "OrganizationDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "analyticUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "GenerateTokenConfig": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "expiresIn": {
+            "type": "string"
+          }
+        }
+      },
+      "OrganizationTokenDTO": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "expiresAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "token",
+          "expiresAt"
+        ]
+      },
+      "OrganizationKey": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "SECRET",
+              "PUBLIC"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "value",
+          "type",
+          "status"
+        ]
+      },
+      "CreateOrganizationKeyDTO": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "SECRET",
+              "PUBLIC"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE"
+            ]
+          }
+        }
+      },
+      "UpdateOrganizationKeyDTO": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "DeleteOrganizationKey": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "AiChatMessageRole": {
+        "type": "string",
+        "enum": [
+          "ASSISTANT",
+          "TOOL",
+          "USER",
+          "SYSTEM"
+        ]
+      },
+      "AiChatChannel": {
+        "type": "string",
+        "enum": [
+          "SMS",
+          "VOICE",
+          "TEXT"
+        ]
+      },
+      "CreateMessageDto": {
+        "type": "object",
+        "properties": {
+          "aiChatId": {
+            "type": "string",
+            "description": "AI Chat ID"
+          },
+          "role": {
+            "$ref": "#/components/schemas/AiChatMessageRole"
+          },
+          "channel": {
+            "$ref": "#/components/schemas/AiChatChannel"
+          },
+          "content": {
+            "type": "string",
+            "description": "Message content"
+          }
+        },
+        "required": [
+          "aiChatId",
+          "role",
+          "channel"
+        ]
+      },
+      "CursorBasedPageDto": {
+        "type": "object",
+        "properties": {
+          "hasMore": {
+            "type": "boolean"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "hasMore",
+          "data"
+        ]
+      },
+      "Session": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "aiChatId": {
+            "type": "string"
+          },
+          "startedAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "endedAt": {
+            "format": "date-time",
+            "type": "string",
+            "nullable": true
+          },
+          "customerMetadata": {
+            "type": "object",
+            "nullable": true
+          },
+          "callRecording": {
+            "type": "object",
+            "nullable": true
+          },
+          "deployment": {
+            "nullable": true,
+            "$ref": "#/components/schemas/AiChatChannel"
+          }
+        },
+        "required": [
+          "id",
+          "aiChatId",
+          "startedAt",
+          "endedAt",
+          "customerMetadata",
+          "callRecording",
+          "deployment"
+        ]
+      },
+      "AiChatLogsType": {
+        "type": "string",
+        "enum": [
+          "SESSION_START",
+          "SESSION_END",
+          "SEND_MESSAGE",
+          "RECEIVE_MESSAGE",
+          "FUNCTION_CALL",
+          "FUNCTION_RESPONSE",
+          "CHANGE_WORKFLOW",
+          "CHANGE_NODE_WORKFLOW",
+          "CALL_RECORDING",
+          "ERROR"
+        ]
+      },
+      "Message": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "seqId": {
+            "type": "number"
+          },
+          "role": {
+            "$ref": "#/components/schemas/AiChatMessageRole"
+          },
+          "channel": {
+            "$ref": "#/components/schemas/AiChatChannel"
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
+          },
+          "toolCallId": {
+            "type": "string",
+            "nullable": true
+          },
+          "toolCalls": {
+            "type": "object",
+            "nullable": true
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "seqId",
+          "role",
+          "channel",
+          "content",
+          "toolCallId",
+          "toolCalls",
+          "createdAt"
+        ]
+      },
+      "Log": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AiChatLogsType"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "sessionId": {
+            "type": "string"
+          },
+          "aiChatId": {
+            "type": "string"
+          },
+          "workflowId": {
+            "type": "string"
+          },
+          "workflowNodeId": {
+            "type": "string"
+          },
+          "messageId": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Message"
+              }
+            ]
+          },
+          "aiUserId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "createdAt",
+          "sessionId",
+          "aiChatId",
+          "workflowId",
+          "workflowNodeId",
+          "messageId",
+          "message",
+          "aiUserId"
+        ]
+      },
+      "CreatePhoneCallConfiguration": {
+        "type": "object",
+        "properties": {
+          "workflowId": {
+            "type": "string"
+          },
+          "deploymentId": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "userName": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "variables": {
+            "type": "object"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Metadata"
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "anonymousId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "phoneNumber",
+          "metadata"
+        ]
+      },
+      "PhoneCallConfiguration": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "PhoneCallConfigurationNumberDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "number"
+        ]
+      }
+    }
+  }
+}

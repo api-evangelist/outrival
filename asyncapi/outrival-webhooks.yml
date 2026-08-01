@@ -1,0 +1,32 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.outrival.com/v1/api-reference/webhooks.md
+spec_type: Webhooks
+note: >-
+  OutRival documents outbound webhooks ("Server Events") but publishes no AsyncAPI document.
+  This captures the webhook catalog. Delivery is a POST to a configured Webhook URL; each payload
+  is signed with an x-signature HMAC-SHA256 header computed over the raw body using the Webhook
+  Secret. Webhook URL + Secret are configured per organization (see POST /rest/v1/settings and
+  GET /rest/v1/settings/secret).
+transport: http
+delivery: outbound POST to configured Webhook URL
+signature:
+  header: x-signature
+  algorithm: HMAC-SHA256
+  over: raw request body
+  secret: per-organization Webhook Secret
+payload_envelope:
+  event: enum [status-changed, conversation-updated, function-call]
+  type: enum [VOICE, TEXT, SMS]
+  companionId: string
+  data: object
+events:
+  - name: status-changed
+    description: A conversation/chat changed status (queued, ringing, in-progress, forwarding, ended).
+    data_fields: [messages, status, startedAt, endedAt, endedReason, phoneNumber]
+  - name: conversation-updated
+    description: A conversation transcript was updated with new messages.
+    data_fields: [messages, phoneNumber, timestamp]
+  - name: function-call
+    description: The companion invoked a tool/function during the conversation.
+    data_fields: [name, parameters]

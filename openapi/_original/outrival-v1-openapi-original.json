@@ -1,0 +1,2647 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/rest/v1/assistants": {
+      "post": {
+        "operationId": "AssistantsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAssistantDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Create AI Assistant.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assistant"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assistants"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "AssistantsController_findAll",
+        "parameters": [
+          {
+            "name": "order",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "desc",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "take",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of AI Assistant.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/PageDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Assistant"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assistants"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/assistants/templates": {
+      "get": {
+        "operationId": "AssistantsController_findAllTemplates",
+        "parameters": [
+          {
+            "name": "order",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "desc",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "take",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of AI Assistant templates.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/PageDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Assistant"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assistants"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/assistants/{id}": {
+      "get": {
+        "operationId": "AssistantsController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AI Assistant by Assistant ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assistant"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Assistant not found."
+          }
+        },
+        "tags": [
+          "Assistants"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "AssistantsController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAssistantDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update specific AI Assistant.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assistant"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Assistants"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "AssistantsController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete specific AI Assistant.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteAssistant"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assistants"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/assistants/duplicate/{id}": {
+      "post": {
+        "operationId": "AssistantsController_duplicate",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update specific AI Assistant.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Assistant"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assistants"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/assistants/{assistantId}/voice": {
+      "patch": {
+        "operationId": "VoiceController_create",
+        "parameters": [
+          {
+            "name": "assistantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VoiceConfigurationUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update voice configuration of AI Assistant.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceConfiguration"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assistants Voice Configuration"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "VoiceController_config",
+        "parameters": [
+          {
+            "name": "assistantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get voice configuration of AI Assistant.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceConfiguration"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assistants Voice Configuration"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/assistants/{assistantId}/sms": {
+      "patch": {
+        "operationId": "SmsController_create",
+        "parameters": [
+          {
+            "name": "assistantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SmsConfigurationUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update sms configuration of AI Assistant.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SmsConfiguration"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assistants Sms Configuration"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "SmsController_config",
+        "parameters": [
+          {
+            "name": "assistantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get sms configuration of AI Assistant.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SmsConfiguration"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assistants Sms Configuration"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/assistants/{assistantId}/chat": {
+      "patch": {
+        "operationId": "ChatController_create",
+        "parameters": [
+          {
+            "name": "assistantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatConfigurationUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update chat configuration of AI Assistant.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatConfiguration"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assistants Chat Configuration"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "ChatController_config",
+        "parameters": [
+          {
+            "name": "assistantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get chat configuration of AI Assistant.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatConfiguration"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assistants Chat Configuration"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/assistants/{assistantId}/theme": {
+      "patch": {
+        "operationId": "ThemeController_create",
+        "parameters": [
+          {
+            "name": "assistantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ThemeConfigurationUpdateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update theme configuration of AI Assistant.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThemeConfiguration"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assistants Theme Configuration"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "ThemeController_config",
+        "parameters": [
+          {
+            "name": "assistantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get theme configuration of AI Assistant.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ThemeConfiguration"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assistants Theme Configuration"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/assistants/{assistantId}/logs": {
+      "get": {
+        "operationId": "AssistantLogsController_logs",
+        "parameters": [
+          {
+            "name": "assistantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "desc",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "take",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "type": "number"
+            }
+          },
+          {
+            "name": "type",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "enum": [
+                "VOICE",
+                "TEXT",
+                "SMS"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get assistant logs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AssistantLogsList"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assistants Logs"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/assistants/{assistantId}/log/{logId}": {
+      "get": {
+        "operationId": "AssistantLogsController_log",
+        "parameters": [
+          {
+            "name": "assistantId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "logId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get assistant log",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssistantLog"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Assistants Logs"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/settings/secret": {
+      "get": {
+        "operationId": "SettingsController_generateWebhookSecret",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Regenerate webhook secret.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Settings"
+        ]
+      }
+    },
+    "/rest/v1/settings": {
+      "get": {
+        "operationId": "SettingsController_getSettings",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Get list of registered webhooks.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WebhookSettings"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Settings"
+        ]
+      },
+      "post": {
+        "operationId": "SettingsController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhooksServiceConfigCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create webhook settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookSettings"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Settings"
+        ]
+      }
+    },
+    "/rest/v1/settings/{id}": {
+      "patch": {
+        "operationId": "SettingsController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebhooksServiceConfigUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update webhook settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookSettings"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Settings"
+        ]
+      },
+      "delete": {
+        "operationId": "SettingsController_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete webhook settings.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookSettings"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Settings"
+        ]
+      }
+    },
+    "/rest/v1/organization": {
+      "get": {
+        "operationId": "OrganizationController_getOrganization",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get organization.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Organization"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/organization/token": {
+      "post": {
+        "operationId": "OrganizationController_generateOrganizationToken",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateTokenConfig"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Get auth token for organization.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationTokenDTO"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Organization"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/organization/keys": {
+      "get": {
+        "operationId": "OrganizationKeysController_getOrganizationKeys",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get organization keys.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrganizationKey"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Organization Keys"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "OrganizationKeysController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrganizationKeyDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Create organization key.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationKey"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Organization Keys"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/organization/keys/public": {
+      "get": {
+        "operationId": "OrganizationKeysController_getOrganizationPublicKey",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get organization active public key.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationKey"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Organization Keys"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/organization/keys/{keyId}": {
+      "get": {
+        "operationId": "OrganizationKeysController_getOrganizationKey",
+        "parameters": [
+          {
+            "name": "keyId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get organization key.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationKey"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Organization Keys"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "OrganizationKeysController_update",
+        "parameters": [
+          {
+            "name": "keyId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateOrganizationKeyDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update organization key status.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationKey"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Organization Keys"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "OrganizationKeysController_remove",
+        "parameters": [
+          {
+            "name": "keyId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete specific organization key.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteOrganizationKey"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Organization Keys"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/ai-chats/messages": {
+      "post": {
+        "operationId": "MessagesController_create",
+        "summary": "Create new message",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMessageDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "404": {
+            "description": "Ai Chat doesn't exist"
+          }
+        },
+        "tags": [
+          "Chat with Ai Assistant"
+        ],
+        "security": [
+          {
+            "api_key": []
+          },
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/files/upload": {
+      "post": {
+        "operationId": "FilesController_upload",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "description": "File to upload",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/FileUploadDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          },
+          "400": {
+            "description": "Invalid upload request."
+          }
+        },
+        "tags": [
+          "Files"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/files": {
+      "get": {
+        "operationId": "FilesController_findAll",
+        "parameters": [
+          {
+            "name": "order",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "default": "desc",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "default": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "take",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated list of AI Assistant.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/PageDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/File"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Files"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/files/{id}/download": {
+      "get": {
+        "operationId": "FilesController_getDownloadLink",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Download link",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileDownloadLinkDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "File not found"
+          }
+        },
+        "tags": [
+          "Files"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/files/{id}": {
+      "delete": {
+        "operationId": "FilesController_deleteFile",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete file",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeletedFile"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Files"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/rest/v1/webhooks/vapi/server-messages": {
+      "post": {
+        "operationId": "VapiWebhooksController_onServerMessage",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/rest/v1/webhooks/vapi/custom-llm/chat/completions": {
+      "post": {
+        "operationId": "VapiWebhooksController_onOpenAICustomLLMCall",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/rest/v1/call/phone": {
+      "post": {
+        "operationId": "VapiController_phoneCallInitiate",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePhoneCallConfiguration"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Initiate phone call.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PhoneCallConfiguration"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Assistant not found or invalid organization ID."
+          }
+        },
+        "tags": [
+          "Call"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "OutRival API",
+    "description": "OutRival API documentation.",
+    "version": "1.0",
+    "contact": {
+
+    }
+  },
+  "tags": [],
+  "servers": [{
+    "url": "https://api.outrival.com"
+  }],
+  "components": {
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key"
+      }
+    },
+    "schemas": {
+      "CreateAssistantDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "variables": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "Assistant": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "template": {
+            "type": "boolean",
+            "default": false
+          },
+          "variables": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      },
+      "PageMetaDto": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "number"
+          },
+          "take": {
+            "type": "number"
+          },
+          "itemCount": {
+            "type": "number"
+          },
+          "pageCount": {
+            "type": "number"
+          },
+          "hasPreviousPage": {
+            "type": "boolean"
+          },
+          "hasNextPage": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "page",
+          "take",
+          "itemCount",
+          "pageCount",
+          "hasPreviousPage",
+          "hasNextPage"
+        ]
+      },
+      "PageDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "array"
+            }
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PageMetaDto"
+          }
+        },
+        "required": [
+          "data",
+          "meta"
+        ]
+      },
+      "UpdateAssistantDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "variables": {
+            "type": "object"
+          }
+        }
+      },
+      "DeleteAssistant": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "Provider": {
+        "type": "string",
+        "enum": [
+          "OPENAI",
+          "GROQ",
+          "ANTHROPIC"
+        ]
+      },
+      "Model": {
+        "type": "string",
+        "enum": [
+          "GPT_4_O",
+          "GPT_3_5_TURBO",
+          "GPT_4_TURBO",
+          "GPT_4_O_MINI",
+          "LLAMA_3_70B",
+          "LLAMA_3_8B",
+          "LLAMA_3_1_405B_REASONING",
+          "MIXTRAL",
+          "CLAUDE_3_OPUS",
+          "CLAUDE_3_SONNET",
+          "CLAUDE_3_HAIKU",
+          "CLAUDE_3_5_SONNET"
+        ]
+      },
+      "VoiceProvider": {
+        "type": "string",
+        "enum": [
+          "ELEVENLABS",
+          "PLAYHT",
+          "OPENAI"
+        ]
+      },
+      "BackgroundSound": {
+        "type": "string",
+        "enum": [
+          "DEFAULT",
+          "OFF",
+          "OFFICE"
+        ]
+      },
+      "VoiceConfigurationUpdateDto": {
+        "type": "object",
+        "properties": {
+          "initialMessage": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "resources": {
+            "type": "string"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/Provider"
+          },
+          "model": {
+            "$ref": "#/components/schemas/Model"
+          },
+          "voiceProvider": {
+            "$ref": "#/components/schemas/VoiceProvider"
+          },
+          "voice": {
+            "type": "string",
+            "enum": [
+              "burt",
+              "marissa",
+              "andrea",
+              "sarah",
+              "phillip",
+              "steve",
+              "joseph",
+              "myra",
+              "paula",
+              "ryan",
+              "drew",
+              "paul",
+              "mrb",
+              "matilda",
+              "mark",
+              "alloy",
+              "echo",
+              "fable",
+              "onyx",
+              "nova",
+              "shimmer",
+              "jennifer",
+              "melissa",
+              "will",
+              "chris",
+              "matt",
+              "jack",
+              "ruby",
+              "davis",
+              "donna",
+              "michael"
+            ]
+          },
+          "temperature": {
+            "type": "number"
+          },
+          "maxTokensOutput": {
+            "type": "number"
+          },
+          "backgroundSound": {
+            "$ref": "#/components/schemas/BackgroundSound"
+          },
+          "backchanneling": {
+            "type": "boolean"
+          },
+          "functions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "endCallFunction": {
+            "type": "boolean"
+          },
+          "dialKeypadFunction": {
+            "type": "boolean"
+          },
+          "endCallMessage": {
+            "type": "string"
+          },
+          "endCallPhrases": {
+            "type": "string"
+          }
+        }
+      },
+      "VoiceConfiguration": {
+        "type": "object",
+        "properties": {
+          "initialMessage": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/Provider"
+          },
+          "resources": {
+            "type": "string"
+          },
+          "model": {
+            "$ref": "#/components/schemas/Model"
+          },
+          "voiceProvider": {
+            "$ref": "#/components/schemas/VoiceProvider"
+          },
+          "voice": {
+            "type": "string",
+            "enum": [
+              "burt",
+              "marissa",
+              "andrea",
+              "sarah",
+              "phillip",
+              "steve",
+              "joseph",
+              "myra",
+              "paula",
+              "ryan",
+              "drew",
+              "paul",
+              "mrb",
+              "matilda",
+              "mark",
+              "alloy",
+              "echo",
+              "fable",
+              "onyx",
+              "nova",
+              "shimmer",
+              "jennifer",
+              "melissa",
+              "will",
+              "chris",
+              "matt",
+              "jack",
+              "ruby",
+              "davis",
+              "donna",
+              "michael"
+            ]
+          },
+          "temperature": {
+            "type": "number"
+          },
+          "maxTokensOutput": {
+            "type": "number"
+          },
+          "backgroundSound": {
+            "$ref": "#/components/schemas/BackgroundSound"
+          },
+          "backchanneling": {
+            "type": "boolean"
+          },
+          "functions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "endCallFunction": {
+            "type": "boolean"
+          },
+          "dialKeypadFunction": {
+            "type": "boolean"
+          },
+          "endCallMessage": {
+            "type": "string"
+          },
+          "endCallPhrases": {
+            "type": "string"
+          },
+          "isRagEnabled": {
+            "type": "boolean"
+          },
+          "forceRag": {
+            "type": "boolean"
+          },
+          "ragTriggerTopics": {
+            "type": "string"
+          },
+          "preserveRagResult": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "initialMessage",
+          "prompt",
+          "provider",
+          "resources",
+          "model",
+          "voiceProvider",
+          "voice",
+          "temperature",
+          "maxTokensOutput",
+          "backgroundSound",
+          "backchanneling",
+          "functions",
+          "endCallFunction",
+          "dialKeypadFunction",
+          "endCallMessage",
+          "endCallPhrases",
+          "isRagEnabled",
+          "forceRag",
+          "ragTriggerTopics",
+          "preserveRagResult"
+        ]
+      },
+      "SmsProvider": {
+        "type": "string",
+        "enum": [
+          "OPENAI",
+          "GROQ"
+        ]
+      },
+      "SmsModel": {
+        "type": "string",
+        "enum": [
+          "GPT_4_O",
+          "GPT_3_5_TURBO",
+          "GPT_4_TURBO",
+          "GPT_4_O_MINI",
+          "LLAMA_3_70B",
+          "LLAMA_3_8B",
+          "LLAMA_3_1_405B_REASONING",
+          "MIXTRAL"
+        ]
+      },
+      "SmsConfigurationUpdateDto": {
+        "type": "object",
+        "properties": {
+          "initialMessage": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "resources": {
+            "type": "string"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/SmsProvider"
+          },
+          "model": {
+            "$ref": "#/components/schemas/SmsModel"
+          },
+          "temperature": {
+            "type": "number"
+          },
+          "maxTokensOutput": {
+            "type": "number"
+          },
+          "smsMode": {
+            "type": "boolean"
+          },
+          "voiceCallMode": {
+            "type": "boolean"
+          },
+          "keywords": {
+            "type": "string"
+          },
+          "functions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "SmsConfiguration": {
+        "type": "object",
+        "properties": {
+          "initialMessage": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "resources": {
+            "type": "string"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/SmsProvider"
+          },
+          "model": {
+            "$ref": "#/components/schemas/SmsModel"
+          },
+          "temperature": {
+            "type": "number"
+          },
+          "maxTokensOutput": {
+            "type": "number"
+          },
+          "smsMode": {
+            "type": "boolean"
+          },
+          "voiceCallMode": {
+            "type": "boolean"
+          },
+          "keywords": {
+            "type": "string"
+          },
+          "isRagEnabled": {
+            "type": "boolean"
+          },
+          "forceRag": {
+            "type": "boolean"
+          },
+          "ragTriggerTopics": {
+            "type": "string"
+          },
+          "preserveRagResult": {
+            "type": "boolean"
+          },
+          "functions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "initialMessage",
+          "prompt",
+          "resources",
+          "provider",
+          "model",
+          "temperature",
+          "maxTokensOutput",
+          "smsMode",
+          "voiceCallMode",
+          "keywords",
+          "isRagEnabled",
+          "forceRag",
+          "ragTriggerTopics",
+          "preserveRagResult",
+          "functions"
+        ]
+      },
+      "ChatProvider": {
+        "type": "string",
+        "enum": [
+          "OPENAI",
+          "GROQ"
+        ]
+      },
+      "ChatModel": {
+        "type": "string",
+        "enum": [
+          "GPT_4_O",
+          "GPT_3_5_TURBO",
+          "GPT_4_TURBO",
+          "GPT_4_O_MINI",
+          "LLAMA_3_70B",
+          "LLAMA_3_8B",
+          "LLAMA_3_1_405B_REASONING",
+          "MIXTRAL"
+        ]
+      },
+      "ChatConfigurationUpdateDto": {
+        "type": "object",
+        "properties": {
+          "initialMessage": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "resources": {
+            "type": "string"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/ChatProvider"
+          },
+          "model": {
+            "$ref": "#/components/schemas/ChatModel"
+          },
+          "temperature": {
+            "type": "number"
+          },
+          "maxTokensOutput": {
+            "type": "number"
+          },
+          "chatMode": {
+            "type": "boolean"
+          },
+          "quickRepliesEnabled": {
+            "type": "boolean"
+          },
+          "functions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "ChatConfiguration": {
+        "type": "object",
+        "properties": {
+          "initialMessage": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "resources": {
+            "type": "string"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/ChatProvider"
+          },
+          "model": {
+            "$ref": "#/components/schemas/ChatModel"
+          },
+          "temperature": {
+            "type": "number"
+          },
+          "maxTokensOutput": {
+            "type": "number"
+          },
+          "chatMode": {
+            "type": "boolean"
+          },
+          "quickRepliesEnabled": {
+            "type": "boolean"
+          },
+          "isRagEnabled": {
+            "type": "boolean"
+          },
+          "forceRag": {
+            "type": "boolean"
+          },
+          "ragTriggerTopics": {
+            "type": "string"
+          },
+          "preserveRagResult": {
+            "type": "boolean"
+          },
+          "functions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "initialMessage",
+          "prompt",
+          "resources",
+          "provider",
+          "model",
+          "temperature",
+          "maxTokensOutput",
+          "chatMode",
+          "quickRepliesEnabled",
+          "isRagEnabled",
+          "forceRag",
+          "ragTriggerTopics",
+          "preserveRagResult",
+          "functions"
+        ]
+      },
+      "ThemeConfigurationUpdateDto": {
+        "type": "object",
+        "properties": {
+          "theme": {
+            "type": "object"
+          }
+        }
+      },
+      "AssistantMode": {
+        "type": "string",
+        "enum": [
+          "CHAT_ONLY",
+          "VOICE_ONLY",
+          "VOICE_AND_CHAT"
+        ]
+      },
+      "ThemeConfiguration": {
+        "type": "object",
+        "properties": {
+          "theme": {
+            "type": "object"
+          },
+          "mode": {
+            "$ref": "#/components/schemas/AssistantMode"
+          }
+        },
+        "required": [
+          "theme",
+          "mode"
+        ]
+      },
+      "AssistantLogsList": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "VOICE",
+              "TEXT",
+              "SMS"
+            ]
+          },
+          "label": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "label",
+          "createdAt"
+        ]
+      },
+      "AssistantLog": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "VOICE",
+              "TEXT",
+              "SMS"
+            ]
+          },
+          "recordingUrl": {
+            "type": "string"
+          },
+          "messages": {
+            "type": "object"
+          },
+          "metadata": {
+            "type": "object"
+          },
+          "customerMetadata": {
+            "type": "object"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "recordingUrl",
+          "messages",
+          "metadata",
+          "customerMetadata",
+          "createdAt"
+        ]
+      },
+      "WebhookSettings": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "secret": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "url",
+          "name",
+          "secret",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "WebhooksServiceConfigUpdate": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "WebhooksServiceConfigCreate": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url",
+          "secret"
+        ]
+      },
+      "OrganizationDTO": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "analyticUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "GenerateTokenConfig": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "expiresIn": {
+            "type": "string"
+          }
+        }
+      },
+      "OrganizationTokenDTO": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "expiresAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "token",
+          "expiresAt"
+        ]
+      },
+      "OrganizationKey": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "SECRET",
+              "PUBLIC"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "value",
+          "type",
+          "status"
+        ]
+      },
+      "CreateOrganizationKeyDTO": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "SECRET",
+              "PUBLIC"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE"
+            ]
+          }
+        }
+      },
+      "UpdateOrganizationKeyDTO": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "DeleteOrganizationKey": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "AiChatMessageRole": {
+        "type": "string",
+        "description": "Role of the sender (user | assistant| system | tool)",
+        "enum": [
+          "ASSISTANT",
+          "TOOL",
+          "USER",
+          "SYSTEM"
+        ]
+      },
+      "AiChatChannel": {
+        "type": "string",
+        "description": "Message channel (text | voice | video)",
+        "enum": [
+          "SMS",
+          "VOICE",
+          "TEXT"
+        ]
+      },
+      "CreateMessageDto": {
+        "type": "object",
+        "properties": {
+          "aiChatId": {
+            "type": "string",
+            "description": "AI Chat ID"
+          },
+          "role": {
+            "$ref": "#/components/schemas/AiChatMessageRole"
+          },
+          "channel": {
+            "$ref": "#/components/schemas/AiChatChannel"
+          },
+          "content": {
+            "type": "string",
+            "description": "Message content"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Metadata"
+          }
+        },
+        "required": [
+          "aiChatId",
+          "role",
+          "channel",
+          "metadata"
+        ]
+      },
+      "FileUploadDto": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary"
+          },
+          "metadata": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "file"
+        ]
+      },
+      "File": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "organizationId": {
+            "type": "string"
+          },
+          "size": {
+            "type": "number"
+          },
+          "metadata": {
+            "type": "object"
+          },
+          "mimeType": {
+            "type": "string"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "organizationId",
+          "size",
+          "metadata",
+          "mimeType",
+          "createdAt"
+        ]
+      },
+      "FileDownloadLinkDto": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      },
+      "DeletedFile": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "CreatePhoneCallConfiguration": {
+        "type": "object",
+        "properties": {
+          "assistantId": {
+            "type": "string"
+          },
+          "phoneNumber": {
+            "type": "string"
+          },
+          "userName": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "variables": {
+            "type": "object"
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Metadata"
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "anonymousId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "assistantId",
+          "phoneNumber",
+          "metadata"
+        ]
+      },
+      "PhoneCallConfiguration": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    }
+  }
+}

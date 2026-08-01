@@ -1,0 +1,19 @@
+# AI Platform
+
+## Docs
+
+- [Authentication](https://docs.outrival.com/v1/api-reference/authentication.md)
+- [Initiate a phone call](https://docs.outrival.com/v1/api-reference/call/phone.md)
+- [Introduction](https://docs.outrival.com/v1/api-reference/introduction.md): Interact with OutRival programmatically
+- [Metadata](https://docs.outrival.com/v1/api-reference/metadata.md): Learn how to use Metadata with OutRival.
+- [Generate public token](https://docs.outrival.com/v1/api-reference/organization/token.md)
+- [Server Events](https://docs.outrival.com/v1/api-reference/webhooks.md): Learn how to set up Webhooks and receive Server Events with OutRival.
+- [Integration](https://docs.outrival.com/v1/documentation/integration.md)
+- [Builder Quickstart](https://docs.outrival.com/v1/documentation/quickstart.md)
+- [Introduction](https://docs.outrival.com/v1/introduction.md): Welcome to OutRival documentation!
+- [OutRival Voice Call SDK](https://docs.outrival.com/v1/web-sdk.md): Voice Calls for OutRival API in your web application
+
+## OpenAPI Specs
+
+- [openapi-v1](https://docs.outrival.com/openapi-v1.json)
+- [openapi-v2](https://docs.outrival.com/openapi-v2.json)

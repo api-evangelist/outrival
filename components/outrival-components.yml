@@ -1,0 +1,27 @@
+generated: '2026-07-20'
+method: searched
+source: >-
+  https://docs.outrival.com/v1/documentation/integration.md,
+  https://docs.outrival.com/v1/web-sdk.md
+note: >-
+  Client-side / embeddable surfaces OutRival ships for putting an AI companion into a web app.
+  Distinct from server-side SDKs (see packages/).
+components:
+  - family: Companion Widget
+    kind: embedded-widget
+    description: >-
+      Drop-in chat bubble embedded via a copy-paste script tag; renders the companion inside an
+      iframe in a bottom corner of the page. Initialized at runtime with variables + metadata.
+    loader_library: CompanionWidget
+    init_method: CompanionWidget.initializeAssistant(variables, metadata)
+    load_event: companion-iframe-loaded
+    docs: https://docs.outrival.com/v1/documentation/integration.md
+  - family: Voice Call SDK
+    kind: js-element-library
+    description: >-
+      Web SDK to start browser voice calls with a companion, authenticated with a public key or
+      an API-generated token.
+    loader_library: "@outrival/voice-call"
+    entrypoint: VoiceCall
+    docs: https://docs.outrival.com/v1/web-sdk.md
+    package: packages/outrival-packages.yml

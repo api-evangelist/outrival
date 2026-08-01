@@ -1,0 +1,60 @@
+generated: '2026-07-20'
+method: searched
+source: >-
+  https://docs.outrival.com/v1/api-reference/authentication.md,
+  https://docs.outrival.com/v1/api-reference/metadata.md,
+  https://docs.outrival.com/v1/api-reference/webhooks.md,
+  openapi/outrival-v1-openapi-original.json, openapi/outrival-v2-openapi-original.json
+note: >-
+  Cross-cutting request/response semantics for the OutRival REST API, captured from the docs
+  and derived from the two OpenAPI documents.
+authentication:
+  style: api-key
+  header: X-API-Key
+  docs: https://docs.outrival.com/v1/api-reference/authentication.md
+  key_management: https://builder.outrival.com/api-keys
+  public_token: >-
+    A short-lived public token can be minted via POST /rest/v1/organization/token for
+    client-side use with the Voice Call SDK / Companion Widget.
+idempotency:
+  supported: false
+  note: No idempotency-key header or parameter is documented or present in the OpenAPI.
+pagination:
+  styles:
+    - style: offset
+      params: [page, take, order]
+      response_fields: [data, meta]
+      response_schema: PageDto / PageMetaDto
+      applies_to: v2 list endpoints (projects, workflows, edges, nodes)
+    - style: cursor
+      params: [startingAfter, limit]
+      response_schema: CursorBasedPageDto
+      applies_to: v2 ai-chats sessions/logs endpoints
+metadata:
+  supported: true
+  docs: https://docs.outrival.com/v1/api-reference/metadata.md
+  description: >-
+    Key-value custom metadata attached to conversations; returned on webhooks and function
+    calls but not exposed to the LLM. Common use is carrying an (ideally encoded) user id.
+  accepts_on:
+    - rest/v1/ai-chats/current
+    - rest/v1/assistants/{assistantId}/chat/completions
+    - rest/v1/call/web
+    - rest/v1/call/phone
+versioning:
+  scheme: uri-path
+  current: v2
+error_envelope:
+  format: json
+  note: Plain application/json error bodies (not RFC 9457 problem+json). See errors/outrival-problem-types.yml.
+webhooks:
+  signature_header: x-signature
+  algorithm: HMAC-SHA256 over the raw payload using the configured Webhook Secret
+  docs: https://docs.outrival.com/v1/api-reference/webhooks.md
+rate_limiting:
+  documented: false
+cross_links:
+  errors: errors/outrival-problem-types.yml
+  lifecycle: lifecycle/outrival-lifecycle.yml
+  authentication: authentication/outrival-authentication.yml
+  webhooks: asyncapi/outrival-webhooks.yml

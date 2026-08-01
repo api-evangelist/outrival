@@ -1,0 +1,19 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/outrival-v1-openapi-original.json, openapi/outrival-v2-openapi-original.json, https://docs.outrival.com/
+note: >-
+  Versioning derived from the two published OpenAPI documents (v1 and v2) and their URI-path
+  version segments (/rest/v1, /rest/v2). No dedicated deprecation policy, SLA, Sunset-header
+  support, or public status page was found as of the generated date.
+versioning:
+  scheme: uri-path
+  current: v2
+  versions: [v1, v2]
+  docs: https://docs.outrival.com/
+deprecation:
+  policy_url: null
+  sunset_header: false
+sla:
+  url: null
+status_page: null
+deprecated_operations: []

@@ -1,0 +1,16 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/outrival-v1-openapi-original.json, openapi/outrival-v2-openapi-original.json
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: api_key
+  type: apiKey
+  in: header
+  parameter: X-API-Key
+  sources:
+  - openapi/outrival-v1-openapi-original.json
+  - openapi/outrival-v2-openapi-original.json

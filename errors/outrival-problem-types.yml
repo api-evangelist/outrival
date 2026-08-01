@@ -1,0 +1,52 @@
+generated: '2026-07-20'
+method: derived
+format: json
+source: openapi/outrival-v1-openapi-original.json, openapi/outrival-v2-openapi-original.json
+note: 'Derived from OpenAPI 4xx/5xx responses. OutRival returns plain JSON error bodies (not application/problem+json).
+  Status codes observed: 400 (validation / not found), 404 (resource missing).'
+status_codes:
+- status: 400
+  meaning: "Bad request \u2014 validation failure or referenced resource (assistant/organization) not\
+    \ found"
+- status: 404
+  meaning: Resource not found
+problems:
+- status: 400
+  title: Assistant not found.
+  source_operation: openapi/outrival-v1-openapi-original.json#AssistantsController_findOne
+- status: 400
+  title: Bad request
+  source_operation: openapi/outrival-v1-openapi-original.json#AssistantsController_update
+- status: 400
+  title: Bad request
+  source_operation: openapi/outrival-v1-openapi-original.json#SettingsController_create
+- status: 404
+  title: Not found
+  source_operation: openapi/outrival-v1-openapi-original.json#SettingsController_delete
+- status: 404
+  title: Ai Chat doesn't exist
+  source_operation: openapi/outrival-v1-openapi-original.json#MessagesController_create
+- status: 400
+  title: Invalid upload request.
+  source_operation: openapi/outrival-v1-openapi-original.json#FilesController_upload
+- status: 404
+  title: File not found
+  source_operation: openapi/outrival-v1-openapi-original.json#FilesController_getDownloadLink
+- status: 400
+  title: Assistant not found or invalid organization ID.
+  source_operation: openapi/outrival-v1-openapi-original.json#VapiController_phoneCallInitiate
+- status: 400
+  title: Project not found.
+  source_operation: openapi/outrival-v2-openapi-original.json#WorkflowProjectController_findOne
+- status: 400
+  title: Workflow Node not found.
+  source_operation: openapi/outrival-v2-openapi-original.json#NodeController_findOne
+- status: 400
+  title: Bad request
+  source_operation: openapi/outrival-v2-openapi-original.json#NodeController_update
+- status: 404
+  title: Ai Chat doesn't exist
+  source_operation: openapi/outrival-v2-openapi-original.json#MessagesController_create
+- status: 400
+  title: Workflow not found or invalid organization ID.
+  source_operation: openapi/outrival-v2-openapi-original.json#VapiController_phoneCallInitiate

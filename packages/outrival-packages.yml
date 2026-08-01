@@ -1,0 +1,18 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.outrival.com/v1/web-sdk.md
+note: >-
+  First-party OutRival Voice Call SDK for embedding voice calls in a web application.
+  Published under the @outrival npm scope; homepage points to the OutRivalAI GitHub org.
+  No other first-party client libraries (PyPI, Maven, NuGet, Go, RubyGems, Packagist, crates.io)
+  were found for this provider as of the generated date.
+packages:
+  - language: javascript
+    registry: npm
+    name: "@outrival/voice-call"
+    version: 1.0.1
+    url: https://www.npmjs.com/package/@outrival/voice-call
+    repository: https://github.com/OutRivalAI/voice-call
+    install: npm install @outrival/voice-call
+    description: Voice Calls for OutRival API in your web application
+    official: true

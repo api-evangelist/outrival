@@ -1,8 +1,27 @@
 aid: outrival
 name: OutRival
-description: 'OutRival is a company surfaced as a portfolio company of initialized-capital and added to
-  the API Evangelist network as a stub for enrichment. Sector: enterprise-saas. This profile is a lead
-  awaiting the enrichment pipeline.'
+description: >-
+  OutRival is a conversational AI platform that deploys AI agents ("Digital Workers" / companions)
+  to handle high-volume customer engagement across voice calls, SMS, and chat. Its REST API and
+  Companion Builder let developers create and configure assistants, build multi-node conversation
+  workflows, initiate outbound phone calls, upload knowledge files, manage organization API keys,
+  and receive real-time server events over signed webhooks. OutRival serves higher education,
+  travel, healthcare, insurance, home services, and financial services, and is SOC 2 Type 2
+  attested. Surfaced as a portfolio company of Initialized Capital and enriched into the API
+  Evangelist network from its published OpenAPI (v1 and v2), docs, and SDK.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.outrival.com/assets/og_card.png
 url: https://raw.githubusercontent.com/api-evangelist/outrival/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -10,18 +29,398 @@ x-backed-by:
 - initialized-capital
 x-tier: stub
 x-tier-reason: portfolio-lead
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 19
+  pass: local-v1
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
 - Enterprise Saas
-apis: []
+- Conversational AI
+- AI Agents
+- Voice
+- SMS
+- Customer Engagement
+- Chatbots
+- Contact Center
+- Webhooks
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: outrival:outrival-ai-chat-sessions-api
+  name: OutRival Ai Chat Sessions API
+  description: The Ai Chat Sessions API from OutRival — 6 operation(s) for ai chat sessions.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Ai Chat Sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-ai-chat-sessions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-assistants-api
+  name: OutRival Assistants API
+  description: The Assistants API from OutRival — 4 operation(s) for assistants.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Assistants
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-assistants-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-assistants-chat-configuration-api
+  name: OutRival Assistants Chat Configuration API
+  description: >-
+    The Assistants Chat Configuration API from OutRival — 1 operation(s) for assistants chat configuration.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Assistants Chat Configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-assistants-chat-configuration-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-assistants-logs-api
+  name: OutRival Assistants Logs API
+  description: The Assistants Logs API from OutRival — 2 operation(s) for assistants logs.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Assistants Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-assistants-logs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-assistants-sms-configuration-api
+  name: OutRival Assistants Sms Configuration API
+  description: >-
+    The Assistants Sms Configuration API from OutRival — 1 operation(s) for assistants sms configuration.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Assistants Sms Configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-assistants-sms-configuration-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-assistants-theme-configuration-api
+  name: OutRival Assistants Theme Configuration API
+  description: >-
+    The Assistants Theme Configuration API from OutRival — 1 operation(s) for assistants theme configuration.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Assistants Theme Configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-assistants-theme-configuration-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-assistants-voice-configuration-api
+  name: OutRival Assistants Voice Configuration API
+  description: >-
+    The Assistants Voice Configuration API from OutRival — 1 operation(s) for assistants voice configuration.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Assistants Voice Configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-assistants-voice-configuration-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-call-api
+  name: OutRival Call API
+  description: The Call API from OutRival — 3 operation(s) for call.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Call
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-call-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-chat-with-ai-assistant-api
+  name: OutRival Chat with Ai Assistant API
+  description: >-
+    The Chat with Ai Assistant API from OutRival — 2 operation(s) for chat with ai assistant.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Chat with Ai Assistant
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-chat-with-ai-assistant-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-edges-api
+  name: OutRival Edges API
+  description: The Edges API from OutRival — 2 operation(s) for edges.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Edges
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-edges-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-files-api
+  name: OutRival Files API
+  description: The Files API from OutRival — 4 operation(s) for files.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-files-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-nodes-api
+  name: OutRival Nodes API
+  description: The Nodes API from OutRival — 4 operation(s) for nodes.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Nodes
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-nodes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-nodes-chat-configuration-api
+  name: OutRival Nodes Chat Configuration API
+  description: >-
+    The Nodes Chat Configuration API from OutRival — 1 operation(s) for nodes chat configuration.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Nodes Chat Configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-nodes-chat-configuration-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-nodes-sms-configuration-api
+  name: OutRival Nodes Sms Configuration API
+  description: >-
+    The Nodes Sms Configuration API from OutRival — 1 operation(s) for nodes sms configuration.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Nodes Sms Configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-nodes-sms-configuration-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-nodes-voice-configuration-api
+  name: OutRival Nodes Voice Configuration API
+  description: >-
+    The Nodes Voice Configuration API from OutRival — 1 operation(s) for nodes voice configuration.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Nodes Voice Configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-nodes-voice-configuration-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-organization-api
+  name: OutRival Organization API
+  description: The Organization API from OutRival — 2 operation(s) for organization.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Organization
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-organization-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-organization-keys-api
+  name: OutRival Organization Keys API
+  description: The Organization Keys API from OutRival — 3 operation(s) for organization keys.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Organization Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-organization-keys-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-project-variables-api
+  name: OutRival Project variables API
+  description: The Project variables API from OutRival — 2 operation(s) for project variables.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Project variables
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-project-variables-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-projects-api
+  name: OutRival Projects API
+  description: The Projects API from OutRival — 4 operation(s) for projects.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-projects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-projects-theme-configuration-api
+  name: OutRival Projects Theme Configuration API
+  description: >-
+    The Projects Theme Configuration API from OutRival — 1 operation(s) for projects theme configuration.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Projects Theme Configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-projects-theme-configuration-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-rest-api
+  name: OutRival Rest API
+  description: The Rest API from OutRival — 2 operation(s) for rest.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Rest
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-rest-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-settings-api
+  name: OutRival Settings API
+  description: The Settings API from OutRival — 3 operation(s) for settings.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-settings-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-webhooks-vapi-api
+  name: OutRival Webhooks Vapi API
+  description: The Webhooks Vapi API from OutRival — 2 operation(s) for webhooks vapi.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Webhooks Vapi
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-webhooks-vapi-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-workflow-deployment-api
+  name: OutRival Workflow Deployment API
+  description: The Workflow Deployment API from OutRival — 2 operation(s) for workflow deployment.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Workflow Deployment
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-workflow-deployment-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
+- aid: outrival:outrival-workflows-api
+  name: OutRival Workflows API
+  description: The Workflows API from OutRival — 5 operation(s) for workflows.
+  humanURL: https://docs.outrival.com/v1/api-reference/introduction
+  baseURL: https://api.outrival.com
+  tags:
+  - Workflows
+  properties:
+  - type: OpenAPI
+    url: openapi/outrival-workflows-api-openapi.yml
+  - type: Documentation
+    url: https://docs.outrival.com/v1/introduction
 common:
 - type: Website
   url: https://outrival.com/
+- type: DeveloperPortal
+  url: https://docs.outrival.com/
+- type: Documentation
+  url: https://docs.outrival.com/v1/introduction
+- type: APIReference
+  url: https://docs.outrival.com/v1/api-reference/introduction
+- type: GettingStarted
+  url: https://docs.outrival.com/v1/documentation/quickstart
+- type: Blog
+  url: https://outrival.com/blog
+- type: GitHubOrganization
+  url: https://github.com/OutRivalAI
+- type: SignUp
+  url: https://outrival.com/book-demo
+- type: Login
+  url: https://builder.outrival.com/
+- type: TermsOfService
+  url: https://outrival.com/terms-of-service
+- type: PrivacyPolicy
+  url: https://privacy.outrival.com/privacy-policy
+- type: Authentication
+  url: authentication/outrival-authentication.yml
+- type: LLMsTxt
+  url: llms/outrival-llms.txt
+- type: Packages
+  url: packages/outrival-packages.yml
+- type: SDKs
+  url: packages/outrival-packages.yml
+- type: Components
+  url: components/outrival-components.yml
+- type: Webhooks
+  url: asyncapi/outrival-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: MCPServer
+  url: mcp/outrival-mcp.yml
+- type: ErrorCatalog
+  url: errors/outrival-problem-types.yml
+- type: Conventions
+  url: conventions/outrival-conventions.yml
+- type: DataModel
+  url: data-model/outrival-data-model.yml
+- type: Lifecycle
+  url: lifecycle/outrival-lifecycle.yml
+- type: Conformance
+  url: conformance/outrival-conformance.yml
+- type: Compliance
+  url: https://outrival.com/security
+- type: AgenticAccess
+  url: agentic-access/outrival-agentic-access.yml
+- type: Security
+  url: https://outrival.com/security
+- type: VulnerabilityDisclosure
+  url: security/outrival-vulnerability-disclosure.yml
+- type: TrustCenter
+  url: security/outrival-trust-center.yml
+- type: DomainSecurity
+  url: security/outrival-domain-security.yml

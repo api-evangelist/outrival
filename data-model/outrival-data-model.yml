@@ -1,0 +1,97 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/outrival-v1-openapi-original.json, openapi/outrival-v2-openapi-original.json
+note: >-
+  Entity-relationship graph derived from OpenAPI schemas, path hierarchy, and id-reference query
+  fields. v1 centers on the Assistant (companion) + its per-modality configs; v2 introduces the
+  Workflow Builder graph (Project > Workflow > Node/Edge > Deployment).
+entities:
+  - name: Assistant
+    api: v1
+    aka: Companion
+    description: An AI companion with voice/sms/chat/theme configuration.
+  - name: Organization
+    api: v1
+    description: The account tenant that owns assistants, keys, and settings.
+  - name: OrganizationKey
+    api: v1
+    description: API key belonging to an organization.
+  - name: File
+    api: v1
+    description: Uploaded resource file usable by a companion.
+  - name: AiChat
+    api: v1/v2
+    description: A conversation session (voice/sms/text) with a companion.
+  - name: Project
+    api: v2
+    description: Top-level container for workflows in the Builder.
+  - name: Workflow
+    api: v2
+    description: A companion workflow graph belonging to a project.
+  - name: Node
+    api: v2
+    description: A step in a workflow, with per-modality (voice/sms/chat) config.
+  - name: Edge
+    api: v2
+    description: A directed connection between two workflow nodes.
+  - name: WorkflowDeployment
+    api: v2
+    description: A deployed instance of a workflow.
+  - name: Variable
+    api: v2
+    description: A project-scoped variable.
+  - name: Session
+    api: v2
+    description: A conversation session tied to an ai-chat.
+  - name: Log
+    api: v2
+    description: A log record for a session/chat/workflow/user.
+relationships:
+  - from: Workflow
+    to: Project
+    type: belongs_to
+    via: projectId
+  - from: Node
+    to: Workflow
+    type: belongs_to
+    via: workflowId (path)
+  - from: Edge
+    to: Workflow
+    type: belongs_to
+    via: workflowId (path)
+  - from: Variable
+    to: Project
+    type: belongs_to
+    via: projectId
+  - from: WorkflowDeployment
+    to: Workflow
+    type: belongs_to
+    via: workflow deployment
+  - from: OrganizationKey
+    to: Organization
+    type: belongs_to
+    via: organization
+  - from: Session
+    to: AiChat
+    type: belongs_to
+    via: aiChatId
+  - from: Log
+    to: Session
+    type: belongs_to
+    via: sessionId
+  - from: Assistant
+    to: VoiceConfiguration
+    type: has_one
+    via: assistantId
+  - from: Assistant
+    to: SmsConfiguration
+    type: has_one
+    via: assistantId
+  - from: Assistant
+    to: ChatConfiguration
+    type: has_one
+    via: assistantId
+  - from: Assistant
+    to: ThemeConfiguration
+    type: has_one
+    via: assistantId

@@ -1,0 +1,311 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/outrival-v1-openapi-original.json, openapi/outrival-v2-openapi-original.json
+note: No official OutRival MCP server found as of the generated date. Tool list derived from OpenAPI operations
+  as a candidate surface.
+server:
+  name: outrival
+  transport: http
+  url: null
+tools:
+- name: AssistantsController_create
+  description: POST /rest/v1/assistants
+  source_operation: openapi/outrival-v1-openapi-original.json#AssistantsController_create
+- name: AssistantsController_findAll
+  description: GET /rest/v1/assistants
+  source_operation: openapi/outrival-v1-openapi-original.json#AssistantsController_findAll
+- name: AssistantsController_findAllTemplates
+  description: GET /rest/v1/assistants/templates
+  source_operation: openapi/outrival-v1-openapi-original.json#AssistantsController_findAllTemplates
+- name: AssistantsController_findOne
+  description: GET /rest/v1/assistants/{id}
+  source_operation: openapi/outrival-v1-openapi-original.json#AssistantsController_findOne
+- name: AssistantsController_update
+  description: PATCH /rest/v1/assistants/{id}
+  source_operation: openapi/outrival-v1-openapi-original.json#AssistantsController_update
+- name: AssistantsController_remove
+  description: DELETE /rest/v1/assistants/{id}
+  source_operation: openapi/outrival-v1-openapi-original.json#AssistantsController_remove
+- name: AssistantsController_duplicate
+  description: POST /rest/v1/assistants/duplicate/{id}
+  source_operation: openapi/outrival-v1-openapi-original.json#AssistantsController_duplicate
+- name: VoiceController_create
+  description: PATCH /rest/v1/assistants/{assistantId}/voice
+  source_operation: openapi/outrival-v1-openapi-original.json#VoiceController_create
+- name: VoiceController_config
+  description: GET /rest/v1/assistants/{assistantId}/voice
+  source_operation: openapi/outrival-v1-openapi-original.json#VoiceController_config
+- name: SmsController_create
+  description: PATCH /rest/v1/assistants/{assistantId}/sms
+  source_operation: openapi/outrival-v1-openapi-original.json#SmsController_create
+- name: SmsController_config
+  description: GET /rest/v1/assistants/{assistantId}/sms
+  source_operation: openapi/outrival-v1-openapi-original.json#SmsController_config
+- name: ChatController_create
+  description: PATCH /rest/v1/assistants/{assistantId}/chat
+  source_operation: openapi/outrival-v1-openapi-original.json#ChatController_create
+- name: ChatController_config
+  description: GET /rest/v1/assistants/{assistantId}/chat
+  source_operation: openapi/outrival-v1-openapi-original.json#ChatController_config
+- name: ThemeController_create
+  description: PATCH /rest/v1/assistants/{assistantId}/theme
+  source_operation: openapi/outrival-v1-openapi-original.json#ThemeController_create
+- name: ThemeController_config
+  description: GET /rest/v1/assistants/{assistantId}/theme
+  source_operation: openapi/outrival-v1-openapi-original.json#ThemeController_config
+- name: AssistantLogsController_logs
+  description: GET /rest/v1/assistants/{assistantId}/logs
+  source_operation: openapi/outrival-v1-openapi-original.json#AssistantLogsController_logs
+- name: AssistantLogsController_log
+  description: GET /rest/v1/assistants/{assistantId}/log/{logId}
+  source_operation: openapi/outrival-v1-openapi-original.json#AssistantLogsController_log
+- name: SettingsController_generateWebhookSecret
+  description: GET /rest/v1/settings/secret
+  source_operation: openapi/outrival-v1-openapi-original.json#SettingsController_generateWebhookSecret
+- name: SettingsController_getSettings
+  description: GET /rest/v1/settings
+  source_operation: openapi/outrival-v1-openapi-original.json#SettingsController_getSettings
+- name: SettingsController_create
+  description: POST /rest/v1/settings
+  source_operation: openapi/outrival-v1-openapi-original.json#SettingsController_create
+- name: SettingsController_update
+  description: PATCH /rest/v1/settings/{id}
+  source_operation: openapi/outrival-v1-openapi-original.json#SettingsController_update
+- name: SettingsController_delete
+  description: DELETE /rest/v1/settings/{id}
+  source_operation: openapi/outrival-v1-openapi-original.json#SettingsController_delete
+- name: OrganizationController_getOrganization
+  description: GET /rest/v1/organization
+  source_operation: openapi/outrival-v1-openapi-original.json#OrganizationController_getOrganization
+- name: OrganizationController_generateOrganizationToken
+  description: POST /rest/v1/organization/token
+  source_operation: openapi/outrival-v1-openapi-original.json#OrganizationController_generateOrganizationToken
+- name: OrganizationKeysController_getOrganizationKeys
+  description: GET /rest/v1/organization/keys
+  source_operation: openapi/outrival-v1-openapi-original.json#OrganizationKeysController_getOrganizationKeys
+- name: OrganizationKeysController_create
+  description: POST /rest/v1/organization/keys
+  source_operation: openapi/outrival-v1-openapi-original.json#OrganizationKeysController_create
+- name: OrganizationKeysController_getOrganizationPublicKey
+  description: GET /rest/v1/organization/keys/public
+  source_operation: openapi/outrival-v1-openapi-original.json#OrganizationKeysController_getOrganizationPublicKey
+- name: OrganizationKeysController_getOrganizationKey
+  description: GET /rest/v1/organization/keys/{keyId}
+  source_operation: openapi/outrival-v1-openapi-original.json#OrganizationKeysController_getOrganizationKey
+- name: OrganizationKeysController_update
+  description: PATCH /rest/v1/organization/keys/{keyId}
+  source_operation: openapi/outrival-v1-openapi-original.json#OrganizationKeysController_update
+- name: OrganizationKeysController_remove
+  description: DELETE /rest/v1/organization/keys/{keyId}
+  source_operation: openapi/outrival-v1-openapi-original.json#OrganizationKeysController_remove
+- name: MessagesController_create
+  description: Create new message
+  source_operation: openapi/outrival-v1-openapi-original.json#MessagesController_create
+- name: FilesController_upload
+  description: POST /rest/v1/files/upload
+  source_operation: openapi/outrival-v1-openapi-original.json#FilesController_upload
+- name: FilesController_findAll
+  description: GET /rest/v1/files
+  source_operation: openapi/outrival-v1-openapi-original.json#FilesController_findAll
+- name: FilesController_getDownloadLink
+  description: GET /rest/v1/files/{id}/download
+  source_operation: openapi/outrival-v1-openapi-original.json#FilesController_getDownloadLink
+- name: FilesController_deleteFile
+  description: DELETE /rest/v1/files/{id}
+  source_operation: openapi/outrival-v1-openapi-original.json#FilesController_deleteFile
+- name: VapiWebhooksController_onServerMessage
+  description: POST /rest/v1/webhooks/vapi/server-messages
+  source_operation: openapi/outrival-v1-openapi-original.json#VapiWebhooksController_onServerMessage
+- name: VapiWebhooksController_onOpenAICustomLLMCall
+  description: POST /rest/v1/webhooks/vapi/custom-llm/chat/completions
+  source_operation: openapi/outrival-v1-openapi-original.json#VapiWebhooksController_onOpenAICustomLLMCall
+- name: VapiController_phoneCallInitiate
+  description: POST /rest/v1/call/phone
+  source_operation: openapi/outrival-v1-openapi-original.json#VapiController_phoneCallInitiate
+- name: WorkflowProjectController_findAll
+  description: GET /rest/v2/projects
+  source_operation: openapi/outrival-v2-openapi-original.json#WorkflowProjectController_findAll
+- name: WorkflowProjectController_createProject
+  description: POST /rest/v2/projects
+  source_operation: openapi/outrival-v2-openapi-original.json#WorkflowProjectController_createProject
+- name: WorkflowProjectController_findOne
+  description: GET /rest/v2/projects/{id}
+  source_operation: openapi/outrival-v2-openapi-original.json#WorkflowProjectController_findOne
+- name: WorkflowProjectController_updateProject
+  description: PATCH /rest/v2/projects/{id}
+  source_operation: openapi/outrival-v2-openapi-original.json#WorkflowProjectController_updateProject
+- name: WorkflowProjectController_deleteProject
+  description: DELETE /rest/v2/projects/{id}
+  source_operation: openapi/outrival-v2-openapi-original.json#WorkflowProjectController_deleteProject
+- name: WorkflowProjectController_projectWorkflows
+  description: GET /rest/v2/projects/{id}/workflows
+  source_operation: openapi/outrival-v2-openapi-original.json#WorkflowProjectController_projectWorkflows
+- name: WorkflowProjectController_projectWorkflowDeployments
+  description: GET /rest/v2/projects/{id}/deployments
+  source_operation: openapi/outrival-v2-openapi-original.json#WorkflowProjectController_projectWorkflowDeployments
+- name: VariableController_getAllVariables
+  description: GET /rest/v2/projects/{projectId}/variables
+  source_operation: openapi/outrival-v2-openapi-original.json#VariableController_getAllVariables
+- name: VariableController_createVariable
+  description: POST /rest/v2/projects/{projectId}/variables
+  source_operation: openapi/outrival-v2-openapi-original.json#VariableController_createVariable
+- name: VariableController_updateVariable
+  description: PATCH /rest/v2/projects/{projectId}/variables/{variableId}
+  source_operation: openapi/outrival-v2-openapi-original.json#VariableController_updateVariable
+- name: VariableController_deleteVariable
+  description: DELETE /rest/v2/projects/{projectId}/variables/{variableId}
+  source_operation: openapi/outrival-v2-openapi-original.json#VariableController_deleteVariable
+- name: WorkflowController_findAll
+  description: GET /rest/v2/workflows
+  source_operation: openapi/outrival-v2-openapi-original.json#WorkflowController_findAll
+- name: WorkflowController_createWorkflow
+  description: POST /rest/v2/workflows
+  source_operation: openapi/outrival-v2-openapi-original.json#WorkflowController_createWorkflow
+- name: WorkflowController_findOne
+  description: GET /rest/v2/workflows/{id}
+  source_operation: openapi/outrival-v2-openapi-original.json#WorkflowController_findOne
+- name: WorkflowController_updateWorkflow
+  description: PATCH /rest/v2/workflows/{id}
+  source_operation: openapi/outrival-v2-openapi-original.json#WorkflowController_updateWorkflow
+- name: WorkflowController_deleteWorkflow
+  description: DELETE /rest/v2/workflows/{id}
+  source_operation: openapi/outrival-v2-openapi-original.json#WorkflowController_deleteWorkflow
+- name: WorkflowController_nodes
+  description: GET /rest/v2/workflows/{id}/nodes
+  source_operation: openapi/outrival-v2-openapi-original.json#WorkflowController_nodes
+- name: WorkflowController_addNode
+  description: POST /rest/v2/workflows/{id}/nodes
+  source_operation: openapi/outrival-v2-openapi-original.json#WorkflowController_addNode
+- name: WorkflowController_nodesWithConfig
+  description: GET /rest/v2/workflows/{id}/nodes/config
+  source_operation: openapi/outrival-v2-openapi-original.json#WorkflowController_nodesWithConfig
+- name: WorkflowController_edges
+  description: GET /rest/v2/workflows/{id}/edges
+  source_operation: openapi/outrival-v2-openapi-original.json#WorkflowController_edges
+- name: EdgeController_findAll
+  description: GET /rest/v2/edges
+  source_operation: openapi/outrival-v2-openapi-original.json#EdgeController_findAll
+- name: EdgeController_createEdge
+  description: POST /rest/v2/edges
+  source_operation: openapi/outrival-v2-openapi-original.json#EdgeController_createEdge
+- name: EdgeController_findOne
+  description: GET /rest/v2/edges/{id}
+  source_operation: openapi/outrival-v2-openapi-original.json#EdgeController_findOne
+- name: EdgeController_updateEdge
+  description: PATCH /rest/v2/edges/{id}
+  source_operation: openapi/outrival-v2-openapi-original.json#EdgeController_updateEdge
+- name: EdgeController_deleteEdge
+  description: DELETE /rest/v2/edges/{id}
+  source_operation: openapi/outrival-v2-openapi-original.json#EdgeController_deleteEdge
+- name: NodeController_findAll
+  description: GET /rest/v2/nodes
+  source_operation: openapi/outrival-v2-openapi-original.json#NodeController_findAll
+- name: NodeController_findOne
+  description: GET /rest/v2/nodes/{id}
+  source_operation: openapi/outrival-v2-openapi-original.json#NodeController_findOne
+- name: NodeController_update
+  description: PATCH /rest/v2/nodes/{id}
+  source_operation: openapi/outrival-v2-openapi-original.json#NodeController_update
+- name: NodeController_remove
+  description: DELETE /rest/v2/nodes/{id}
+  source_operation: openapi/outrival-v2-openapi-original.json#NodeController_remove
+- name: NodeController_duplicate
+  description: POST /rest/v2/nodes/duplicate/{id}
+  source_operation: openapi/outrival-v2-openapi-original.json#NodeController_duplicate
+- name: NodeController_nodeWithConfig
+  description: GET /rest/v2/nodes/{id}/config
+  source_operation: openapi/outrival-v2-openapi-original.json#NodeController_nodeWithConfig
+- name: VoiceConfigController_create
+  description: PATCH /rest/v2/nodes/{nodeId}/voice
+  source_operation: openapi/outrival-v2-openapi-original.json#VoiceConfigController_create
+- name: VoiceConfigController_config
+  description: GET /rest/v2/nodes/{nodeId}/voice
+  source_operation: openapi/outrival-v2-openapi-original.json#VoiceConfigController_config
+- name: SmsConfigController_create
+  description: PATCH /rest/v2/nodes/{nodeId}/sms
+  source_operation: openapi/outrival-v2-openapi-original.json#SmsConfigController_create
+- name: SmsConfigController_config
+  description: GET /rest/v2/nodes/{nodeId}/sms
+  source_operation: openapi/outrival-v2-openapi-original.json#SmsConfigController_config
+- name: ChatConfigController_create
+  description: PATCH /rest/v2/nodes/{nodeId}/chat
+  source_operation: openapi/outrival-v2-openapi-original.json#ChatConfigController_create
+- name: ChatConfigController_config
+  description: GET /rest/v2/nodes/{nodeId}/chat
+  source_operation: openapi/outrival-v2-openapi-original.json#ChatConfigController_config
+- name: WorkflowDeploymentController_projectWorkflowDeployment
+  description: GET /rest/v2/deployments/{id}
+  source_operation: openapi/outrival-v2-openapi-original.json#WorkflowDeploymentController_projectWorkflowDeployment
+- name: WorkflowDeploymentController_deleteWorkflowDeployment
+  description: DELETE /rest/v2/deployments/{id}
+  source_operation: openapi/outrival-v2-openapi-original.json#WorkflowDeploymentController_deleteWorkflowDeployment
+- name: WorkflowDeploymentController_updateWorkflowDeployment
+  description: POST /rest/v2/deployments/{id}
+  source_operation: openapi/outrival-v2-openapi-original.json#WorkflowDeploymentController_updateWorkflowDeployment
+- name: WorkflowDeploymentController_createWorkflowDeployment
+  description: POST /rest/v2/deployments
+  source_operation: openapi/outrival-v2-openapi-original.json#WorkflowDeploymentController_createWorkflowDeployment
+- name: ThemeController_create
+  description: PATCH /rest/v2/deployments/{workflowDeploymentId}/theme
+  source_operation: openapi/outrival-v2-openapi-original.json#ThemeController_create
+- name: ThemeController_config
+  description: GET /rest/v2/deployments/{workflowDeploymentId}/theme
+  source_operation: openapi/outrival-v2-openapi-original.json#ThemeController_config
+- name: OrganizationController_getOrganization
+  description: GET /rest/v1/organization
+  source_operation: openapi/outrival-v2-openapi-original.json#OrganizationController_getOrganization
+- name: OrganizationController_generateOrganizationToken
+  description: POST /rest/v1/organization/token
+  source_operation: openapi/outrival-v2-openapi-original.json#OrganizationController_generateOrganizationToken
+- name: OrganizationKeysController_getOrganizationKeys
+  description: GET /rest/v1/organization/keys
+  source_operation: openapi/outrival-v2-openapi-original.json#OrganizationKeysController_getOrganizationKeys
+- name: OrganizationKeysController_create
+  description: POST /rest/v1/organization/keys
+  source_operation: openapi/outrival-v2-openapi-original.json#OrganizationKeysController_create
+- name: OrganizationKeysController_getOrganizationPublicKey
+  description: GET /rest/v1/organization/keys/public
+  source_operation: openapi/outrival-v2-openapi-original.json#OrganizationKeysController_getOrganizationPublicKey
+- name: OrganizationKeysController_getOrganizationKey
+  description: GET /rest/v1/organization/keys/{keyId}
+  source_operation: openapi/outrival-v2-openapi-original.json#OrganizationKeysController_getOrganizationKey
+- name: OrganizationKeysController_update
+  description: PATCH /rest/v1/organization/keys/{keyId}
+  source_operation: openapi/outrival-v2-openapi-original.json#OrganizationKeysController_update
+- name: OrganizationKeysController_remove
+  description: DELETE /rest/v1/organization/keys/{keyId}
+  source_operation: openapi/outrival-v2-openapi-original.json#OrganizationKeysController_remove
+- name: MessagesController_create
+  description: Create new message
+  source_operation: openapi/outrival-v2-openapi-original.json#MessagesController_create
+- name: SessionsController_getByChatId
+  description: Get a list of sessions by aiChatId
+  source_operation: openapi/outrival-v2-openapi-original.json#SessionsController_getByChatId
+- name: SessionsController_getByProjectId
+  description: Get a list of sessions by projectId
+  source_operation: openapi/outrival-v2-openapi-original.json#SessionsController_getByProjectId
+- name: SessionsController_getBySession
+  description: Get a list of logs by session
+  source_operation: openapi/outrival-v2-openapi-original.json#SessionsController_getBySession
+- name: SessionsController_getByAiChat
+  description: Get a list of all logs by chat
+  source_operation: openapi/outrival-v2-openapi-original.json#SessionsController_getByAiChat
+- name: SessionsController_getByUserId
+  description: Get a list of all logs by userId
+  source_operation: openapi/outrival-v2-openapi-original.json#SessionsController_getByUserId
+- name: SessionsController_getByWorkflowId
+  description: Get a list of all logs by workflowId
+  source_operation: openapi/outrival-v2-openapi-original.json#SessionsController_getByWorkflowId
+- name: VapiController_phoneCallInitiate
+  description: POST /rest/v2/call/phone
+  source_operation: openapi/outrival-v2-openapi-original.json#VapiController_phoneCallInitiate
+- name: VapiController_getActivePhoneNumbers
+  description: GET /rest/v2/call/phone-numbers
+  source_operation: openapi/outrival-v2-openapi-original.json#VapiController_getActivePhoneNumbers
+- name: VapiWebhooksController_onServerMessage
+  description: POST /rest/v2/webhooks/vapi/server-messages
+  source_operation: openapi/outrival-v2-openapi-original.json#VapiWebhooksController_onServerMessage
+- name: VapiWebhooksController_onOpenAICustomLLMCall
+  description: POST /rest/v2/webhooks/vapi/custom-llm/chat/completions
+  source_operation: openapi/outrival-v2-openapi-original.json#VapiWebhooksController_onOpenAICustomLLMCall
