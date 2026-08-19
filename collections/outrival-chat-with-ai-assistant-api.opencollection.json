@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OutRival Ai Chat Sessions Chat with Ai Assistant API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Chat with Ai Assistant",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create new message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.outrival.com/rest/v1/ai-chats/messages",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create new message"
+        },
+        {
+          "info": {
+            "name": "Create new message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.outrival.com/rest/v2/ai-chats/messages",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create new message"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

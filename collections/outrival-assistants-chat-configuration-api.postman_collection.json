@@ -1,0 +1,283 @@
+{
+  "item": [
+    {
+      "id": "eb5209a7-2a89-46ab-8320-477fa3eedbed",
+      "name": "Assistants Chat Configuration",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0e2db095-df0c-4be5-8a71-e92f6213acaa",
+          "name": "Chat Controller create",
+          "request": {
+            "name": "Chat Controller create",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "v1",
+                "assistants",
+                ":assistantId",
+                "chat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "assistantId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"initialMessage\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"resources\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"model\": \"<string>\",\n  \"temperature\": \"<number>\",\n  \"maxTokensOutput\": \"<number>\",\n  \"chatMode\": \"<boolean>\",\n  \"quickRepliesEnabled\": \"<boolean>\",\n  \"functions\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d346e6b6-8704-4ca7-9ec6-f73892d5a74a",
+              "name": "Update chat configuration of AI Assistant.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "v1",
+                    "assistants",
+                    ":assistantId",
+                    "chat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "assistantId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"initialMessage\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"resources\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"model\": \"<string>\",\n  \"temperature\": \"<number>\",\n  \"maxTokensOutput\": \"<number>\",\n  \"chatMode\": \"<boolean>\",\n  \"quickRepliesEnabled\": \"<boolean>\",\n  \"functions\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"initialMessage\": \"string\",\n  \"prompt\": \"string\",\n  \"resources\": \"string\",\n  \"provider\": \"<string>\",\n  \"model\": \"<string>\",\n  \"temperature\": 7222.75223149927,\n  \"maxTokensOutput\": 756.86661716454,\n  \"chatMode\": false,\n  \"quickRepliesEnabled\": false,\n  \"isRagEnabled\": false,\n  \"forceRag\": true,\n  \"ragTriggerTopics\": \"string\",\n  \"preserveRagResult\": false,\n  \"functions\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d342d4b1-dd72-4174-859a-8f677c27c5b9",
+          "name": "Chat Controller config",
+          "request": {
+            "name": "Chat Controller config",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "v1",
+                "assistants",
+                ":assistantId",
+                "chat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "assistantId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fa7433f5-64fd-4a12-bf00-358f955f621b",
+              "name": "Get chat configuration of AI Assistant.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "v1",
+                    "assistants",
+                    ":assistantId",
+                    "chat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "assistantId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"initialMessage\": \"string\",\n  \"prompt\": \"string\",\n  \"resources\": \"string\",\n  \"provider\": \"<string>\",\n  \"model\": \"<string>\",\n  \"temperature\": 9926.684511172696,\n  \"maxTokensOutput\": 5376.662229578223,\n  \"chatMode\": false,\n  \"quickRepliesEnabled\": true,\n  \"isRagEnabled\": true,\n  \"forceRag\": false,\n  \"ragTriggerTopics\": \"string\",\n  \"preserveRagResult\": true,\n  \"functions\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.outrival.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "53d09561-73bb-4124-9517-fadb33228f6e",
+    "name": "OutRival Ai Chat Sessions Assistants Chat Configuration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OutRival API documentation.",
+      "type": "text/plain"
+    }
+  }
+}

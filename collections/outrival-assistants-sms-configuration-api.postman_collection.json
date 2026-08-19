@@ -1,0 +1,283 @@
+{
+  "item": [
+    {
+      "id": "f3c2eea5-f6e4-40ab-bac1-2fee75333cc6",
+      "name": "Assistants Sms Configuration",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0f17bf7d-9bca-4da0-a603-6691a369c0ba",
+          "name": "Sms Controller create",
+          "request": {
+            "name": "Sms Controller create",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "v1",
+                "assistants",
+                ":assistantId",
+                "sms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "assistantId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"initialMessage\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"resources\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"model\": \"<string>\",\n  \"temperature\": \"<number>\",\n  \"maxTokensOutput\": \"<number>\",\n  \"smsMode\": \"<boolean>\",\n  \"voiceCallMode\": \"<boolean>\",\n  \"keywords\": \"<string>\",\n  \"functions\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b8f3635e-10bf-4cc7-a40b-765ec2e050aa",
+              "name": "Update sms configuration of AI Assistant.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "v1",
+                    "assistants",
+                    ":assistantId",
+                    "sms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "assistantId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"initialMessage\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"resources\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"model\": \"<string>\",\n  \"temperature\": \"<number>\",\n  \"maxTokensOutput\": \"<number>\",\n  \"smsMode\": \"<boolean>\",\n  \"voiceCallMode\": \"<boolean>\",\n  \"keywords\": \"<string>\",\n  \"functions\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"initialMessage\": \"string\",\n  \"prompt\": \"string\",\n  \"resources\": \"string\",\n  \"provider\": \"<string>\",\n  \"model\": \"<string>\",\n  \"temperature\": 8609.214486350867,\n  \"maxTokensOutput\": 1757.0944701036194,\n  \"smsMode\": false,\n  \"voiceCallMode\": true,\n  \"keywords\": \"string\",\n  \"isRagEnabled\": true,\n  \"forceRag\": true,\n  \"ragTriggerTopics\": \"string\",\n  \"preserveRagResult\": false,\n  \"functions\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd992665-02fd-41fd-bf93-937274ab4fb9",
+          "name": "Sms Controller config",
+          "request": {
+            "name": "Sms Controller config",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "v1",
+                "assistants",
+                ":assistantId",
+                "sms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "assistantId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fcd14f0e-0935-47fd-b3a1-fd4eaf84e6b4",
+              "name": "Get sms configuration of AI Assistant.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "v1",
+                    "assistants",
+                    ":assistantId",
+                    "sms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "assistantId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"initialMessage\": \"string\",\n  \"prompt\": \"string\",\n  \"resources\": \"string\",\n  \"provider\": \"<string>\",\n  \"model\": \"<string>\",\n  \"temperature\": 7419.760067227944,\n  \"maxTokensOutput\": 9609.924774367793,\n  \"smsMode\": false,\n  \"voiceCallMode\": false,\n  \"keywords\": \"string\",\n  \"isRagEnabled\": false,\n  \"forceRag\": true,\n  \"ragTriggerTopics\": \"string\",\n  \"preserveRagResult\": false,\n  \"functions\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.outrival.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d586fdf9-ee37-4f9c-8d83-40f4b0880551",
+    "name": "OutRival Ai Chat Sessions Assistants Sms Configuration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OutRival API documentation.",
+      "type": "text/plain"
+    }
+  }
+}

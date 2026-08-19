@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OutRival Ai Chat Sessions Nodes Chat Configuration API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Nodes Chat Configuration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ChatConfigController_config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.outrival.com/rest/v2/nodes/:nodeId/chat",
+            "params": [
+              {
+                "name": "nodeId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "ChatConfigController_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.outrival.com/rest/v2/nodes/:nodeId/chat",
+            "params": [
+              {
+                "name": "nodeId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

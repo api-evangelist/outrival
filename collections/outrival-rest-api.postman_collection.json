@@ -1,0 +1,160 @@
+{
+  "item": [
+    {
+      "id": "16d23383-f03f-476f-89ba-034c14e2a445",
+      "name": "Rest",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f4ba9d5b-a6f2-49bb-9f18-4ebb8eca10d6",
+          "name": "Vapi Webhooks Controller on Server Message",
+          "request": {
+            "name": "Vapi Webhooks Controller on Server Message",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "v1",
+                "webhooks",
+                "vapi",
+                "server-messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "487574ae-8ad6-48bf-9677-9f4efe7ee55b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "v1",
+                    "webhooks",
+                    "vapi",
+                    "server-messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e8ce6899-98ae-485e-bcf6-234ac0614407",
+          "name": "Vapi Webhooks Controller on Open AI Custom LLM Call",
+          "request": {
+            "name": "Vapi Webhooks Controller on Open AI Custom LLM Call",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "v1",
+                "webhooks",
+                "vapi",
+                "custom-llm",
+                "chat",
+                "completions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0b890eb5-b0fa-42d6-b4a0-f7c3556a9233",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "v1",
+                    "webhooks",
+                    "vapi",
+                    "custom-llm",
+                    "chat",
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.outrival.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "09f73b66-75ca-40e1-8ca1-945afae85113",
+    "name": "OutRival Ai Chat Sessions Rest API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OutRival API documentation.",
+      "type": "text/plain"
+    }
+  }
+}

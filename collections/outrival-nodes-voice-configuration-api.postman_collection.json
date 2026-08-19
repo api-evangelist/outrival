@@ -1,0 +1,283 @@
+{
+  "item": [
+    {
+      "id": "29707729-0f13-499a-b3fd-025a1fd39e4e",
+      "name": "Nodes Voice Configuration",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e925abd6-cdbf-4137-9f6f-97f19e01906f",
+          "name": "Voice Config Controller create",
+          "request": {
+            "name": "Voice Config Controller create",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "v2",
+                "nodes",
+                ":nodeId",
+                "voice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"initialMessage\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"resources\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"model\": \"<string>\",\n  \"voiceProvider\": \"<string>\",\n  \"voice\": \"<string>\",\n  \"temperature\": \"<number>\",\n  \"maxTokensOutput\": \"<number>\",\n  \"backgroundSound\": \"<string>\",\n  \"backchanneling\": \"<boolean>\",\n  \"functions\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"endCallFunction\": \"<boolean>\",\n  \"dialKeypadFunction\": \"<boolean>\",\n  \"endCallMessage\": \"<string>\",\n  \"endCallPhrases\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5a15ccd4-b872-4f5c-9105-a2df7ecbb255",
+              "name": "Update voice configuration of the Node.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "v2",
+                    "nodes",
+                    ":nodeId",
+                    "voice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"initialMessage\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"resources\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"model\": \"<string>\",\n  \"voiceProvider\": \"<string>\",\n  \"voice\": \"<string>\",\n  \"temperature\": \"<number>\",\n  \"maxTokensOutput\": \"<number>\",\n  \"backgroundSound\": \"<string>\",\n  \"backchanneling\": \"<boolean>\",\n  \"functions\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"endCallFunction\": \"<boolean>\",\n  \"dialKeypadFunction\": \"<boolean>\",\n  \"endCallMessage\": \"<string>\",\n  \"endCallPhrases\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"initialMessage\": \"string\",\n  \"prompt\": \"string\",\n  \"provider\": \"<string>\",\n  \"resources\": \"string\",\n  \"model\": \"<string>\",\n  \"voiceProvider\": \"<string>\",\n  \"voice\": \"jennifer\",\n  \"temperature\": 3442.6474428662714,\n  \"maxTokensOutput\": 1548.7321185742442,\n  \"backgroundSound\": \"<string>\",\n  \"backchanneling\": true,\n  \"functions\": [],\n  \"endCallFunction\": true,\n  \"dialKeypadFunction\": true,\n  \"endCallMessage\": \"string\",\n  \"endCallPhrases\": \"string\",\n  \"isRagEnabled\": true,\n  \"forceRag\": false,\n  \"ragTriggerTopics\": \"string\",\n  \"preserveRagResult\": false,\n  \"isCallTransferEnabled\": false,\n  \"callTransferPhoneNumber\": \"string\",\n  \"callTransferCondition\": \"string\",\n  \"callTransferForce\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0eccbfdf-77f4-41e1-ae9c-606057a3ab58",
+          "name": "Voice Config Controller config",
+          "request": {
+            "name": "Voice Config Controller config",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "v2",
+                "nodes",
+                ":nodeId",
+                "voice"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "77f48426-c5e6-4d2f-8a8c-505ade7b91e0",
+              "name": "Get voice configuration of the Node.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "v2",
+                    "nodes",
+                    ":nodeId",
+                    "voice"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"initialMessage\": \"string\",\n  \"prompt\": \"string\",\n  \"provider\": \"<string>\",\n  \"resources\": \"string\",\n  \"model\": \"<string>\",\n  \"voiceProvider\": \"<string>\",\n  \"voice\": \"melissa\",\n  \"temperature\": 8893.090102362368,\n  \"maxTokensOutput\": 3588.6277989176597,\n  \"backgroundSound\": \"<string>\",\n  \"backchanneling\": true,\n  \"functions\": [],\n  \"endCallFunction\": true,\n  \"dialKeypadFunction\": false,\n  \"endCallMessage\": \"string\",\n  \"endCallPhrases\": \"string\",\n  \"isRagEnabled\": false,\n  \"forceRag\": true,\n  \"ragTriggerTopics\": \"string\",\n  \"preserveRagResult\": true,\n  \"isCallTransferEnabled\": false,\n  \"callTransferPhoneNumber\": \"string\",\n  \"callTransferCondition\": \"string\",\n  \"callTransferForce\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.outrival.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b4ea99da-3230-49b1-b373-72ccfc9b130e",
+    "name": "OutRival Ai Chat Sessions Nodes Voice Configuration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OutRival API documentation.",
+      "type": "text/plain"
+    }
+  }
+}

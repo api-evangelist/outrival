@@ -1,0 +1,283 @@
+{
+  "item": [
+    {
+      "id": "fd2642c5-56d7-4cde-aad6-9d952174db22",
+      "name": "Nodes Sms Configuration",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5e1832fb-472f-40da-9e8b-68a8946f6b67",
+          "name": "Sms Config Controller create",
+          "request": {
+            "name": "Sms Config Controller create",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "v2",
+                "nodes",
+                ":nodeId",
+                "sms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"initialMessage\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"resources\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"model\": \"<string>\",\n  \"temperature\": \"<number>\",\n  \"maxTokensOutput\": \"<number>\",\n  \"smsMode\": \"<boolean>\",\n  \"voiceCallMode\": \"<boolean>\",\n  \"keywords\": \"<string>\",\n  \"functions\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1b41c536-a371-4239-bce3-71b180e53a98",
+              "name": "Update sms configuration of the Node.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "v2",
+                    "nodes",
+                    ":nodeId",
+                    "sms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"initialMessage\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"resources\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"model\": \"<string>\",\n  \"temperature\": \"<number>\",\n  \"maxTokensOutput\": \"<number>\",\n  \"smsMode\": \"<boolean>\",\n  \"voiceCallMode\": \"<boolean>\",\n  \"keywords\": \"<string>\",\n  \"functions\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"initialMessage\": \"string\",\n  \"prompt\": \"string\",\n  \"resources\": \"string\",\n  \"provider\": \"<string>\",\n  \"model\": \"<string>\",\n  \"temperature\": 7523.338711735877,\n  \"maxTokensOutput\": 4209.102175344232,\n  \"smsMode\": false,\n  \"phoneCallbackEnabled\": false,\n  \"keywords\": \"string\",\n  \"isRagEnabled\": false,\n  \"forceRag\": true,\n  \"ragTriggerTopics\": \"string\",\n  \"preserveRagResult\": true,\n  \"functions\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "81e48eb8-a693-4b93-9250-53fe8487183e",
+          "name": "Sms Config Controller config",
+          "request": {
+            "name": "Sms Config Controller config",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "v2",
+                "nodes",
+                ":nodeId",
+                "sms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "755443bf-5abd-4300-a8c6-f4e4a79f1885",
+              "name": "Get sms configuration of the Node.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "v2",
+                    "nodes",
+                    ":nodeId",
+                    "sms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"initialMessage\": \"string\",\n  \"prompt\": \"string\",\n  \"resources\": \"string\",\n  \"provider\": \"<string>\",\n  \"model\": \"<string>\",\n  \"temperature\": 7244.46815420838,\n  \"maxTokensOutput\": 5505.740319869548,\n  \"smsMode\": false,\n  \"phoneCallbackEnabled\": false,\n  \"keywords\": \"string\",\n  \"isRagEnabled\": false,\n  \"forceRag\": false,\n  \"ragTriggerTopics\": \"string\",\n  \"preserveRagResult\": true,\n  \"functions\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.outrival.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6332a8f6-53ee-4333-b735-ba7805532dad",
+    "name": "OutRival Ai Chat Sessions Nodes Sms Configuration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OutRival API documentation.",
+      "type": "text/plain"
+    }
+  }
+}

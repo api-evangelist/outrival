@@ -1,0 +1,38 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OutRival Ai Chat Sessions Rest API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rest",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "VapiWebhooksController_onServerMessage",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.outrival.com/rest/v1/webhooks/vapi/server-messages"
+          }
+        },
+        {
+          "info": {
+            "name": "VapiWebhooksController_onOpenAICustomLLMCall",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.outrival.com/rest/v1/webhooks/vapi/custom-llm/chat/completions"
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

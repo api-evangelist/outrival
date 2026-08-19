@@ -1,0 +1,204 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OutRival Ai Chat Sessions API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ai Chat Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of sessions by aiChatId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.outrival.com/rest/v2/ai-chats/:aiChatId/sessions",
+            "params": [
+              {
+                "name": "aiChatId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get a list of sessions by aiChatId"
+        },
+        {
+          "info": {
+            "name": "Get a list of sessions by projectId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.outrival.com/rest/v2/ai-chats/project/:projectId/sessions",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "aiChatId",
+                "value": "",
+                "type": "query",
+                "description": "AI Chat ID"
+              },
+              {
+                "name": "deployment",
+                "value": "",
+                "type": "query",
+                "description": "Ai Chat deployment"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit of sessions"
+              },
+              {
+                "name": "startingAfter",
+                "value": "",
+                "type": "query",
+                "description": "Starting after session id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get a list of sessions by projectId"
+        },
+        {
+          "info": {
+            "name": "Get a list of logs by session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.outrival.com/rest/v2/ai-chats/sessions/:sessionId/logs",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "Ai Chat Log type"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit of logs"
+              },
+              {
+                "name": "startingAfter",
+                "value": "",
+                "type": "query",
+                "description": "Starting after log id"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get a list of logs by session"
+        },
+        {
+          "info": {
+            "name": "Get a list of all logs by chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.outrival.com/rest/v2/ai-chats/:AiChatId/logs",
+            "params": [
+              {
+                "name": "AiChatId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get a list of all logs by chat"
+        },
+        {
+          "info": {
+            "name": "Get a list of all logs by userId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.outrival.com/rest/v2/ai-chats/user/:userId/logs",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get a list of all logs by userId"
+        },
+        {
+          "info": {
+            "name": "Get a list of all logs by workflowId",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.outrival.com/rest/v2/ai-chats/workflow/:workflowId/logs",
+            "params": [
+              {
+                "name": "workflowId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-Key",
+              "value": "{{X-API-Key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get a list of all logs by workflowId"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

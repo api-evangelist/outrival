@@ -309,3 +309,9 @@ tools:
 - name: VapiWebhooksController_onOpenAICustomLLMCall
   description: POST /rest/v2/webhooks/vapi/custom-llm/chat/completions
   source_operation: openapi/outrival-v2-openapi-original.json#VapiWebhooksController_onOpenAICustomLLMCall
+deployment:
+  mode: none
+  verified: derived
+  tools: 100
+  checked: '2026-08-12'
+  source: catalog MCP census

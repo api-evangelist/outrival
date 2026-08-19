@@ -1,0 +1,283 @@
+{
+  "item": [
+    {
+      "id": "98dc11a3-3734-401c-b0e0-ce6703add1d2",
+      "name": "Nodes Chat Configuration",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2f8e9d56-a73b-4516-acdb-233cacaf0384",
+          "name": "Chat Config Controller create",
+          "request": {
+            "name": "Chat Config Controller create",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "v2",
+                "nodes",
+                ":nodeId",
+                "chat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"initialMessage\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"resources\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"model\": \"<string>\",\n  \"temperature\": \"<number>\",\n  \"maxTokensOutput\": \"<number>\",\n  \"chatMode\": \"<boolean>\",\n  \"quickRepliesEnabled\": \"<boolean>\",\n  \"functions\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a9acd684-12ca-4e29-a60c-24eed6f2db73",
+              "name": "Update chat configuration of the Node.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "v2",
+                    "nodes",
+                    ":nodeId",
+                    "chat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"initialMessage\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"resources\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"model\": \"<string>\",\n  \"temperature\": \"<number>\",\n  \"maxTokensOutput\": \"<number>\",\n  \"chatMode\": \"<boolean>\",\n  \"quickRepliesEnabled\": \"<boolean>\",\n  \"functions\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"initialMessage\": \"string\",\n  \"prompt\": \"string\",\n  \"resources\": \"string\",\n  \"provider\": \"<string>\",\n  \"model\": \"<string>\",\n  \"temperature\": 498.81743095787857,\n  \"maxTokensOutput\": 9015.99834427396,\n  \"chatMode\": true,\n  \"quickRepliesEnabled\": true,\n  \"isRagEnabled\": false,\n  \"forceRag\": false,\n  \"ragTriggerTopics\": \"string\",\n  \"preserveRagResult\": false,\n  \"functions\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c5bb8130-6fac-43c8-bcd7-042296f200c3",
+          "name": "Chat Config Controller config",
+          "request": {
+            "name": "Chat Config Controller config",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "v2",
+                "nodes",
+                ":nodeId",
+                "chat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-Key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9b3af0dd-ac85-4acb-a070-6eb658853ccf",
+              "name": "Get chat configuration of the Node.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "v2",
+                    "nodes",
+                    ":nodeId",
+                    "chat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"initialMessage\": \"string\",\n  \"prompt\": \"string\",\n  \"resources\": \"string\",\n  \"provider\": \"<string>\",\n  \"model\": \"<string>\",\n  \"temperature\": 244.09077568256942,\n  \"maxTokensOutput\": 3029.2833975146805,\n  \"chatMode\": true,\n  \"quickRepliesEnabled\": false,\n  \"isRagEnabled\": false,\n  \"forceRag\": true,\n  \"ragTriggerTopics\": \"string\",\n  \"preserveRagResult\": true,\n  \"functions\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.outrival.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "17c9d9a3-288d-465b-adf8-7fc3d3a2bc0c",
+    "name": "OutRival Ai Chat Sessions Nodes Chat Configuration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OutRival API documentation.",
+      "type": "text/plain"
+    }
+  }
+}
