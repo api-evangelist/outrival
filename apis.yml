@@ -47,6 +47,17 @@ tags:
 - Customer Engagement
 - Chatbots
 - Contact Center
+- Webhook
+tags_raw:
+- Company
+- Enterprise Saas
+- Conversational AI
+- AI Agents
+- Voice
+- SMS
+- Customer Engagement
+- Chatbots
+- Contact Center
 - Webhooks
 maintainers:
 - FN: Kin Lane
@@ -185,6 +196,8 @@ apis:
   humanURL: https://docs.outrival.com/v1/api-reference/introduction
   baseURL: https://api.outrival.com
   tags:
+  - File
+  tags_raw:
   - Files
   properties:
   - type: OpenAPI
@@ -272,6 +285,8 @@ apis:
   humanURL: https://docs.outrival.com/v1/api-reference/introduction
   baseURL: https://api.outrival.com
   tags:
+  - Project Variables
+  tags_raw:
   - Project variables
   properties:
   - type: OpenAPI
@@ -284,6 +299,8 @@ apis:
   humanURL: https://docs.outrival.com/v1/api-reference/introduction
   baseURL: https://api.outrival.com
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
@@ -309,6 +326,8 @@ apis:
   humanURL: https://docs.outrival.com/v1/api-reference/introduction
   baseURL: https://api.outrival.com
   tags:
+  - REST
+  tags_raw:
   - Rest
   properties:
   - type: OpenAPI
