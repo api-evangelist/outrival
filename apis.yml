@@ -9,6 +9,18 @@ description: >-
   travel, healthcare, insurance, home services, and financial services, and is SOC 2 Type 2
   attested. Surfaced as a portfolio company of Initialized Capital and enriched into the API
   Evangelist network from its published OpenAPI (v1 and v2), docs, and SDK.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
