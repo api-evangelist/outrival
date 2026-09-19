@@ -96,6 +96,8 @@ apis:
   humanURL: https://docs.outrival.com/v1/api-reference/introduction
   baseURL: https://api.outrival.com
   tags:
+  - Assistant
+  tags_raw:
   - Assistants
   properties:
   - type: OpenAPI
@@ -223,6 +225,8 @@ apis:
   humanURL: https://docs.outrival.com/v1/api-reference/introduction
   baseURL: https://api.outrival.com
   tags:
+  - Node
+  tags_raw:
   - Nodes
   properties:
   - type: OpenAPI
