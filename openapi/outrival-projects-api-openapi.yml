@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: OutRival Ai Chat Sessions Projects API
+  title: OutRival Projects API
   description: OutRival API documentation.
-  version: '1.0'
+  version: '2.0'
   contact: {}
 servers:
 - url: https://api.outrival.com
@@ -55,6 +55,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Workflow project controller find all
+      x-summary-source: derived
     post:
       operationId: WorkflowProjectController_createProject
       parameters: []
@@ -76,6 +78,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Workflow project controller create project
+      x-summary-source: derived
   /rest/v2/projects/{id}:
     get:
       operationId: WorkflowProjectController_findOne
@@ -99,6 +103,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Workflow project controller find one
+      x-summary-source: derived
     patch:
       operationId: WorkflowProjectController_updateProject
       parameters:
@@ -125,6 +131,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Workflow project controller update project
+      x-summary-source: derived
     delete:
       operationId: WorkflowProjectController_deleteProject
       parameters:
@@ -145,6 +153,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Workflow project controller delete project
+      x-summary-source: derived
   /rest/v2/projects/{id}/workflows:
     get:
       operationId: WorkflowProjectController_projectWorkflows
@@ -168,6 +178,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Workflow project controller project workflows
+      x-summary-source: derived
   /rest/v2/projects/{id}/deployments:
     get:
       operationId: WorkflowProjectController_projectWorkflowDeployments
@@ -191,13 +203,51 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Workflow project controller project workflow deployments
+      x-summary-source: derived
 components:
   schemas:
+    WorkflowDeploymentType:
+      type: string
+      enum:
+      - TEXT_IFRAME
+      - TEXT_BUBBLE
+      - VOICE_BUBBLE
+      - VOICE_IFRAME
+      - SMS
+      - PHONE_OUTBOUND
+      - PHONE_INBOUND
+      - SLACK
+      - API
+    ProjectDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        template:
+          type: boolean
+          default: false
+      required:
+      - id
+      - name
     WorkflowType:
       type: string
       enum:
       - SIMPLE
       - ADVANCED
+    CreateProjectDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+      required:
+      - name
     WorkflowDeploymentDto:
       type: object
       properties:
@@ -214,36 +264,6 @@ components:
       required:
       - id
       - type
-    ProjectDto:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        template:
-          type: boolean
-          default: false
-      required:
-      - id
-      - name
-    WorkflowModality:
-      type: string
-      enum:
-      - TEXT
-      - VOICE
-      - SMS
-    CreateProjectDto:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-      required:
-      - name
     UpdateProjectDto:
       type: object
       properties:
@@ -273,18 +293,6 @@ components:
       - pageCount
       - hasPreviousPage
       - hasNextPage
-    WorkflowDeploymentType:
-      type: string
-      enum:
-      - TEXT_IFRAME
-      - TEXT_BUBBLE
-      - VOICE_BUBBLE
-      - VOICE_IFRAME
-      - SMS
-      - PHONE_OUTBOUND
-      - PHONE_INBOUND
-      - SLACK
-      - API
     WorkflowDto:
       type: object
       properties:
@@ -308,6 +316,12 @@ components:
       - name
       - type
       - modality
+    WorkflowModality:
+      type: string
+      enum:
+      - TEXT
+      - VOICE
+      - SMS
     PageDto:
       type: object
       properties:

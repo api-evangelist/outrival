@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: OutRival Ai Chat Sessions Assistants Voice Configuration API
+  title: OutRival Assistants Voice Configuration API
   description: OutRival API documentation.
   version: '1.0'
   contact: {}
@@ -36,6 +36,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Voice controller create
+      x-summary-source: derived
     get:
       operationId: VoiceController_config
       parameters:
@@ -56,89 +58,10 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Voice controller config
+      x-summary-source: derived
 components:
   schemas:
-    Provider:
-      type: string
-      enum:
-      - OPENAI
-      - GROQ
-      - ANTHROPIC
-    BackgroundSound:
-      type: string
-      enum:
-      - DEFAULT
-      - 'OFF'
-      - OFFICE
-    VoiceConfigurationUpdateDto:
-      type: object
-      properties:
-        initialMessage:
-          type: string
-        prompt:
-          type: string
-        resources:
-          type: string
-        provider:
-          $ref: '#/components/schemas/Provider'
-        model:
-          $ref: '#/components/schemas/Model'
-        voiceProvider:
-          $ref: '#/components/schemas/VoiceProvider'
-        voice:
-          type: string
-          enum:
-          - burt
-          - marissa
-          - andrea
-          - sarah
-          - phillip
-          - steve
-          - joseph
-          - myra
-          - paula
-          - ryan
-          - drew
-          - paul
-          - mrb
-          - matilda
-          - mark
-          - alloy
-          - echo
-          - fable
-          - onyx
-          - nova
-          - shimmer
-          - jennifer
-          - melissa
-          - will
-          - chris
-          - matt
-          - jack
-          - ruby
-          - davis
-          - donna
-          - michael
-        temperature:
-          type: number
-        maxTokensOutput:
-          type: number
-        backgroundSound:
-          $ref: '#/components/schemas/BackgroundSound'
-        backchanneling:
-          type: boolean
-        functions:
-          type: array
-          items:
-            type: object
-        endCallFunction:
-          type: boolean
-        dialKeypadFunction:
-          type: boolean
-        endCallMessage:
-          type: string
-        endCallPhrases:
-          type: string
     VoiceConfiguration:
       type: object
       properties:
@@ -237,6 +160,24 @@ components:
       - forceRag
       - ragTriggerTopics
       - preserveRagResult
+    VoiceProvider:
+      type: string
+      enum:
+      - ELEVENLABS
+      - PLAYHT
+      - OPENAI
+    BackgroundSound:
+      type: string
+      enum:
+      - DEFAULT
+      - 'OFF'
+      - OFFICE
+    Provider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
+      - ANTHROPIC
     Model:
       type: string
       enum:
@@ -252,12 +193,75 @@ components:
       - CLAUDE_3_SONNET
       - CLAUDE_3_HAIKU
       - CLAUDE_3_5_SONNET
-    VoiceProvider:
-      type: string
-      enum:
-      - ELEVENLABS
-      - PLAYHT
-      - OPENAI
+    VoiceConfigurationUpdateDto:
+      type: object
+      properties:
+        initialMessage:
+          type: string
+        prompt:
+          type: string
+        resources:
+          type: string
+        provider:
+          $ref: '#/components/schemas/Provider'
+        model:
+          $ref: '#/components/schemas/Model'
+        voiceProvider:
+          $ref: '#/components/schemas/VoiceProvider'
+        voice:
+          type: string
+          enum:
+          - burt
+          - marissa
+          - andrea
+          - sarah
+          - phillip
+          - steve
+          - joseph
+          - myra
+          - paula
+          - ryan
+          - drew
+          - paul
+          - mrb
+          - matilda
+          - mark
+          - alloy
+          - echo
+          - fable
+          - onyx
+          - nova
+          - shimmer
+          - jennifer
+          - melissa
+          - will
+          - chris
+          - matt
+          - jack
+          - ruby
+          - davis
+          - donna
+          - michael
+        temperature:
+          type: number
+        maxTokensOutput:
+          type: number
+        backgroundSound:
+          $ref: '#/components/schemas/BackgroundSound'
+        backchanneling:
+          type: boolean
+        functions:
+          type: array
+          items:
+            type: object
+        endCallFunction:
+          type: boolean
+        dialKeypadFunction:
+          type: boolean
+        endCallMessage:
+          type: string
+        endCallPhrases:
+          type: string
   securitySchemes:
     api_key:
       type: apiKey

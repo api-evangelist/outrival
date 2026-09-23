@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   title: OutRival Ai Chat Sessions API
   description: OutRival API documentation.
-  version: '1.0'
+  version: '2.0'
   contact: {}
 servers:
 - url: https://api.outrival.com
@@ -217,12 +217,6 @@ paths:
       - bearer: []
 components:
   schemas:
-    AiChatChannel:
-      type: string
-      enum:
-      - SMS
-      - VOICE
-      - TEXT
     Session:
       type: object
       properties:
@@ -235,16 +229,18 @@ components:
           type: string
         endedAt:
           format: date-time
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         customerMetadata:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
         callRecording:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
         deployment:
-          nullable: true
           $ref: '#/components/schemas/AiChatChannel'
       required:
       - id
@@ -273,15 +269,16 @@ components:
         workflowNodeId:
           type: string
         messageId:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         message:
-          nullable: true
           allOf:
           - $ref: '#/components/schemas/Message'
         aiUserId:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       required:
       - id
       - type
@@ -306,6 +303,41 @@ components:
       - CHANGE_NODE_WORKFLOW
       - CALL_RECORDING
       - ERROR
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+        seqId:
+          type: number
+        role:
+          $ref: '#/components/schemas/AiChatMessageRole'
+        channel:
+          $ref: '#/components/schemas/AiChatChannel'
+        content:
+          type:
+          - string
+          - 'null'
+        toolCallId:
+          type:
+          - string
+          - 'null'
+        toolCalls:
+          type:
+          - object
+          - 'null'
+        createdAt:
+          format: date-time
+          type: string
+      required:
+      - id
+      - seqId
+      - role
+      - channel
+      - content
+      - toolCallId
+      - toolCalls
+      - createdAt
     AiChatMessageRole:
       type: string
       enum:
@@ -325,38 +357,12 @@ components:
       required:
       - hasMore
       - data
-    Message:
-      type: object
-      properties:
-        id:
-          type: string
-        seqId:
-          type: number
-        role:
-          $ref: '#/components/schemas/AiChatMessageRole'
-        channel:
-          $ref: '#/components/schemas/AiChatChannel'
-        content:
-          type: string
-          nullable: true
-        toolCallId:
-          type: string
-          nullable: true
-        toolCalls:
-          type: object
-          nullable: true
-        createdAt:
-          format: date-time
-          type: string
-      required:
-      - id
-      - seqId
-      - role
-      - channel
-      - content
-      - toolCallId
-      - toolCalls
-      - createdAt
+    AiChatChannel:
+      type: string
+      enum:
+      - SMS
+      - VOICE
+      - TEXT
   securitySchemes:
     api_key:
       type: apiKey

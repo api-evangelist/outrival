@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: OutRival Ai Chat Sessions Workflows API
+  title: OutRival Workflows API
   description: OutRival API documentation.
-  version: '1.0'
+  version: '2.0'
   contact: {}
 servers:
 - url: https://api.outrival.com
@@ -37,6 +37,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Workflow controller find all
+      x-summary-source: derived
     post:
       operationId: WorkflowController_createWorkflow
       parameters: []
@@ -58,6 +60,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Workflow controller create workflow
+      x-summary-source: derived
   /rest/v2/workflows/{id}:
     get:
       operationId: WorkflowController_findOne
@@ -79,6 +83,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Workflow controller find one
+      x-summary-source: derived
     patch:
       operationId: WorkflowController_updateWorkflow
       parameters:
@@ -105,6 +111,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Workflow controller update workflow
+      x-summary-source: derived
     delete:
       operationId: WorkflowController_deleteWorkflow
       parameters:
@@ -125,6 +133,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Workflow controller delete workflow
+      x-summary-source: derived
   /rest/v2/workflows/{id}/nodes:
     get:
       operationId: WorkflowController_nodes
@@ -148,6 +158,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Workflow controller nodes
+      x-summary-source: derived
     post:
       operationId: WorkflowController_addNode
       parameters:
@@ -174,6 +186,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Workflow controller add node
+      x-summary-source: derived
   /rest/v2/workflows/{id}/nodes/config:
     get:
       operationId: WorkflowController_nodesWithConfig
@@ -197,6 +211,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Workflow controller nodes with config
+      x-summary-source: derived
   /rest/v2/workflows/{id}/edges:
     get:
       operationId: WorkflowController_edges
@@ -220,211 +236,10 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Workflow controller edges
+      x-summary-source: derived
 components:
   schemas:
-    CreateNodeDto:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        type:
-          $ref: '#/components/schemas/NodeType'
-        builderPositionX:
-          type: number
-        builderPositionY:
-          type: number
-      required:
-      - name
-      - type
-      - builderPositionX
-      - builderPositionY
-    WorkflowModality:
-      type: string
-      enum:
-      - TEXT
-      - VOICE
-      - SMS
-    BackgroundSound:
-      type: string
-      enum:
-      - DEFAULT
-      - 'OFF'
-      - OFFICE
-    EdgeDto:
-      type: object
-      properties:
-        id:
-          type: string
-        workflowId:
-          type: string
-        sourceNodeId:
-          type: string
-        targetNodeId:
-          type: string
-        name:
-          type: string
-        functionCondition:
-          type: string
-        sourceHandlePosition:
-          $ref: '#/components/schemas/HandlePosition'
-        targetHandlePosition:
-          $ref: '#/components/schemas/HandlePosition'
-      required:
-      - id
-      - workflowId
-      - sourceNodeId
-      - targetNodeId
-    Provider:
-      type: string
-      enum:
-      - OPENAI
-      - GROQ
-      - ANTHROPIC
-    WorkflowType:
-      type: string
-      enum:
-      - SIMPLE
-      - ADVANCED
-    ChatConfiguration:
-      type: object
-      properties:
-        initialMessage:
-          type: string
-        prompt:
-          type: string
-        resources:
-          type: string
-        provider:
-          $ref: '#/components/schemas/ChatProvider'
-        model:
-          $ref: '#/components/schemas/ChatModel'
-        temperature:
-          type: number
-        maxTokensOutput:
-          type: number
-        chatMode:
-          type: boolean
-        quickRepliesEnabled:
-          type: boolean
-        isRagEnabled:
-          type: boolean
-        forceRag:
-          type: boolean
-        ragTriggerTopics:
-          type: string
-        preserveRagResult:
-          type: boolean
-        functions:
-          type: array
-          items:
-            type: object
-      required:
-      - initialMessage
-      - prompt
-      - resources
-      - provider
-      - model
-      - temperature
-      - maxTokensOutput
-      - chatMode
-      - quickRepliesEnabled
-      - isRagEnabled
-      - forceRag
-      - ragTriggerTopics
-      - preserveRagResult
-      - functions
-    NodeDto:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        workflowId:
-          type: string
-        type:
-          $ref: '#/components/schemas/NodeType'
-        builderPositionX:
-          type: number
-        builderPositionY:
-          type: number
-        error:
-          type: string
-      required:
-      - id
-      - name
-      - workflowId
-      - type
-      - builderPositionX
-      - builderPositionY
-      - error
-    WorkflowDto:
-      type: object
-      properties:
-        workflowDeploymentId:
-          type: string
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        template:
-          type: boolean
-          default: false
-        type:
-          $ref: '#/components/schemas/WorkflowType'
-        modality:
-          $ref: '#/components/schemas/WorkflowModality'
-      required:
-      - id
-      - name
-      - type
-      - modality
-    VoiceProvider:
-      type: string
-      enum:
-      - ELEVENLABS
-      - PLAYHT
-      - OPENAI
-    SmsModel:
-      type: string
-      enum:
-      - GPT_4_O
-      - GPT_3_5_TURBO
-      - GPT_4_TURBO
-      - GPT_4_O_MINI
-      - LLAMA_3_70B
-      - LLAMA_3_8B
-      - LLAMA_3_1_405B_REASONING
-      - MIXTRAL
-    SmsProvider:
-      type: string
-      enum:
-      - OPENAI
-      - GROQ
-    CreateWorkflowDto:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        projectId:
-          type: string
-        type:
-          $ref: '#/components/schemas/WorkflowType'
-        modality:
-          $ref: '#/components/schemas/WorkflowModality'
-      required:
-      - name
-      - projectId
-      - type
-      - modality
     VoiceConfiguration:
       type: object
       properties:
@@ -535,6 +350,39 @@ components:
       - callTransferPhoneNumber
       - callTransferCondition
       - callTransferForce
+    NodeDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        workflowId:
+          type: string
+        type:
+          $ref: '#/components/schemas/NodeType'
+        builderPositionX:
+          type: number
+        builderPositionY:
+          type: number
+        error:
+          type: string
+      required:
+      - id
+      - name
+      - workflowId
+      - type
+      - builderPositionX
+      - builderPositionY
+      - error
+    WorkflowModality:
+      type: string
+      enum:
+      - TEXT
+      - VOICE
+      - SMS
     Model:
       type: string
       enum:
@@ -558,6 +406,12 @@ components:
       - PROMPT
       - ACTION
       - CONDITION
+    VoiceProvider:
+      type: string
+      enum:
+      - ELEVENLABS
+      - PLAYHT
+      - OPENAI
     HandlePosition:
       type: string
       enum:
@@ -570,39 +424,25 @@ components:
       enum:
       - OPENAI
       - GROQ
-    NodeWithConfigDto:
+    UpdateWorkflowDto:
       type: object
       properties:
-        id:
-          type: string
         name:
           type: string
         description:
           type: string
-        workflowId:
+        projectId:
           type: string
         type:
-          $ref: '#/components/schemas/NodeType'
-        builderPositionX:
-          type: number
-        builderPositionY:
-          type: number
-        error:
-          type: string
-        config:
-          oneOf:
-          - $ref: '#/components/schemas/ChatConfiguration'
-          - $ref: '#/components/schemas/SmsConfiguration'
-          - $ref: '#/components/schemas/VoiceConfiguration'
-      required:
-      - id
-      - name
-      - workflowId
-      - type
-      - builderPositionX
-      - builderPositionY
-      - error
-      - config
+          $ref: '#/components/schemas/WorkflowType'
+        modality:
+          $ref: '#/components/schemas/WorkflowModality'
+    Provider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
+      - ANTHROPIC
     SmsConfiguration:
       type: object
       properties:
@@ -654,6 +494,90 @@ components:
       - ragTriggerTopics
       - preserveRagResult
       - functions
+    SmsModel:
+      type: string
+      enum:
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
+    WorkflowType:
+      type: string
+      enum:
+      - SIMPLE
+      - ADVANCED
+    BackgroundSound:
+      type: string
+      enum:
+      - DEFAULT
+      - 'OFF'
+      - OFFICE
+    EdgeDto:
+      type: object
+      properties:
+        id:
+          type: string
+        workflowId:
+          type: string
+        sourceNodeId:
+          type: string
+        targetNodeId:
+          type: string
+        name:
+          type: string
+        functionCondition:
+          type: string
+        sourceHandlePosition:
+          $ref: '#/components/schemas/HandlePosition'
+        targetHandlePosition:
+          $ref: '#/components/schemas/HandlePosition'
+      required:
+      - id
+      - workflowId
+      - sourceNodeId
+      - targetNodeId
+    NodeWithConfigDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        workflowId:
+          type: string
+        type:
+          $ref: '#/components/schemas/NodeType'
+        builderPositionX:
+          type: number
+        builderPositionY:
+          type: number
+        error:
+          type: string
+        config:
+          oneOf:
+          - $ref: '#/components/schemas/ChatConfiguration'
+          - $ref: '#/components/schemas/SmsConfiguration'
+          - $ref: '#/components/schemas/VoiceConfiguration'
+      required:
+      - id
+      - name
+      - workflowId
+      - type
+      - builderPositionX
+      - builderPositionY
+      - error
+      - config
+    SmsProvider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
     ChatModel:
       type: string
       enum:
@@ -665,7 +589,96 @@ components:
       - LLAMA_3_8B
       - LLAMA_3_1_405B_REASONING
       - MIXTRAL
-    UpdateWorkflowDto:
+    ChatConfiguration:
+      type: object
+      properties:
+        initialMessage:
+          type: string
+        prompt:
+          type: string
+        resources:
+          type: string
+        provider:
+          $ref: '#/components/schemas/ChatProvider'
+        model:
+          $ref: '#/components/schemas/ChatModel'
+        temperature:
+          type: number
+        maxTokensOutput:
+          type: number
+        chatMode:
+          type: boolean
+        quickRepliesEnabled:
+          type: boolean
+        isRagEnabled:
+          type: boolean
+        forceRag:
+          type: boolean
+        ragTriggerTopics:
+          type: string
+        preserveRagResult:
+          type: boolean
+        functions:
+          type: array
+          items:
+            type: object
+      required:
+      - initialMessage
+      - prompt
+      - resources
+      - provider
+      - model
+      - temperature
+      - maxTokensOutput
+      - chatMode
+      - quickRepliesEnabled
+      - isRagEnabled
+      - forceRag
+      - ragTriggerTopics
+      - preserveRagResult
+      - functions
+    WorkflowDto:
+      type: object
+      properties:
+        workflowDeploymentId:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        template:
+          type: boolean
+          default: false
+        type:
+          $ref: '#/components/schemas/WorkflowType'
+        modality:
+          $ref: '#/components/schemas/WorkflowModality'
+      required:
+      - id
+      - name
+      - type
+      - modality
+    CreateNodeDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          $ref: '#/components/schemas/NodeType'
+        builderPositionX:
+          type: number
+        builderPositionY:
+          type: number
+      required:
+      - name
+      - type
+      - builderPositionX
+      - builderPositionY
+    CreateWorkflowDto:
       type: object
       properties:
         name:
@@ -678,6 +691,11 @@ components:
           $ref: '#/components/schemas/WorkflowType'
         modality:
           $ref: '#/components/schemas/WorkflowModality'
+      required:
+      - name
+      - projectId
+      - type
+      - modality
   securitySchemes:
     api_key:
       type: apiKey

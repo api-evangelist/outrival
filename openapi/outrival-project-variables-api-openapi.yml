@@ -1,13 +1,13 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: OutRival Ai Chat Sessions Project variables API
+  title: OutRival Project variables API
   description: OutRival API documentation.
-  version: '1.0'
+  version: '2.0'
   contact: {}
 servers:
 - url: https://api.outrival.com
 tags:
-- name: Project variables
+- name: Project Variables
 paths:
   /rest/v2/projects/{projectId}/variables:
     get:
@@ -28,10 +28,12 @@ paths:
                 items:
                   $ref: '#/components/schemas/VariableDto'
       tags:
-      - Project variables
+      - Project Variables
       security:
       - api_key: []
       - bearer: []
+      summary: Variable controller get all variables
+      x-summary-source: derived
     post:
       operationId: VariableController_createVariable
       parameters:
@@ -54,10 +56,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/VariableDto'
       tags:
-      - Project variables
+      - Project Variables
       security:
       - api_key: []
       - bearer: []
+      summary: Variable controller create variable
+      x-summary-source: derived
   /rest/v2/projects/{projectId}/variables/{variableId}:
     patch:
       operationId: VariableController_updateVariable
@@ -86,10 +90,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/VariableDto'
       tags:
-      - Project variables
+      - Project Variables
       security:
       - api_key: []
       - bearer: []
+      summary: Variable controller update variable
+      x-summary-source: derived
     delete:
       operationId: VariableController_deleteVariable
       parameters:
@@ -111,12 +117,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/VariableDto'
       tags:
-      - Project variables
+      - Project Variables
       security:
       - api_key: []
       - bearer: []
+      summary: Variable controller delete variable
+      x-summary-source: derived
 components:
   schemas:
+    CreateVariableDto:
+      type: object
+      properties:
+        name:
+          type: string
+        testValue:
+          type: string
+      required:
+      - name
     UpdateVariableDto:
       type: object
       properties:
@@ -135,15 +152,6 @@ components:
           type: string
       required:
       - id
-      - name
-    CreateVariableDto:
-      type: object
-      properties:
-        name:
-          type: string
-        testValue:
-          type: string
-      required:
       - name
   securitySchemes:
     api_key:

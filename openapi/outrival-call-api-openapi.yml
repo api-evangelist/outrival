@@ -1,9 +1,9 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: OutRival Ai Chat Sessions Call API
-  description: OutRival API documentation.
-  version: '1.0'
+  title: Outrival Call API
   contact: {}
+  version: '1.0'
+  description: 'Operations tagged Call across 2 of this provider''s published API definitions: outrival-v1-openapi-original.json, outrival-v2-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.outrival.com
 tags:
@@ -32,6 +32,10 @@ paths:
       - Call
       security:
       - api_key: []
+      summary: Vapi controller phone call initiate
+      x-summary-source: derived
+    servers:
+    - url: https://api.outrival.com
   /rest/v2/call/phone:
     post:
       operationId: VapiController_phoneCallInitiate
@@ -55,6 +59,10 @@ paths:
       - Call
       security:
       - api_key: []
+      summary: Vapi controller phone call initiate
+      x-summary-source: derived
+    servers:
+    - url: https://api.outrival.com
   /rest/v2/call/phone-numbers:
     get:
       operationId: VapiController_getActivePhoneNumbers
@@ -70,18 +78,36 @@ paths:
                   $ref: '#/components/schemas/PhoneCallConfigurationNumberDto'
       tags:
       - Call
+      summary: Vapi controller get active phone numbers
+      x-summary-source: derived
+    servers:
+    - url: https://api.outrival.com
 components:
   schemas:
-    PhoneCallConfigurationNumberDto:
+    CreatePhoneCallConfiguration:
       type: object
       properties:
-        id:
+        assistantId:
           type: string
-        number:
+        phoneNumber:
+          type: string
+        userName:
+          type: string
+        userId:
+          type: string
+        variables:
+          type: object
+        metadata:
+          type: object
+          description: Metadata
+        externalId:
+          type: string
+        anonymousId:
           type: string
       required:
-      - id
-      - number
+      - assistantId
+      - phoneNumber
+      - metadata
     PhoneCallConfiguration:
       type: object
       properties:
@@ -114,32 +140,21 @@ components:
       required:
       - phoneNumber
       - metadata
-    CreatePhoneCallConfiguration:
+    PhoneCallConfigurationNumberDto:
       type: object
       properties:
-        assistantId:
+        id:
           type: string
-        phoneNumber:
-          type: string
-        userName:
-          type: string
-        userId:
-          type: string
-        variables:
-          type: object
-        metadata:
-          type: object
-          description: Metadata
-        externalId:
-          type: string
-        anonymousId:
+        number:
           type: string
       required:
-      - assistantId
-      - phoneNumber
-      - metadata
+      - id
+      - number
   securitySchemes:
     api_key:
       type: apiKey
       in: header
       name: X-API-Key
+x-refined-from:
+- outrival-v1-openapi-original.json
+- outrival-v2-openapi-original.json

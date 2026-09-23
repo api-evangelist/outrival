@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: OutRival Ai Chat Sessions Assistants Sms Configuration API
+  title: OutRival Assistants Sms Configuration API
   description: OutRival API documentation.
   version: '1.0'
   contact: {}
@@ -36,6 +36,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Sms controller create
+      x-summary-source: derived
     get:
       operationId: SmsController_config
       parameters:
@@ -56,8 +58,26 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Sms controller config
+      x-summary-source: derived
 components:
   schemas:
+    SmsModel:
+      type: string
+      enum:
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
+    SmsProvider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
     SmsConfigurationUpdateDto:
       type: object
       properties:
@@ -85,22 +105,6 @@ components:
           type: array
           items:
             type: object
-    SmsModel:
-      type: string
-      enum:
-      - GPT_4_O
-      - GPT_3_5_TURBO
-      - GPT_4_TURBO
-      - GPT_4_O_MINI
-      - LLAMA_3_70B
-      - LLAMA_3_8B
-      - LLAMA_3_1_405B_REASONING
-      - MIXTRAL
-    SmsProvider:
-      type: string
-      enum:
-      - OPENAI
-      - GROQ
     SmsConfiguration:
       type: object
       properties:

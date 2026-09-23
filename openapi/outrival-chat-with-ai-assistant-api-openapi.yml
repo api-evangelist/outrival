@@ -1,9 +1,9 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: OutRival Ai Chat Sessions Chat with Ai Assistant API
-  description: OutRival API documentation.
-  version: '1.0'
+  title: Outrival Chat with Ai Assistant API
   contact: {}
+  version: '1.0'
+  description: 'Operations tagged Chat with Ai Assistant across 2 of this provider''s published API definitions: outrival-v1-openapi-original.json, outrival-v2-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.outrival.com
 tags:
@@ -28,6 +28,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+    servers:
+    - url: https://api.outrival.com
   /rest/v2/ai-chats/messages:
     post:
       operationId: MessagesController_create
@@ -47,21 +49,10 @@ paths:
       security:
       - api_key: []
       - bearer: []
+    servers:
+    - url: https://api.outrival.com
 components:
   schemas:
-    AiChatChannel:
-      type: string
-      description: Message channel (text | voice | video)
-      enum:
-      - SMS
-      - VOICE
-      - TEXT
-    AiChatChannel_2:
-      type: string
-      enum:
-      - SMS
-      - VOICE
-      - TEXT
     CreateMessageDto:
       type: object
       properties:
@@ -91,6 +82,13 @@ components:
       - TOOL
       - USER
       - SYSTEM
+    AiChatChannel:
+      type: string
+      description: Message channel (text | voice | video)
+      enum:
+      - SMS
+      - VOICE
+      - TEXT
     CreateMessageDto_2:
       type: object
       properties:
@@ -115,8 +113,17 @@ components:
       - TOOL
       - USER
       - SYSTEM
+    AiChatChannel_2:
+      type: string
+      enum:
+      - SMS
+      - VOICE
+      - TEXT
   securitySchemes:
     api_key:
       type: apiKey
       in: header
       name: X-API-Key
+x-refined-from:
+- outrival-v1-openapi-original.json
+- outrival-v2-openapi-original.json

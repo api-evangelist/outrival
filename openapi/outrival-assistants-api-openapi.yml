@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: OutRival Ai Chat Sessions Assistants API
+  title: OutRival Assistants API
   description: OutRival API documentation.
   version: '1.0'
   contact: {}
@@ -31,6 +31,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Assistants controller create
+      x-summary-source: derived
     get:
       operationId: AssistantsController_findAll
       parameters:
@@ -76,6 +78,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Assistants controller find all
+      x-summary-source: derived
   /rest/v1/assistants/templates:
     get:
       operationId: AssistantsController_findAllTemplates
@@ -122,6 +126,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Assistants controller find all templates
+      x-summary-source: derived
   /rest/v1/assistants/{id}:
     get:
       operationId: AssistantsController_findOne
@@ -145,6 +151,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Assistants controller find one
+      x-summary-source: derived
     patch:
       operationId: AssistantsController_update
       parameters:
@@ -173,6 +181,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Assistants controller update
+      x-summary-source: derived
     delete:
       operationId: AssistantsController_remove
       parameters:
@@ -193,6 +203,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Assistants controller remove
+      x-summary-source: derived
   /rest/v1/assistants/duplicate/{id}:
     post:
       operationId: AssistantsController_duplicate
@@ -214,50 +226,10 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Assistants controller duplicate
+      x-summary-source: derived
 components:
   schemas:
-    CreateAssistantDto:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        variables:
-          type: object
-      required:
-      - name
-    UpdateAssistantDto:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        variables:
-          type: object
-    PageMetaDto:
-      type: object
-      properties:
-        page:
-          type: number
-        take:
-          type: number
-        itemCount:
-          type: number
-        pageCount:
-          type: number
-        hasPreviousPage:
-          type: boolean
-        hasNextPage:
-          type: boolean
-      required:
-      - page
-      - take
-      - itemCount
-      - pageCount
-      - hasPreviousPage
-      - hasNextPage
     Assistant:
       type: object
       properties:
@@ -282,6 +254,48 @@ components:
           type: string
       required:
       - id
+    PageMetaDto:
+      type: object
+      properties:
+        page:
+          type: number
+        take:
+          type: number
+        itemCount:
+          type: number
+        pageCount:
+          type: number
+        hasPreviousPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+      required:
+      - page
+      - take
+      - itemCount
+      - pageCount
+      - hasPreviousPage
+      - hasNextPage
+    CreateAssistantDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        variables:
+          type: object
+      required:
+      - name
+    UpdateAssistantDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        variables:
+          type: object
     PageDto:
       type: object
       properties:

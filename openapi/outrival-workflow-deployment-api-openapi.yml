@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: OutRival Ai Chat Sessions Workflow Deployment API
+  title: OutRival Workflow Deployment API
   description: OutRival API documentation.
-  version: '1.0'
+  version: '2.0'
   contact: {}
 servers:
 - url: https://api.outrival.com
@@ -30,6 +30,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Workflow deployment controller project workflow deployment
+      x-summary-source: derived
     delete:
       operationId: WorkflowDeploymentController_deleteWorkflowDeployment
       parameters:
@@ -50,6 +52,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Workflow deployment controller delete workflow deployment
+      x-summary-source: derived
     post:
       operationId: WorkflowDeploymentController_updateWorkflowDeployment
       parameters:
@@ -76,6 +80,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Workflow deployment controller update workflow deployment
+      x-summary-source: derived
   /rest/v2/deployments:
     post:
       operationId: WorkflowDeploymentController_createWorkflowDeployment
@@ -98,8 +104,19 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Workflow deployment controller create workflow deployment
+      x-summary-source: derived
 components:
   schemas:
+    WorkflowDeploymentUpdateDto:
+      type: object
+      properties:
+        workflowId:
+          type: string
+        enabled:
+          type: boolean
+        phoneNumberId:
+          type: string
     WorkflowDeploymentDto:
       type: object
       properties:
@@ -116,15 +133,6 @@ components:
       required:
       - id
       - type
-    WorkflowDeploymentUpdateDto:
-      type: object
-      properties:
-        workflowId:
-          type: string
-        enabled:
-          type: boolean
-        phoneNumberId:
-          type: string
     WorkflowDeploymentType:
       type: string
       enum:

@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: OutRival Ai Chat Sessions Nodes API
+  title: OutRival Nodes API
   description: OutRival API documentation.
-  version: '1.0'
+  version: '2.0'
   contact: {}
 servers:
 - url: https://api.outrival.com
@@ -55,6 +55,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Node controller find all
+      x-summary-source: derived
   /rest/v2/nodes/{id}:
     get:
       operationId: NodeController_findOne
@@ -78,6 +80,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Node controller find one
+      x-summary-source: derived
     patch:
       operationId: NodeController_update
       parameters:
@@ -106,6 +110,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Node controller update
+      x-summary-source: derived
     delete:
       operationId: NodeController_remove
       parameters:
@@ -126,6 +132,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Node controller remove
+      x-summary-source: derived
   /rest/v2/nodes/duplicate/{id}:
     post:
       operationId: NodeController_duplicate
@@ -147,6 +155,8 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Node controller duplicate
+      x-summary-source: derived
   /rest/v2/nodes/{id}/config:
     get:
       operationId: NodeController_nodeWithConfig
@@ -168,22 +178,21 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      summary: Node controller node with config
+      x-summary-source: derived
 components:
   schemas:
-    NodeType:
+    SmsModel:
       type: string
       enum:
-      - START
-      - END
-      - PROMPT
-      - ACTION
-      - CONDITION
-    Provider:
-      type: string
-      enum:
-      - OPENAI
-      - GROQ
-      - ANTHROPIC
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
     VoiceConfiguration:
       type: object
       properties:
@@ -294,29 +303,6 @@ components:
       - callTransferPhoneNumber
       - callTransferCondition
       - callTransferForce
-    DeleteNodeDto:
-      type: object
-      properties:
-        id:
-          type: string
-      required:
-      - id
-    ChatProvider:
-      type: string
-      enum:
-      - OPENAI
-      - GROQ
-    SmsModel:
-      type: string
-      enum:
-      - GPT_4_O
-      - GPT_3_5_TURBO
-      - GPT_4_TURBO
-      - GPT_4_O_MINI
-      - LLAMA_3_70B
-      - LLAMA_3_8B
-      - LLAMA_3_1_405B_REASONING
-      - MIXTRAL
     UpdateNodeDto:
       type: object
       properties:
@@ -330,11 +316,109 @@ components:
           type: number
         builderPositionY:
           type: number
+    NodeType:
+      type: string
+      enum:
+      - START
+      - END
+      - PROMPT
+      - ACTION
+      - CONDITION
+    VoiceProvider:
+      type: string
+      enum:
+      - ELEVENLABS
+      - PLAYHT
+      - OPENAI
+    BackgroundSound:
+      type: string
+      enum:
+      - DEFAULT
+      - 'OFF'
+      - OFFICE
     SmsProvider:
       type: string
       enum:
       - OPENAI
       - GROQ
+    ChatProvider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
+    DeleteNodeDto:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+      - id
+    NodeDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        workflowId:
+          type: string
+        type:
+          $ref: '#/components/schemas/NodeType'
+        builderPositionX:
+          type: number
+        builderPositionY:
+          type: number
+        error:
+          type: string
+      required:
+      - id
+      - name
+      - workflowId
+      - type
+      - builderPositionX
+      - builderPositionY
+      - error
+    ChatModel:
+      type: string
+      enum:
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
+    Provider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
+      - ANTHROPIC
+    PageMetaDto:
+      type: object
+      properties:
+        page:
+          type: number
+        take:
+          type: number
+        itemCount:
+          type: number
+        pageCount:
+          type: number
+        hasPreviousPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+      required:
+      - page
+      - take
+      - itemCount
+      - pageCount
+      - hasPreviousPage
+      - hasNextPage
     ChatConfiguration:
       type: object
       properties:
@@ -383,67 +467,6 @@ components:
       - ragTriggerTopics
       - preserveRagResult
       - functions
-    BackgroundSound:
-      type: string
-      enum:
-      - DEFAULT
-      - 'OFF'
-      - OFFICE
-    PageMetaDto:
-      type: object
-      properties:
-        page:
-          type: number
-        take:
-          type: number
-        itemCount:
-          type: number
-        pageCount:
-          type: number
-        hasPreviousPage:
-          type: boolean
-        hasNextPage:
-          type: boolean
-      required:
-      - page
-      - take
-      - itemCount
-      - pageCount
-      - hasPreviousPage
-      - hasNextPage
-    NodeWithConfigDto:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        workflowId:
-          type: string
-        type:
-          $ref: '#/components/schemas/NodeType'
-        builderPositionX:
-          type: number
-        builderPositionY:
-          type: number
-        error:
-          type: string
-        config:
-          oneOf:
-          - $ref: '#/components/schemas/ChatConfiguration'
-          - $ref: '#/components/schemas/SmsConfiguration'
-          - $ref: '#/components/schemas/VoiceConfiguration'
-      required:
-      - id
-      - name
-      - workflowId
-      - type
-      - builderPositionX
-      - builderPositionY
-      - error
-      - config
     SmsConfiguration:
       type: object
       properties:
@@ -495,7 +518,22 @@ components:
       - ragTriggerTopics
       - preserveRagResult
       - functions
-    NodeDto:
+    Model:
+      type: string
+      enum:
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
+      - CLAUDE_3_OPUS
+      - CLAUDE_3_SONNET
+      - CLAUDE_3_HAIKU
+      - CLAUDE_3_5_SONNET
+    NodeWithConfigDto:
       type: object
       properties:
         id:
@@ -514,6 +552,11 @@ components:
           type: number
         error:
           type: string
+        config:
+          oneOf:
+          - $ref: '#/components/schemas/ChatConfiguration'
+          - $ref: '#/components/schemas/SmsConfiguration'
+          - $ref: '#/components/schemas/VoiceConfiguration'
       required:
       - id
       - name
@@ -522,38 +565,7 @@ components:
       - builderPositionX
       - builderPositionY
       - error
-    ChatModel:
-      type: string
-      enum:
-      - GPT_4_O
-      - GPT_3_5_TURBO
-      - GPT_4_TURBO
-      - GPT_4_O_MINI
-      - LLAMA_3_70B
-      - LLAMA_3_8B
-      - LLAMA_3_1_405B_REASONING
-      - MIXTRAL
-    Model:
-      type: string
-      enum:
-      - GPT_4_O
-      - GPT_3_5_TURBO
-      - GPT_4_TURBO
-      - GPT_4_O_MINI
-      - LLAMA_3_70B
-      - LLAMA_3_8B
-      - LLAMA_3_1_405B_REASONING
-      - MIXTRAL
-      - CLAUDE_3_OPUS
-      - CLAUDE_3_SONNET
-      - CLAUDE_3_HAIKU
-      - CLAUDE_3_5_SONNET
-    VoiceProvider:
-      type: string
-      enum:
-      - ELEVENLABS
-      - PLAYHT
-      - OPENAI
+      - config
     PageDto:
       type: object
       properties:

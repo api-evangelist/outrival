@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: OutRival Ai Chat Sessions Settings API
+  title: OutRival Settings API
   description: OutRival API documentation.
   version: '1.0'
   contact: {}
@@ -22,6 +22,8 @@ paths:
                 type: string
       tags:
       - Settings
+      summary: Settings controller generate webhook secret
+      x-summary-source: derived
   /rest/v1/settings:
     get:
       operationId: SettingsController_getSettings
@@ -37,6 +39,8 @@ paths:
                   $ref: '#/components/schemas/WebhookSettings'
       tags:
       - Settings
+      summary: Settings controller get settings
+      x-summary-source: derived
     post:
       operationId: SettingsController_create
       parameters: []
@@ -57,6 +61,8 @@ paths:
           description: ''
       tags:
       - Settings
+      summary: Settings controller create
+      x-summary-source: derived
   /rest/v1/settings/{id}:
     patch:
       operationId: SettingsController_update
@@ -81,6 +87,8 @@ paths:
                 $ref: '#/components/schemas/WebhookSettings'
       tags:
       - Settings
+      summary: Settings controller update
+      x-summary-source: derived
     delete:
       operationId: SettingsController_delete
       parameters:
@@ -100,6 +108,8 @@ paths:
           description: ''
       tags:
       - Settings
+      summary: Settings controller delete
+      x-summary-source: derived
 components:
   schemas:
     WebhooksServiceConfigUpdate:
@@ -131,8 +141,9 @@ components:
         url:
           type: string
         name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         secret:
           type: string
         createdAt:
