@@ -62,47 +62,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ChatConfigurationUpdateDto:
-      type: object
-      properties:
-        initialMessage:
-          type: string
-        prompt:
-          type: string
-        resources:
-          type: string
-        provider:
-          $ref: '#/components/schemas/ChatProvider'
-        model:
-          $ref: '#/components/schemas/ChatModel'
-        temperature:
-          type: number
-        maxTokensOutput:
-          type: number
-        chatMode:
-          type: boolean
-        quickRepliesEnabled:
-          type: boolean
-        functions:
-          type: array
-          items:
-            type: object
-    ChatModel:
-      type: string
-      enum:
-      - GPT_4_O
-      - GPT_3_5_TURBO
-      - GPT_4_TURBO
-      - GPT_4_O_MINI
-      - LLAMA_3_70B
-      - LLAMA_3_8B
-      - LLAMA_3_1_405B_REASONING
-      - MIXTRAL
-    ChatProvider:
-      type: string
-      enum:
-      - OPENAI
-      - GROQ
     ChatConfiguration:
       type: object
       properties:
@@ -151,6 +110,47 @@ components:
       - ragTriggerTopics
       - preserveRagResult
       - functions
+    ChatConfigurationUpdateDto:
+      type: object
+      properties:
+        initialMessage:
+          type: string
+        prompt:
+          type: string
+        resources:
+          type: string
+        provider:
+          $ref: '#/components/schemas/ChatProvider'
+        model:
+          $ref: '#/components/schemas/ChatModel'
+        temperature:
+          type: number
+        maxTokensOutput:
+          type: number
+        chatMode:
+          type: boolean
+        quickRepliesEnabled:
+          type: boolean
+        functions:
+          type: array
+          items:
+            type: object
+    ChatProvider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
+    ChatModel:
+      type: string
+      enum:
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
   securitySchemes:
     api_key:
       type: apiKey

@@ -207,6 +207,43 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    CreateProjectDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+      required:
+      - name
+    WorkflowModality:
+      type: string
+      enum:
+      - TEXT
+      - VOICE
+      - SMS
+    PageMetaDto:
+      type: object
+      properties:
+        page:
+          type: number
+        take:
+          type: number
+        itemCount:
+          type: number
+        pageCount:
+          type: number
+        hasPreviousPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+      required:
+      - page
+      - take
+      - itemCount
+      - pageCount
+      - hasPreviousPage
+      - hasNextPage
     WorkflowDeploymentType:
       type: string
       enum:
@@ -219,35 +256,23 @@ components:
       - PHONE_INBOUND
       - SLACK
       - API
-    ProjectDto:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        template:
-          type: boolean
-          default: false
-      required:
-      - id
-      - name
     WorkflowType:
       type: string
       enum:
       - SIMPLE
       - ADVANCED
-    CreateProjectDto:
+    PageDto:
       type: object
       properties:
-        name:
-          type: string
-        description:
-          type: string
+        data:
+          type: array
+          items:
+            type: array
+        meta:
+          $ref: '#/components/schemas/PageMetaDto'
       required:
-      - name
+      - data
+      - meta
     WorkflowDeploymentDto:
       type: object
       properties:
@@ -271,28 +296,21 @@ components:
           type: string
         description:
           type: string
-    PageMetaDto:
+    ProjectDto:
       type: object
       properties:
-        page:
-          type: number
-        take:
-          type: number
-        itemCount:
-          type: number
-        pageCount:
-          type: number
-        hasPreviousPage:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        template:
           type: boolean
-        hasNextPage:
-          type: boolean
+          default: false
       required:
-      - page
-      - take
-      - itemCount
-      - pageCount
-      - hasPreviousPage
-      - hasNextPage
+      - id
+      - name
     WorkflowDto:
       type: object
       properties:
@@ -316,24 +334,6 @@ components:
       - name
       - type
       - modality
-    WorkflowModality:
-      type: string
-      enum:
-      - TEXT
-      - VOICE
-      - SMS
-    PageDto:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: array
-        meta:
-          $ref: '#/components/schemas/PageMetaDto'
-      required:
-      - data
-      - meta
   securitySchemes:
     api_key:
       type: apiKey

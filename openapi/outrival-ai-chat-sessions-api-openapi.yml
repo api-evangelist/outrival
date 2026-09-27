@@ -217,6 +217,37 @@ paths:
       - bearer: []
 components:
   schemas:
+    AiChatChannel:
+      type: string
+      enum:
+      - SMS
+      - VOICE
+      - TEXT
+    CursorBasedPageDto:
+      type: object
+      properties:
+        hasMore:
+          type: boolean
+        data:
+          type: array
+          items:
+            type: string
+      required:
+      - hasMore
+      - data
+    AiChatLogsType:
+      type: string
+      enum:
+      - SESSION_START
+      - SESSION_END
+      - SEND_MESSAGE
+      - RECEIVE_MESSAGE
+      - FUNCTION_CALL
+      - FUNCTION_RESPONSE
+      - CHANGE_WORKFLOW
+      - CHANGE_NODE_WORKFLOW
+      - CALL_RECORDING
+      - ERROR
     Session:
       type: object
       properties:
@@ -250,6 +281,41 @@ components:
       - customerMetadata
       - callRecording
       - deployment
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+        seqId:
+          type: number
+        role:
+          $ref: '#/components/schemas/AiChatMessageRole'
+        channel:
+          $ref: '#/components/schemas/AiChatChannel'
+        content:
+          type:
+          - string
+          - 'null'
+        toolCallId:
+          type:
+          - string
+          - 'null'
+        toolCalls:
+          type:
+          - object
+          - 'null'
+        createdAt:
+          format: date-time
+          type: string
+      required:
+      - id
+      - seqId
+      - role
+      - channel
+      - content
+      - toolCallId
+      - toolCalls
+      - createdAt
     Log:
       type: object
       properties:
@@ -290,54 +356,6 @@ components:
       - messageId
       - message
       - aiUserId
-    AiChatLogsType:
-      type: string
-      enum:
-      - SESSION_START
-      - SESSION_END
-      - SEND_MESSAGE
-      - RECEIVE_MESSAGE
-      - FUNCTION_CALL
-      - FUNCTION_RESPONSE
-      - CHANGE_WORKFLOW
-      - CHANGE_NODE_WORKFLOW
-      - CALL_RECORDING
-      - ERROR
-    Message:
-      type: object
-      properties:
-        id:
-          type: string
-        seqId:
-          type: number
-        role:
-          $ref: '#/components/schemas/AiChatMessageRole'
-        channel:
-          $ref: '#/components/schemas/AiChatChannel'
-        content:
-          type:
-          - string
-          - 'null'
-        toolCallId:
-          type:
-          - string
-          - 'null'
-        toolCalls:
-          type:
-          - object
-          - 'null'
-        createdAt:
-          format: date-time
-          type: string
-      required:
-      - id
-      - seqId
-      - role
-      - channel
-      - content
-      - toolCallId
-      - toolCalls
-      - createdAt
     AiChatMessageRole:
       type: string
       enum:
@@ -345,24 +363,6 @@ components:
       - TOOL
       - USER
       - SYSTEM
-    CursorBasedPageDto:
-      type: object
-      properties:
-        hasMore:
-          type: boolean
-        data:
-          type: array
-          items:
-            type: string
-      required:
-      - hasMore
-      - data
-    AiChatChannel:
-      type: string
-      enum:
-      - SMS
-      - VOICE
-      - TEXT
   securitySchemes:
     api_key:
       type: apiKey

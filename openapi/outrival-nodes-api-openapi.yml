@@ -182,17 +182,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SmsModel:
-      type: string
-      enum:
-      - GPT_4_O
-      - GPT_3_5_TURBO
-      - GPT_4_TURBO
-      - GPT_4_O_MINI
-      - LLAMA_3_70B
-      - LLAMA_3_8B
-      - LLAMA_3_1_405B_REASONING
-      - MIXTRAL
     VoiceConfiguration:
       type: object
       properties:
@@ -303,84 +292,13 @@ components:
       - callTransferPhoneNumber
       - callTransferCondition
       - callTransferForce
-    UpdateNodeDto:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        type:
-          $ref: '#/components/schemas/NodeType'
-        builderPositionX:
-          type: number
-        builderPositionY:
-          type: number
-    NodeType:
-      type: string
-      enum:
-      - START
-      - END
-      - PROMPT
-      - ACTION
-      - CONDITION
     VoiceProvider:
       type: string
       enum:
       - ELEVENLABS
       - PLAYHT
       - OPENAI
-    BackgroundSound:
-      type: string
-      enum:
-      - DEFAULT
-      - 'OFF'
-      - OFFICE
-    SmsProvider:
-      type: string
-      enum:
-      - OPENAI
-      - GROQ
-    ChatProvider:
-      type: string
-      enum:
-      - OPENAI
-      - GROQ
-    DeleteNodeDto:
-      type: object
-      properties:
-        id:
-          type: string
-      required:
-      - id
-    NodeDto:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        workflowId:
-          type: string
-        type:
-          $ref: '#/components/schemas/NodeType'
-        builderPositionX:
-          type: number
-        builderPositionY:
-          type: number
-        error:
-          type: string
-      required:
-      - id
-      - name
-      - workflowId
-      - type
-      - builderPositionX
-      - builderPositionY
-      - error
-    ChatModel:
+    Model:
       type: string
       enum:
       - GPT_4_O
@@ -391,34 +309,16 @@ components:
       - LLAMA_3_8B
       - LLAMA_3_1_405B_REASONING
       - MIXTRAL
-    Provider:
+      - CLAUDE_3_OPUS
+      - CLAUDE_3_SONNET
+      - CLAUDE_3_HAIKU
+      - CLAUDE_3_5_SONNET
+    BackgroundSound:
       type: string
       enum:
-      - OPENAI
-      - GROQ
-      - ANTHROPIC
-    PageMetaDto:
-      type: object
-      properties:
-        page:
-          type: number
-        take:
-          type: number
-        itemCount:
-          type: number
-        pageCount:
-          type: number
-        hasPreviousPage:
-          type: boolean
-        hasNextPage:
-          type: boolean
-      required:
-      - page
-      - take
-      - itemCount
-      - pageCount
-      - hasPreviousPage
-      - hasNextPage
+      - DEFAULT
+      - 'OFF'
+      - OFFICE
     ChatConfiguration:
       type: object
       properties:
@@ -467,6 +367,17 @@ components:
       - ragTriggerTopics
       - preserveRagResult
       - functions
+    ChatModel:
+      type: string
+      enum:
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
     SmsConfiguration:
       type: object
       properties:
@@ -518,7 +429,53 @@ components:
       - ragTriggerTopics
       - preserveRagResult
       - functions
-    Model:
+    ChatProvider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
+    PageMetaDto:
+      type: object
+      properties:
+        page:
+          type: number
+        take:
+          type: number
+        itemCount:
+          type: number
+        pageCount:
+          type: number
+        hasPreviousPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+      required:
+      - page
+      - take
+      - itemCount
+      - pageCount
+      - hasPreviousPage
+      - hasNextPage
+    DeleteNodeDto:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+      - id
+    PageDto:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: array
+        meta:
+          $ref: '#/components/schemas/PageMetaDto'
+      required:
+      - data
+      - meta
+    SmsModel:
       type: string
       enum:
       - GPT_4_O
@@ -529,10 +486,25 @@ components:
       - LLAMA_3_8B
       - LLAMA_3_1_405B_REASONING
       - MIXTRAL
-      - CLAUDE_3_OPUS
-      - CLAUDE_3_SONNET
-      - CLAUDE_3_HAIKU
-      - CLAUDE_3_5_SONNET
+    UpdateNodeDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          $ref: '#/components/schemas/NodeType'
+        builderPositionX:
+          type: number
+        builderPositionY:
+          type: number
+    Provider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
+      - ANTHROPIC
     NodeWithConfigDto:
       type: object
       properties:
@@ -566,18 +538,46 @@ components:
       - builderPositionY
       - error
       - config
-    PageDto:
+    SmsProvider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
+    NodeType:
+      type: string
+      enum:
+      - START
+      - END
+      - PROMPT
+      - ACTION
+      - CONDITION
+    NodeDto:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            type: array
-        meta:
-          $ref: '#/components/schemas/PageMetaDto'
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        workflowId:
+          type: string
+        type:
+          $ref: '#/components/schemas/NodeType'
+        builderPositionX:
+          type: number
+        builderPositionY:
+          type: number
+        error:
+          type: string
       required:
-      - data
-      - meta
+      - id
+      - name
+      - workflowId
+      - type
+      - builderPositionX
+      - builderPositionY
+      - error
   securitySchemes:
     api_key:
       type: apiKey

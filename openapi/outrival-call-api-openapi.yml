@@ -38,7 +38,7 @@ paths:
     - url: https://api.outrival.com
   /rest/v2/call/phone:
     post:
-      operationId: VapiController_phoneCallInitiate
+      operationId: postRestV2CallPhone
       parameters: []
       requestBody:
         required: true
@@ -61,6 +61,8 @@ paths:
       - api_key: []
       summary: Vapi controller phone call initiate
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: VapiController_phoneCallInitiate
     servers:
     - url: https://api.outrival.com
   /rest/v2/call/phone-numbers:

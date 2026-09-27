@@ -240,6 +240,175 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    WorkflowModality:
+      type: string
+      enum:
+      - TEXT
+      - VOICE
+      - SMS
+    VoiceProvider:
+      type: string
+      enum:
+      - ELEVENLABS
+      - PLAYHT
+      - OPENAI
+    CreateNodeDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          $ref: '#/components/schemas/NodeType'
+        builderPositionX:
+          type: number
+        builderPositionY:
+          type: number
+      required:
+      - name
+      - type
+      - builderPositionX
+      - builderPositionY
+    EdgeDto:
+      type: object
+      properties:
+        id:
+          type: string
+        workflowId:
+          type: string
+        sourceNodeId:
+          type: string
+        targetNodeId:
+          type: string
+        name:
+          type: string
+        functionCondition:
+          type: string
+        sourceHandlePosition:
+          $ref: '#/components/schemas/HandlePosition'
+        targetHandlePosition:
+          $ref: '#/components/schemas/HandlePosition'
+      required:
+      - id
+      - workflowId
+      - sourceNodeId
+      - targetNodeId
+    SmsProvider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
+    NodeType:
+      type: string
+      enum:
+      - START
+      - END
+      - PROMPT
+      - ACTION
+      - CONDITION
+    UpdateWorkflowDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        projectId:
+          type: string
+        type:
+          $ref: '#/components/schemas/WorkflowType'
+        modality:
+          $ref: '#/components/schemas/WorkflowModality'
+    Model:
+      type: string
+      enum:
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
+      - CLAUDE_3_OPUS
+      - CLAUDE_3_SONNET
+      - CLAUDE_3_HAIKU
+      - CLAUDE_3_5_SONNET
+    WorkflowType:
+      type: string
+      enum:
+      - SIMPLE
+      - ADVANCED
+    SmsConfiguration:
+      type: object
+      properties:
+        initialMessage:
+          type: string
+        prompt:
+          type: string
+        resources:
+          type: string
+        provider:
+          $ref: '#/components/schemas/SmsProvider'
+        model:
+          $ref: '#/components/schemas/SmsModel'
+        temperature:
+          type: number
+        maxTokensOutput:
+          type: number
+        smsMode:
+          type: boolean
+        phoneCallbackEnabled:
+          type: boolean
+        keywords:
+          type: string
+        isRagEnabled:
+          type: boolean
+        forceRag:
+          type: boolean
+        ragTriggerTopics:
+          type: string
+        preserveRagResult:
+          type: boolean
+        functions:
+          type: array
+          items:
+            type: object
+      required:
+      - initialMessage
+      - prompt
+      - resources
+      - provider
+      - model
+      - temperature
+      - maxTokensOutput
+      - smsMode
+      - phoneCallbackEnabled
+      - keywords
+      - isRagEnabled
+      - forceRag
+      - ragTriggerTopics
+      - preserveRagResult
+      - functions
+    CreateWorkflowDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        projectId:
+          type: string
+        type:
+          $ref: '#/components/schemas/WorkflowType'
+        modality:
+          $ref: '#/components/schemas/WorkflowModality'
+      required:
+      - name
+      - projectId
+      - type
+      - modality
     VoiceConfiguration:
       type: object
       properties:
@@ -350,6 +519,39 @@ components:
       - callTransferPhoneNumber
       - callTransferCondition
       - callTransferForce
+    ChatModel:
+      type: string
+      enum:
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
+    Provider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
+      - ANTHROPIC
+    SmsModel:
+      type: string
+      enum:
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
+    ChatProvider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
     NodeDto:
       type: object
       properties:
@@ -377,41 +579,6 @@ components:
       - builderPositionX
       - builderPositionY
       - error
-    WorkflowModality:
-      type: string
-      enum:
-      - TEXT
-      - VOICE
-      - SMS
-    Model:
-      type: string
-      enum:
-      - GPT_4_O
-      - GPT_3_5_TURBO
-      - GPT_4_TURBO
-      - GPT_4_O_MINI
-      - LLAMA_3_70B
-      - LLAMA_3_8B
-      - LLAMA_3_1_405B_REASONING
-      - MIXTRAL
-      - CLAUDE_3_OPUS
-      - CLAUDE_3_SONNET
-      - CLAUDE_3_HAIKU
-      - CLAUDE_3_5_SONNET
-    NodeType:
-      type: string
-      enum:
-      - START
-      - END
-      - PROMPT
-      - ACTION
-      - CONDITION
-    VoiceProvider:
-      type: string
-      enum:
-      - ELEVENLABS
-      - PLAYHT
-      - OPENAI
     HandlePosition:
       type: string
       enum:
@@ -419,127 +586,6 @@ components:
       - RIGHT
       - TOP
       - BOTTOM
-    ChatProvider:
-      type: string
-      enum:
-      - OPENAI
-      - GROQ
-    UpdateWorkflowDto:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        projectId:
-          type: string
-        type:
-          $ref: '#/components/schemas/WorkflowType'
-        modality:
-          $ref: '#/components/schemas/WorkflowModality'
-    Provider:
-      type: string
-      enum:
-      - OPENAI
-      - GROQ
-      - ANTHROPIC
-    SmsConfiguration:
-      type: object
-      properties:
-        initialMessage:
-          type: string
-        prompt:
-          type: string
-        resources:
-          type: string
-        provider:
-          $ref: '#/components/schemas/SmsProvider'
-        model:
-          $ref: '#/components/schemas/SmsModel'
-        temperature:
-          type: number
-        maxTokensOutput:
-          type: number
-        smsMode:
-          type: boolean
-        phoneCallbackEnabled:
-          type: boolean
-        keywords:
-          type: string
-        isRagEnabled:
-          type: boolean
-        forceRag:
-          type: boolean
-        ragTriggerTopics:
-          type: string
-        preserveRagResult:
-          type: boolean
-        functions:
-          type: array
-          items:
-            type: object
-      required:
-      - initialMessage
-      - prompt
-      - resources
-      - provider
-      - model
-      - temperature
-      - maxTokensOutput
-      - smsMode
-      - phoneCallbackEnabled
-      - keywords
-      - isRagEnabled
-      - forceRag
-      - ragTriggerTopics
-      - preserveRagResult
-      - functions
-    SmsModel:
-      type: string
-      enum:
-      - GPT_4_O
-      - GPT_3_5_TURBO
-      - GPT_4_TURBO
-      - GPT_4_O_MINI
-      - LLAMA_3_70B
-      - LLAMA_3_8B
-      - LLAMA_3_1_405B_REASONING
-      - MIXTRAL
-    WorkflowType:
-      type: string
-      enum:
-      - SIMPLE
-      - ADVANCED
-    BackgroundSound:
-      type: string
-      enum:
-      - DEFAULT
-      - 'OFF'
-      - OFFICE
-    EdgeDto:
-      type: object
-      properties:
-        id:
-          type: string
-        workflowId:
-          type: string
-        sourceNodeId:
-          type: string
-        targetNodeId:
-          type: string
-        name:
-          type: string
-        functionCondition:
-          type: string
-        sourceHandlePosition:
-          $ref: '#/components/schemas/HandlePosition'
-        targetHandlePosition:
-          $ref: '#/components/schemas/HandlePosition'
-      required:
-      - id
-      - workflowId
-      - sourceNodeId
-      - targetNodeId
     NodeWithConfigDto:
       type: object
       properties:
@@ -573,22 +619,6 @@ components:
       - builderPositionY
       - error
       - config
-    SmsProvider:
-      type: string
-      enum:
-      - OPENAI
-      - GROQ
-    ChatModel:
-      type: string
-      enum:
-      - GPT_4_O
-      - GPT_3_5_TURBO
-      - GPT_4_TURBO
-      - GPT_4_O_MINI
-      - LLAMA_3_70B
-      - LLAMA_3_8B
-      - LLAMA_3_1_405B_REASONING
-      - MIXTRAL
     ChatConfiguration:
       type: object
       properties:
@@ -660,42 +690,12 @@ components:
       - name
       - type
       - modality
-    CreateNodeDto:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        type:
-          $ref: '#/components/schemas/NodeType'
-        builderPositionX:
-          type: number
-        builderPositionY:
-          type: number
-      required:
-      - name
-      - type
-      - builderPositionX
-      - builderPositionY
-    CreateWorkflowDto:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        projectId:
-          type: string
-        type:
-          $ref: '#/components/schemas/WorkflowType'
-        modality:
-          $ref: '#/components/schemas/WorkflowModality'
-      required:
-      - name
-      - projectId
-      - type
-      - modality
+    BackgroundSound:
+      type: string
+      enum:
+      - DEFAULT
+      - 'OFF'
+      - OFFICE
   securitySchemes:
     api_key:
       type: apiKey

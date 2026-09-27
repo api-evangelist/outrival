@@ -126,35 +126,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PageMetaDto:
-      type: object
-      properties:
-        page:
-          type: number
-        take:
-          type: number
-        itemCount:
-          type: number
-        pageCount:
-          type: number
-        hasPreviousPage:
-          type: boolean
-        hasNextPage:
-          type: boolean
-      required:
-      - page
-      - take
-      - itemCount
-      - pageCount
-      - hasPreviousPage
-      - hasNextPage
-    DeletedFile:
-      type: object
-      properties:
-        id:
-          type: string
-      required:
-      - id
     File:
       type: object
       properties:
@@ -181,6 +152,13 @@ components:
       - metadata
       - mimeType
       - createdAt
+    DeletedFile:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+      - id
     FileDownloadLinkDto:
       type: object
       properties:
@@ -188,16 +166,28 @@ components:
           type: string
       required:
       - url
-    FileUploadDto:
+    PageMetaDto:
       type: object
       properties:
-        file:
-          type: string
-          format: binary
-        metadata:
-          type: object
+        page:
+          type: number
+        take:
+          type: number
+        itemCount:
+          type: number
+        pageCount:
+          type: number
+        hasPreviousPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
       required:
-      - file
+      - page
+      - take
+      - itemCount
+      - pageCount
+      - hasPreviousPage
+      - hasNextPage
     PageDto:
       type: object
       properties:
@@ -210,6 +200,16 @@ components:
       required:
       - data
       - meta
+    FileUploadDto:
+      type: object
+      properties:
+        file:
+          type: string
+          format: binary
+        metadata:
+          type: object
+      required:
+      - file
   securitySchemes:
     api_key:
       type: apiKey

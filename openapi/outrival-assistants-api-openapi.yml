@@ -230,23 +230,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Assistant:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        template:
-          type: boolean
-          default: false
-        variables:
-          type: object
-      required:
-      - id
-      - name
     DeleteAssistant:
       type: object
       properties:
@@ -254,6 +237,15 @@ components:
           type: string
       required:
       - id
+    UpdateAssistantDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        variables:
+          type: object
     PageMetaDto:
       type: object
       properties:
@@ -287,15 +279,6 @@ components:
           type: object
       required:
       - name
-    UpdateAssistantDto:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        variables:
-          type: object
     PageDto:
       type: object
       properties:
@@ -308,6 +291,23 @@ components:
       required:
       - data
       - meta
+    Assistant:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        template:
+          type: boolean
+          default: false
+        variables:
+          type: object
+      required:
+      - id
+      - name
   securitySchemes:
     api_key:
       type: apiKey

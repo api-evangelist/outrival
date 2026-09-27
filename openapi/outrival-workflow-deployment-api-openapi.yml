@@ -108,15 +108,18 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    WorkflowDeploymentUpdateDto:
-      type: object
-      properties:
-        workflowId:
-          type: string
-        enabled:
-          type: boolean
-        phoneNumberId:
-          type: string
+    WorkflowDeploymentType:
+      type: string
+      enum:
+      - TEXT_IFRAME
+      - TEXT_BUBBLE
+      - VOICE_BUBBLE
+      - VOICE_IFRAME
+      - SMS
+      - PHONE_OUTBOUND
+      - PHONE_INBOUND
+      - SLACK
+      - API
     WorkflowDeploymentDto:
       type: object
       properties:
@@ -133,18 +136,15 @@ components:
       required:
       - id
       - type
-    WorkflowDeploymentType:
-      type: string
-      enum:
-      - TEXT_IFRAME
-      - TEXT_BUBBLE
-      - VOICE_BUBBLE
-      - VOICE_IFRAME
-      - SMS
-      - PHONE_OUTBOUND
-      - PHONE_INBOUND
-      - SLACK
-      - API
+    WorkflowDeploymentUpdateDto:
+      type: object
+      properties:
+        workflowId:
+          type: string
+        enabled:
+          type: boolean
+        phoneNumberId:
+          type: string
     CreateWorkflowDeploymentDto:
       type: object
       properties:

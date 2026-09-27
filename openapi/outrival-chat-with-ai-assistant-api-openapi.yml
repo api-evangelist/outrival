@@ -32,7 +32,7 @@ paths:
     - url: https://api.outrival.com
   /rest/v2/ai-chats/messages:
     post:
-      operationId: MessagesController_create
+      operationId: postRestV2AiChatsMessages
       summary: Create new message
       parameters: []
       requestBody:
@@ -49,10 +49,19 @@ paths:
       security:
       - api_key: []
       - bearer: []
+      x-operation-id-source: normalized
+      x-operation-id-original: MessagesController_create
     servers:
     - url: https://api.outrival.com
 components:
   schemas:
+    AiChatChannel:
+      type: string
+      description: Message channel (text | voice | video)
+      enum:
+      - SMS
+      - VOICE
+      - TEXT
     CreateMessageDto:
       type: object
       properties:
@@ -82,9 +91,8 @@ components:
       - TOOL
       - USER
       - SYSTEM
-    AiChatChannel:
+    AiChatChannel_2:
       type: string
-      description: Message channel (text | voice | video)
       enum:
       - SMS
       - VOICE
@@ -113,12 +121,6 @@ components:
       - TOOL
       - USER
       - SYSTEM
-    AiChatChannel_2:
-      type: string
-      enum:
-      - SMS
-      - VOICE
-      - TEXT
   securitySchemes:
     api_key:
       type: apiKey

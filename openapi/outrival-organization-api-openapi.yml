@@ -57,6 +57,13 @@ paths:
     - url: https://api.outrival.com
 components:
   schemas:
+    GenerateTokenConfig:
+      type: object
+      properties:
+        userId:
+          type: string
+        expiresIn:
+          type: string
     OrganizationTokenDTO:
       type: object
       properties:
@@ -68,13 +75,6 @@ components:
       required:
       - token
       - expiresAt
-    GenerateTokenConfig:
-      type: object
-      properties:
-        userId:
-          type: string
-        expiresIn:
-          type: string
     OrganizationDTO:
       type: object
       properties:
