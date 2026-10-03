@@ -121,13 +121,27 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    HandlePosition:
-      type: string
-      enum:
-      - LEFT
-      - RIGHT
-      - TOP
-      - BOTTOM
+    CreateEdgeDto:
+      type: object
+      properties:
+        workflowId:
+          type: string
+        sourceNodeId:
+          type: string
+        targetNodeId:
+          type: string
+        name:
+          type: string
+        functionCondition:
+          type: string
+        sourceHandlePosition:
+          $ref: '#/components/schemas/HandlePosition'
+        targetHandlePosition:
+          $ref: '#/components/schemas/HandlePosition'
+      required:
+      - workflowId
+      - sourceNodeId
+      - targetNodeId
     EdgeDto:
       type: object
       properties:
@@ -169,27 +183,13 @@ components:
           $ref: '#/components/schemas/HandlePosition'
         targetHandlePosition:
           $ref: '#/components/schemas/HandlePosition'
-    CreateEdgeDto:
-      type: object
-      properties:
-        workflowId:
-          type: string
-        sourceNodeId:
-          type: string
-        targetNodeId:
-          type: string
-        name:
-          type: string
-        functionCondition:
-          type: string
-        sourceHandlePosition:
-          $ref: '#/components/schemas/HandlePosition'
-        targetHandlePosition:
-          $ref: '#/components/schemas/HandlePosition'
-      required:
-      - workflowId
-      - sourceNodeId
-      - targetNodeId
+    HandlePosition:
+      type: string
+      enum:
+      - LEFT
+      - RIGHT
+      - TOP
+      - BOTTOM
   securitySchemes:
     api_key:
       type: apiKey

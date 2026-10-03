@@ -62,11 +62,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ThemeConfigurationUpdateDto:
-      type: object
-      properties:
-        theme:
-          type: object
     ThemeConfiguration:
       type: object
       properties:
@@ -77,6 +72,11 @@ components:
       required:
       - theme
       - workflowDeploymentId
+    ThemeConfigurationUpdateDto:
+      type: object
+      properties:
+        theme:
+          type: object
   securitySchemes:
     api_key:
       type: apiKey

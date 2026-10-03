@@ -62,12 +62,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    AssistantMode:
-      type: string
-      enum:
-      - CHAT_ONLY
-      - VOICE_ONLY
-      - VOICE_AND_CHAT
     ThemeConfiguration:
       type: object
       properties:
@@ -78,6 +72,12 @@ components:
       required:
       - theme
       - mode
+    AssistantMode:
+      type: string
+      enum:
+      - CHAT_ONLY
+      - VOICE_ONLY
+      - VOICE_AND_CHAT
     ThemeConfigurationUpdateDto:
       type: object
       properties:

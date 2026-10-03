@@ -62,21 +62,81 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Model:
+    VoiceConfigurationUpdateDto:
+      type: object
+      properties:
+        initialMessage:
+          type: string
+        prompt:
+          type: string
+        resources:
+          type: string
+        provider:
+          $ref: '#/components/schemas/Provider'
+        model:
+          $ref: '#/components/schemas/Model'
+        voiceProvider:
+          $ref: '#/components/schemas/VoiceProvider'
+        voice:
+          type: string
+          enum:
+          - burt
+          - marissa
+          - andrea
+          - sarah
+          - phillip
+          - steve
+          - joseph
+          - myra
+          - paula
+          - ryan
+          - drew
+          - paul
+          - mrb
+          - matilda
+          - mark
+          - alloy
+          - echo
+          - fable
+          - onyx
+          - nova
+          - shimmer
+          - jennifer
+          - melissa
+          - will
+          - chris
+          - matt
+          - jack
+          - ruby
+          - davis
+          - donna
+          - michael
+        temperature:
+          type: number
+        maxTokensOutput:
+          type: number
+        backgroundSound:
+          $ref: '#/components/schemas/BackgroundSound'
+        backchanneling:
+          type: boolean
+        functions:
+          type: array
+          items:
+            type: object
+        endCallFunction:
+          type: boolean
+        dialKeypadFunction:
+          type: boolean
+        endCallMessage:
+          type: string
+        endCallPhrases:
+          type: string
+    VoiceProvider:
       type: string
       enum:
-      - GPT_4_O
-      - GPT_3_5_TURBO
-      - GPT_4_TURBO
-      - GPT_4_O_MINI
-      - LLAMA_3_70B
-      - LLAMA_3_8B
-      - LLAMA_3_1_405B_REASONING
-      - MIXTRAL
-      - CLAUDE_3_OPUS
-      - CLAUDE_3_SONNET
-      - CLAUDE_3_HAIKU
-      - CLAUDE_3_5_SONNET
+      - ELEVENLABS
+      - PLAYHT
+      - OPENAI
     VoiceConfiguration:
       type: object
       properties:
@@ -175,93 +235,33 @@ components:
       - forceRag
       - ragTriggerTopics
       - preserveRagResult
-    VoiceProvider:
-      type: string
-      enum:
-      - ELEVENLABS
-      - PLAYHT
-      - OPENAI
-    VoiceConfigurationUpdateDto:
-      type: object
-      properties:
-        initialMessage:
-          type: string
-        prompt:
-          type: string
-        resources:
-          type: string
-        provider:
-          $ref: '#/components/schemas/Provider'
-        model:
-          $ref: '#/components/schemas/Model'
-        voiceProvider:
-          $ref: '#/components/schemas/VoiceProvider'
-        voice:
-          type: string
-          enum:
-          - burt
-          - marissa
-          - andrea
-          - sarah
-          - phillip
-          - steve
-          - joseph
-          - myra
-          - paula
-          - ryan
-          - drew
-          - paul
-          - mrb
-          - matilda
-          - mark
-          - alloy
-          - echo
-          - fable
-          - onyx
-          - nova
-          - shimmer
-          - jennifer
-          - melissa
-          - will
-          - chris
-          - matt
-          - jack
-          - ruby
-          - davis
-          - donna
-          - michael
-        temperature:
-          type: number
-        maxTokensOutput:
-          type: number
-        backgroundSound:
-          $ref: '#/components/schemas/BackgroundSound'
-        backchanneling:
-          type: boolean
-        functions:
-          type: array
-          items:
-            type: object
-        endCallFunction:
-          type: boolean
-        dialKeypadFunction:
-          type: boolean
-        endCallMessage:
-          type: string
-        endCallPhrases:
-          type: string
-    Provider:
-      type: string
-      enum:
-      - OPENAI
-      - GROQ
-      - ANTHROPIC
     BackgroundSound:
       type: string
       enum:
       - DEFAULT
       - 'OFF'
       - OFFICE
+    Provider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
+      - ANTHROPIC
+    Model:
+      type: string
+      enum:
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
+      - CLAUDE_3_OPUS
+      - CLAUDE_3_SONNET
+      - CLAUDE_3_HAIKU
+      - CLAUDE_3_5_SONNET
   securitySchemes:
     api_key:
       type: apiKey

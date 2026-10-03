@@ -112,18 +112,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    WebhooksServiceConfigCreate:
-      type: object
-      properties:
-        url:
-          type: string
-        secret:
-          type: string
-        name:
-          type: string
-      required:
-      - url
-      - secret
     WebhooksServiceConfigUpdate:
       type: object
       properties:
@@ -159,6 +147,18 @@ components:
       - secret
       - createdAt
       - updatedAt
+    WebhooksServiceConfigCreate:
+      type: object
+      properties:
+        url:
+          type: string
+        secret:
+          type: string
+        name:
+          type: string
+      required:
+      - url
+      - secret
   securitySchemes:
     api_key:
       type: apiKey

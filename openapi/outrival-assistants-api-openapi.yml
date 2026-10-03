@@ -230,13 +230,29 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    DeleteAssistant:
+    PageDto:
       type: object
       properties:
-        id:
-          type: string
+        data:
+          type: array
+          items:
+            type: array
+        meta:
+          $ref: '#/components/schemas/PageMetaDto'
       required:
-      - id
+      - data
+      - meta
+    CreateAssistantDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        variables:
+          type: object
+      required:
+      - name
     UpdateAssistantDto:
       type: object
       properties:
@@ -246,6 +262,30 @@ components:
           type: string
         variables:
           type: object
+    DeleteAssistant:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+      - id
+    Assistant:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        template:
+          type: boolean
+          default: false
+        variables:
+          type: object
+      required:
+      - id
+      - name
     PageMetaDto:
       type: object
       properties:
@@ -268,46 +308,6 @@ components:
       - pageCount
       - hasPreviousPage
       - hasNextPage
-    CreateAssistantDto:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        variables:
-          type: object
-      required:
-      - name
-    PageDto:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: array
-        meta:
-          $ref: '#/components/schemas/PageMetaDto'
-      required:
-      - data
-      - meta
-    Assistant:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        template:
-          type: boolean
-          default: false
-        variables:
-          type: object
-      required:
-      - id
-      - name
   securitySchemes:
     api_key:
       type: apiKey

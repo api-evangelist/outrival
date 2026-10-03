@@ -126,46 +126,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    File:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        organizationId:
-          type: string
-        size:
-          type: number
-        metadata:
-          type: object
-        mimeType:
-          type: string
-        createdAt:
-          format: date-time
-          type: string
-      required:
-      - id
-      - name
-      - organizationId
-      - size
-      - metadata
-      - mimeType
-      - createdAt
-    DeletedFile:
-      type: object
-      properties:
-        id:
-          type: string
-      required:
-      - id
-    FileDownloadLinkDto:
-      type: object
-      properties:
-        url:
-          type: string
-      required:
-      - url
     PageMetaDto:
       type: object
       properties:
@@ -210,6 +170,46 @@ components:
           type: object
       required:
       - file
+    File:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        organizationId:
+          type: string
+        size:
+          type: number
+        metadata:
+          type: object
+        mimeType:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+      required:
+      - id
+      - name
+      - organizationId
+      - size
+      - metadata
+      - mimeType
+      - createdAt
+    DeletedFile:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+      - id
+    FileDownloadLinkDto:
+      type: object
+      properties:
+        url:
+          type: string
+      required:
+      - url
   securitySchemes:
     api_key:
       type: apiKey
