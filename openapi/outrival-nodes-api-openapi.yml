@@ -182,41 +182,45 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SmsProvider:
+    Provider:
       type: string
       enum:
       - OPENAI
       - GROQ
-    PageMetaDto:
+      - ANTHROPIC
+    NodeWithConfigDto:
       type: object
       properties:
-        page:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        workflowId:
+          type: string
+        type:
+          $ref: '#/components/schemas/NodeType'
+        builderPositionX:
           type: number
-        take:
+        builderPositionY:
           type: number
-        itemCount:
-          type: number
-        pageCount:
-          type: number
-        hasPreviousPage:
-          type: boolean
-        hasNextPage:
-          type: boolean
+        error:
+          type: string
+        config:
+          oneOf:
+          - $ref: '#/components/schemas/ChatConfiguration'
+          - $ref: '#/components/schemas/SmsConfiguration'
+          - $ref: '#/components/schemas/VoiceConfiguration'
       required:
-      - page
-      - take
-      - itemCount
-      - pageCount
-      - hasPreviousPage
-      - hasNextPage
-    NodeType:
-      type: string
-      enum:
-      - START
-      - END
-      - PROMPT
-      - ACTION
-      - CONDITION
+      - id
+      - name
+      - workflowId
+      - type
+      - builderPositionX
+      - builderPositionY
+      - error
+      - config
     SmsModel:
       type: string
       enum:
@@ -228,6 +232,13 @@ components:
       - LLAMA_3_8B
       - LLAMA_3_1_405B_REASONING
       - MIXTRAL
+    DeleteNodeDto:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+      - id
     VoiceConfiguration:
       type: object
       properties:
@@ -338,12 +349,11 @@ components:
       - callTransferPhoneNumber
       - callTransferCondition
       - callTransferForce
-    VoiceProvider:
+    SmsProvider:
       type: string
       enum:
-      - ELEVENLABS
-      - PLAYHT
       - OPENAI
+      - GROQ
     PageDto:
       type: object
       properties:
@@ -356,6 +366,21 @@ components:
       required:
       - data
       - meta
+    Model:
+      type: string
+      enum:
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
+      - CLAUDE_3_OPUS
+      - CLAUDE_3_SONNET
+      - CLAUDE_3_HAIKU
+      - CLAUDE_3_5_SONNET
     ChatConfiguration:
       type: object
       properties:
@@ -404,118 +429,6 @@ components:
       - ragTriggerTopics
       - preserveRagResult
       - functions
-    BackgroundSound:
-      type: string
-      enum:
-      - DEFAULT
-      - 'OFF'
-      - OFFICE
-    DeleteNodeDto:
-      type: object
-      properties:
-        id:
-          type: string
-      required:
-      - id
-    NodeWithConfigDto:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        workflowId:
-          type: string
-        type:
-          $ref: '#/components/schemas/NodeType'
-        builderPositionX:
-          type: number
-        builderPositionY:
-          type: number
-        error:
-          type: string
-        config:
-          oneOf:
-          - $ref: '#/components/schemas/ChatConfiguration'
-          - $ref: '#/components/schemas/SmsConfiguration'
-          - $ref: '#/components/schemas/VoiceConfiguration'
-      required:
-      - id
-      - name
-      - workflowId
-      - type
-      - builderPositionX
-      - builderPositionY
-      - error
-      - config
-    Provider:
-      type: string
-      enum:
-      - OPENAI
-      - GROQ
-      - ANTHROPIC
-    NodeDto:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        workflowId:
-          type: string
-        type:
-          $ref: '#/components/schemas/NodeType'
-        builderPositionX:
-          type: number
-        builderPositionY:
-          type: number
-        error:
-          type: string
-      required:
-      - id
-      - name
-      - workflowId
-      - type
-      - builderPositionX
-      - builderPositionY
-      - error
-    ChatProvider:
-      type: string
-      enum:
-      - OPENAI
-      - GROQ
-    Model:
-      type: string
-      enum:
-      - GPT_4_O
-      - GPT_3_5_TURBO
-      - GPT_4_TURBO
-      - GPT_4_O_MINI
-      - LLAMA_3_70B
-      - LLAMA_3_8B
-      - LLAMA_3_1_405B_REASONING
-      - MIXTRAL
-      - CLAUDE_3_OPUS
-      - CLAUDE_3_SONNET
-      - CLAUDE_3_HAIKU
-      - CLAUDE_3_5_SONNET
-    UpdateNodeDto:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        type:
-          $ref: '#/components/schemas/NodeType'
-        builderPositionX:
-          type: number
-        builderPositionY:
-          type: number
     SmsConfiguration:
       type: object
       properties:
@@ -578,6 +491,93 @@ components:
       - LLAMA_3_8B
       - LLAMA_3_1_405B_REASONING
       - MIXTRAL
+    PageMetaDto:
+      type: object
+      properties:
+        page:
+          type: number
+        take:
+          type: number
+        itemCount:
+          type: number
+        pageCount:
+          type: number
+        hasPreviousPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+      required:
+      - page
+      - take
+      - itemCount
+      - pageCount
+      - hasPreviousPage
+      - hasNextPage
+    BackgroundSound:
+      type: string
+      enum:
+      - DEFAULT
+      - 'OFF'
+      - OFFICE
+    ChatProvider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
+    NodeType:
+      type: string
+      enum:
+      - START
+      - END
+      - PROMPT
+      - ACTION
+      - CONDITION
+    NodeDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        workflowId:
+          type: string
+        type:
+          $ref: '#/components/schemas/NodeType'
+        builderPositionX:
+          type: number
+        builderPositionY:
+          type: number
+        error:
+          type: string
+      required:
+      - id
+      - name
+      - workflowId
+      - type
+      - builderPositionX
+      - builderPositionY
+      - error
+    UpdateNodeDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          $ref: '#/components/schemas/NodeType'
+        builderPositionX:
+          type: number
+        builderPositionY:
+          type: number
+    VoiceProvider:
+      type: string
+      enum:
+      - ELEVENLABS
+      - PLAYHT
+      - OPENAI
   securitySchemes:
     api_key:
       type: apiKey

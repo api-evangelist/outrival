@@ -108,6 +108,15 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    WorkflowDeploymentUpdateDto:
+      type: object
+      properties:
+        workflowId:
+          type: string
+        enabled:
+          type: boolean
+        phoneNumberId:
+          type: string
     WorkflowDeploymentType:
       type: string
       enum:
@@ -120,28 +129,6 @@ components:
       - PHONE_INBOUND
       - SLACK
       - API
-    CreateWorkflowDeploymentDto:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/WorkflowDeploymentType'
-        projectId:
-          type: string
-        enabled:
-          type: boolean
-      required:
-      - type
-      - projectId
-      - enabled
-    WorkflowDeploymentUpdateDto:
-      type: object
-      properties:
-        workflowId:
-          type: string
-        enabled:
-          type: boolean
-        phoneNumberId:
-          type: string
     WorkflowDeploymentDto:
       type: object
       properties:
@@ -158,6 +145,19 @@ components:
       required:
       - id
       - type
+    CreateWorkflowDeploymentDto:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/WorkflowDeploymentType'
+        projectId:
+          type: string
+        enabled:
+          type: boolean
+      required:
+      - type
+      - projectId
+      - enabled
   securitySchemes:
     api_key:
       type: apiKey

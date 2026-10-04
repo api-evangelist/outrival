@@ -62,81 +62,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    VoiceConfigurationUpdateDto:
-      type: object
-      properties:
-        initialMessage:
-          type: string
-        prompt:
-          type: string
-        resources:
-          type: string
-        provider:
-          $ref: '#/components/schemas/Provider'
-        model:
-          $ref: '#/components/schemas/Model'
-        voiceProvider:
-          $ref: '#/components/schemas/VoiceProvider'
-        voice:
-          type: string
-          enum:
-          - burt
-          - marissa
-          - andrea
-          - sarah
-          - phillip
-          - steve
-          - joseph
-          - myra
-          - paula
-          - ryan
-          - drew
-          - paul
-          - mrb
-          - matilda
-          - mark
-          - alloy
-          - echo
-          - fable
-          - onyx
-          - nova
-          - shimmer
-          - jennifer
-          - melissa
-          - will
-          - chris
-          - matt
-          - jack
-          - ruby
-          - davis
-          - donna
-          - michael
-        temperature:
-          type: number
-        maxTokensOutput:
-          type: number
-        backgroundSound:
-          $ref: '#/components/schemas/BackgroundSound'
-        backchanneling:
-          type: boolean
-        functions:
-          type: array
-          items:
-            type: object
-        endCallFunction:
-          type: boolean
-        dialKeypadFunction:
-          type: boolean
-        endCallMessage:
-          type: string
-        endCallPhrases:
-          type: string
-    VoiceProvider:
+    Provider:
       type: string
       enum:
-      - ELEVENLABS
-      - PLAYHT
       - OPENAI
+      - GROQ
+      - ANTHROPIC
     VoiceConfiguration:
       type: object
       properties:
@@ -241,12 +172,6 @@ components:
       - DEFAULT
       - 'OFF'
       - OFFICE
-    Provider:
-      type: string
-      enum:
-      - OPENAI
-      - GROQ
-      - ANTHROPIC
     Model:
       type: string
       enum:
@@ -262,6 +187,81 @@ components:
       - CLAUDE_3_SONNET
       - CLAUDE_3_HAIKU
       - CLAUDE_3_5_SONNET
+    VoiceConfigurationUpdateDto:
+      type: object
+      properties:
+        initialMessage:
+          type: string
+        prompt:
+          type: string
+        resources:
+          type: string
+        provider:
+          $ref: '#/components/schemas/Provider'
+        model:
+          $ref: '#/components/schemas/Model'
+        voiceProvider:
+          $ref: '#/components/schemas/VoiceProvider'
+        voice:
+          type: string
+          enum:
+          - burt
+          - marissa
+          - andrea
+          - sarah
+          - phillip
+          - steve
+          - joseph
+          - myra
+          - paula
+          - ryan
+          - drew
+          - paul
+          - mrb
+          - matilda
+          - mark
+          - alloy
+          - echo
+          - fable
+          - onyx
+          - nova
+          - shimmer
+          - jennifer
+          - melissa
+          - will
+          - chris
+          - matt
+          - jack
+          - ruby
+          - davis
+          - donna
+          - michael
+        temperature:
+          type: number
+        maxTokensOutput:
+          type: number
+        backgroundSound:
+          $ref: '#/components/schemas/BackgroundSound'
+        backchanneling:
+          type: boolean
+        functions:
+          type: array
+          items:
+            type: object
+        endCallFunction:
+          type: boolean
+        dialKeypadFunction:
+          type: boolean
+        endCallMessage:
+          type: string
+        endCallPhrases:
+          type: string
+    VoiceProvider:
+      type: string
+      enum:
+      - ELEVENLABS
+      - PLAYHT
+      - OPENAI
   securitySchemes:
     api_key:
       type: apiKey

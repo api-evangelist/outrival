@@ -151,6 +151,28 @@ paths:
     - url: https://api.outrival.com
 components:
   schemas:
+    OrganizationKey:
+      type: object
+      properties:
+        id:
+          type: string
+        value:
+          type: string
+        type:
+          type: string
+          enum:
+          - SECRET
+          - PUBLIC
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+      required:
+      - id
+      - value
+      - type
+      - status
     UpdateOrganizationKeyDTO:
       type: object
       properties:
@@ -181,28 +203,6 @@ components:
           enum:
           - ACTIVE
           - INACTIVE
-    OrganizationKey:
-      type: object
-      properties:
-        id:
-          type: string
-        value:
-          type: string
-        type:
-          type: string
-          enum:
-          - SECRET
-          - PUBLIC
-        status:
-          type: string
-          enum:
-          - ACTIVE
-          - INACTIVE
-      required:
-      - id
-      - value
-      - type
-      - status
   securitySchemes:
     api_key:
       type: apiKey

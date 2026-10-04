@@ -67,33 +67,17 @@ components:
       enum:
       - OPENAI
       - GROQ
-    SmsConfigurationUpdateDto:
-      type: object
-      properties:
-        initialMessage:
-          type: string
-        prompt:
-          type: string
-        resources:
-          type: string
-        provider:
-          $ref: '#/components/schemas/SmsProvider'
-        model:
-          $ref: '#/components/schemas/SmsModel'
-        temperature:
-          type: number
-        maxTokensOutput:
-          type: number
-        smsMode:
-          type: boolean
-        voiceCallMode:
-          type: boolean
-        keywords:
-          type: string
-        functions:
-          type: array
-          items:
-            type: object
+    SmsModel:
+      type: string
+      enum:
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
     SmsConfiguration:
       type: object
       properties:
@@ -145,17 +129,33 @@ components:
       - ragTriggerTopics
       - preserveRagResult
       - functions
-    SmsModel:
-      type: string
-      enum:
-      - GPT_4_O
-      - GPT_3_5_TURBO
-      - GPT_4_TURBO
-      - GPT_4_O_MINI
-      - LLAMA_3_70B
-      - LLAMA_3_8B
-      - LLAMA_3_1_405B_REASONING
-      - MIXTRAL
+    SmsConfigurationUpdateDto:
+      type: object
+      properties:
+        initialMessage:
+          type: string
+        prompt:
+          type: string
+        resources:
+          type: string
+        provider:
+          $ref: '#/components/schemas/SmsProvider'
+        model:
+          $ref: '#/components/schemas/SmsModel'
+        temperature:
+          type: number
+        maxTokensOutput:
+          type: number
+        smsMode:
+          type: boolean
+        voiceCallMode:
+          type: boolean
+        keywords:
+          type: string
+        functions:
+          type: array
+          items:
+            type: object
   securitySchemes:
     api_key:
       type: apiKey

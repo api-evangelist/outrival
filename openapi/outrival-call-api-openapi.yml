@@ -86,13 +86,6 @@ paths:
     - url: https://api.outrival.com
 components:
   schemas:
-    PhoneCallConfiguration:
-      type: object
-      properties:
-        id:
-          type: string
-      required:
-      - id
     CreatePhoneCallConfiguration:
       type: object
       properties:
@@ -117,16 +110,13 @@ components:
       - assistantId
       - phoneNumber
       - metadata
-    PhoneCallConfigurationNumberDto:
+    PhoneCallConfiguration:
       type: object
       properties:
         id:
           type: string
-        number:
-          type: string
       required:
       - id
-      - number
     CreatePhoneCallConfiguration_2:
       type: object
       properties:
@@ -152,6 +142,16 @@ components:
       required:
       - phoneNumber
       - metadata
+    PhoneCallConfigurationNumberDto:
+      type: object
+      properties:
+        id:
+          type: string
+        number:
+          type: string
+      required:
+      - id
+      - number
   securitySchemes:
     api_key:
       type: apiKey

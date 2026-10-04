@@ -207,28 +207,36 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PageMetaDto:
+    WorkflowModality:
+      type: string
+      enum:
+      - TEXT
+      - VOICE
+      - SMS
+    WorkflowDeploymentType:
+      type: string
+      enum:
+      - TEXT_IFRAME
+      - TEXT_BUBBLE
+      - VOICE_BUBBLE
+      - VOICE_IFRAME
+      - SMS
+      - PHONE_OUTBOUND
+      - PHONE_INBOUND
+      - SLACK
+      - API
+    PageDto:
       type: object
       properties:
-        page:
-          type: number
-        take:
-          type: number
-        itemCount:
-          type: number
-        pageCount:
-          type: number
-        hasPreviousPage:
-          type: boolean
-        hasNextPage:
-          type: boolean
+        data:
+          type: array
+          items:
+            type: array
+        meta:
+          $ref: '#/components/schemas/PageMetaDto'
       required:
-      - page
-      - take
-      - itemCount
-      - pageCount
-      - hasPreviousPage
-      - hasNextPage
+      - data
+      - meta
     WorkflowDeploymentDto:
       type: object
       properties:
@@ -245,39 +253,6 @@ components:
       required:
       - id
       - type
-    PageDto:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: array
-        meta:
-          $ref: '#/components/schemas/PageMetaDto'
-      required:
-      - data
-      - meta
-    CreateProjectDto:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-      required:
-      - name
-    WorkflowDeploymentType:
-      type: string
-      enum:
-      - TEXT_IFRAME
-      - TEXT_BUBBLE
-      - VOICE_BUBBLE
-      - VOICE_IFRAME
-      - SMS
-      - PHONE_OUTBOUND
-      - PHONE_INBOUND
-      - SLACK
-      - API
     WorkflowDto:
       type: object
       properties:
@@ -301,17 +276,49 @@ components:
       - name
       - type
       - modality
-    WorkflowModality:
-      type: string
-      enum:
-      - TEXT
-      - VOICE
-      - SMS
+    PageMetaDto:
+      type: object
+      properties:
+        page:
+          type: number
+        take:
+          type: number
+        itemCount:
+          type: number
+        pageCount:
+          type: number
+        hasPreviousPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+      required:
+      - page
+      - take
+      - itemCount
+      - pageCount
+      - hasPreviousPage
+      - hasNextPage
     WorkflowType:
       type: string
       enum:
       - SIMPLE
       - ADVANCED
+    UpdateProjectDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+    CreateProjectDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+      required:
+      - name
     ProjectDto:
       type: object
       properties:
@@ -327,13 +334,6 @@ components:
       required:
       - id
       - name
-    UpdateProjectDto:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
   securitySchemes:
     api_key:
       type: apiKey

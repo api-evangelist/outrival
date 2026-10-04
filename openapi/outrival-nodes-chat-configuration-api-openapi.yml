@@ -62,11 +62,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ChatProvider:
-      type: string
-      enum:
-      - OPENAI
-      - GROQ
     ChatConfigurationUpdateDto:
       type: object
       properties:
@@ -92,17 +87,11 @@ components:
           type: array
           items:
             type: object
-    ChatModel:
+    ChatProvider:
       type: string
       enum:
-      - GPT_4_O
-      - GPT_3_5_TURBO
-      - GPT_4_TURBO
-      - GPT_4_O_MINI
-      - LLAMA_3_70B
-      - LLAMA_3_8B
-      - LLAMA_3_1_405B_REASONING
-      - MIXTRAL
+      - OPENAI
+      - GROQ
     ChatConfiguration:
       type: object
       properties:
@@ -151,6 +140,17 @@ components:
       - ragTriggerTopics
       - preserveRagResult
       - functions
+    ChatModel:
+      type: string
+      enum:
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
   securitySchemes:
     api_key:
       type: apiKey

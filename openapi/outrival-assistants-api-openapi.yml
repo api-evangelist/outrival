@@ -242,6 +242,13 @@ components:
       required:
       - data
       - meta
+    DeleteAssistant:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+      - id
     CreateAssistantDto:
       type: object
       properties:
@@ -252,39 +259,6 @@ components:
         variables:
           type: object
       required:
-      - name
-    UpdateAssistantDto:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        variables:
-          type: object
-    DeleteAssistant:
-      type: object
-      properties:
-        id:
-          type: string
-      required:
-      - id
-    Assistant:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        template:
-          type: boolean
-          default: false
-        variables:
-          type: object
-      required:
-      - id
       - name
     PageMetaDto:
       type: object
@@ -308,6 +282,32 @@ components:
       - pageCount
       - hasPreviousPage
       - hasNextPage
+    Assistant:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        template:
+          type: boolean
+          default: false
+        variables:
+          type: object
+      required:
+      - id
+      - name
+    UpdateAssistantDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        variables:
+          type: object
   securitySchemes:
     api_key:
       type: apiKey
