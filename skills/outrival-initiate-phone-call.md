@@ -2,7 +2,7 @@
 name: Initiate an outbound phone call
 description: Place an outbound phone call with a companion and retrieve the conversation logs.
 api: openapi/outrival-v1-openapi-original.json
-operations: [VapiController_phoneCallInitiate, AssistantLogsController_logs, AssistantLogsController_log]
+operations: [postRestV2CallPhone, AssistantLogsController_logs, AssistantLogsController_log]
 ---
 
 # Initiate an outbound phone call
