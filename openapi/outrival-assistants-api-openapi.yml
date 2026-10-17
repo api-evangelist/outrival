@@ -230,58 +230,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PageDto:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: array
-        meta:
-          $ref: '#/components/schemas/PageMetaDto'
-      required:
-      - data
-      - meta
-    DeleteAssistant:
-      type: object
-      properties:
-        id:
-          type: string
-      required:
-      - id
-    CreateAssistantDto:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        variables:
-          type: object
-      required:
-      - name
-    PageMetaDto:
-      type: object
-      properties:
-        page:
-          type: number
-        take:
-          type: number
-        itemCount:
-          type: number
-        pageCount:
-          type: number
-        hasPreviousPage:
-          type: boolean
-        hasNextPage:
-          type: boolean
-      required:
-      - page
-      - take
-      - itemCount
-      - pageCount
-      - hasPreviousPage
-      - hasNextPage
     Assistant:
       type: object
       properties:
@@ -308,6 +256,58 @@ components:
           type: string
         variables:
           type: object
+    PageMetaDto:
+      type: object
+      properties:
+        page:
+          type: number
+        take:
+          type: number
+        itemCount:
+          type: number
+        pageCount:
+          type: number
+        hasPreviousPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+      required:
+      - page
+      - take
+      - itemCount
+      - pageCount
+      - hasPreviousPage
+      - hasNextPage
+    DeleteAssistant:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+      - id
+    PageDto:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: array
+        meta:
+          $ref: '#/components/schemas/PageMetaDto'
+      required:
+      - data
+      - meta
+    CreateAssistantDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        variables:
+          type: object
+      required:
+      - name
   securitySchemes:
     api_key:
       type: apiKey

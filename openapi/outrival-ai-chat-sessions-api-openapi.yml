@@ -229,100 +229,6 @@ components:
       required:
       - hasMore
       - data
-    AiChatLogsType:
-      type: string
-      enum:
-      - SESSION_START
-      - SESSION_END
-      - SEND_MESSAGE
-      - RECEIVE_MESSAGE
-      - FUNCTION_CALL
-      - FUNCTION_RESPONSE
-      - CHANGE_WORKFLOW
-      - CHANGE_NODE_WORKFLOW
-      - CALL_RECORDING
-      - ERROR
-    AiChatChannel:
-      type: string
-      enum:
-      - SMS
-      - VOICE
-      - TEXT
-    Message:
-      type: object
-      properties:
-        id:
-          type: string
-        seqId:
-          type: number
-        role:
-          $ref: '#/components/schemas/AiChatMessageRole'
-        channel:
-          $ref: '#/components/schemas/AiChatChannel'
-        content:
-          type:
-          - string
-          - 'null'
-        toolCallId:
-          type:
-          - string
-          - 'null'
-        toolCalls:
-          type:
-          - object
-          - 'null'
-        createdAt:
-          format: date-time
-          type: string
-      required:
-      - id
-      - seqId
-      - role
-      - channel
-      - content
-      - toolCallId
-      - toolCalls
-      - createdAt
-    Log:
-      type: object
-      properties:
-        id:
-          type: string
-        type:
-          $ref: '#/components/schemas/AiChatLogsType'
-        createdAt:
-          format: date-time
-          type: string
-        sessionId:
-          type: string
-        aiChatId:
-          type: string
-        workflowId:
-          type: string
-        workflowNodeId:
-          type: string
-        messageId:
-          type:
-          - string
-          - 'null'
-        message:
-          allOf:
-          - $ref: '#/components/schemas/Message'
-        aiUserId:
-          type:
-          - string
-          - 'null'
-      required:
-      - id
-      - type
-      - createdAt
-      - sessionId
-      - aiChatId
-      - workflowId
-      - workflowNodeId
-      - messageId
-      - message
-      - aiUserId
     Session:
       type: object
       properties:
@@ -363,6 +269,100 @@ components:
       - TOOL
       - USER
       - SYSTEM
+    AiChatChannel:
+      type: string
+      enum:
+      - SMS
+      - VOICE
+      - TEXT
+    Log:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/AiChatLogsType'
+        createdAt:
+          format: date-time
+          type: string
+        sessionId:
+          type: string
+        aiChatId:
+          type: string
+        workflowId:
+          type: string
+        workflowNodeId:
+          type: string
+        messageId:
+          type:
+          - string
+          - 'null'
+        message:
+          allOf:
+          - $ref: '#/components/schemas/Message'
+        aiUserId:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - type
+      - createdAt
+      - sessionId
+      - aiChatId
+      - workflowId
+      - workflowNodeId
+      - messageId
+      - message
+      - aiUserId
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+        seqId:
+          type: number
+        role:
+          $ref: '#/components/schemas/AiChatMessageRole'
+        channel:
+          $ref: '#/components/schemas/AiChatChannel'
+        content:
+          type:
+          - string
+          - 'null'
+        toolCallId:
+          type:
+          - string
+          - 'null'
+        toolCalls:
+          type:
+          - object
+          - 'null'
+        createdAt:
+          format: date-time
+          type: string
+      required:
+      - id
+      - seqId
+      - role
+      - channel
+      - content
+      - toolCallId
+      - toolCalls
+      - createdAt
+    AiChatLogsType:
+      type: string
+      enum:
+      - SESSION_START
+      - SESSION_END
+      - SEND_MESSAGE
+      - RECEIVE_MESSAGE
+      - FUNCTION_CALL
+      - FUNCTION_RESPONSE
+      - CHANGE_WORKFLOW
+      - CHANGE_NODE_WORKFLOW
+      - CALL_RECORDING
+      - ERROR
   securitySchemes:
     api_key:
       type: apiKey

@@ -87,11 +87,6 @@ components:
           type: array
           items:
             type: object
-    ChatProvider:
-      type: string
-      enum:
-      - OPENAI
-      - GROQ
     ChatConfiguration:
       type: object
       properties:
@@ -140,6 +135,11 @@ components:
       - ragTriggerTopics
       - preserveRagResult
       - functions
+    ChatProvider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
     ChatModel:
       type: string
       enum:

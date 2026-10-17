@@ -182,12 +182,171 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Provider:
+    ChatModel:
+      type: string
+      enum:
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
+    NodeDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        workflowId:
+          type: string
+        type:
+          $ref: '#/components/schemas/NodeType'
+        builderPositionX:
+          type: number
+        builderPositionY:
+          type: number
+        error:
+          type: string
+      required:
+      - id
+      - name
+      - workflowId
+      - type
+      - builderPositionX
+      - builderPositionY
+      - error
+    PageDto:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: array
+        meta:
+          $ref: '#/components/schemas/PageMetaDto'
+      required:
+      - data
+      - meta
+    PageMetaDto:
+      type: object
+      properties:
+        page:
+          type: number
+        take:
+          type: number
+        itemCount:
+          type: number
+        pageCount:
+          type: number
+        hasPreviousPage:
+          type: boolean
+        hasNextPage:
+          type: boolean
+      required:
+      - page
+      - take
+      - itemCount
+      - pageCount
+      - hasPreviousPage
+      - hasNextPage
+    DeleteNodeDto:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+      - id
+    SmsProvider:
       type: string
       enum:
       - OPENAI
       - GROQ
-      - ANTHROPIC
+    ChatProvider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
+    SmsConfiguration:
+      type: object
+      properties:
+        initialMessage:
+          type: string
+        prompt:
+          type: string
+        resources:
+          type: string
+        provider:
+          $ref: '#/components/schemas/SmsProvider'
+        model:
+          $ref: '#/components/schemas/SmsModel'
+        temperature:
+          type: number
+        maxTokensOutput:
+          type: number
+        smsMode:
+          type: boolean
+        phoneCallbackEnabled:
+          type: boolean
+        keywords:
+          type: string
+        isRagEnabled:
+          type: boolean
+        forceRag:
+          type: boolean
+        ragTriggerTopics:
+          type: string
+        preserveRagResult:
+          type: boolean
+        functions:
+          type: array
+          items:
+            type: object
+      required:
+      - initialMessage
+      - prompt
+      - resources
+      - provider
+      - model
+      - temperature
+      - maxTokensOutput
+      - smsMode
+      - phoneCallbackEnabled
+      - keywords
+      - isRagEnabled
+      - forceRag
+      - ragTriggerTopics
+      - preserveRagResult
+      - functions
+    VoiceProvider:
+      type: string
+      enum:
+      - ELEVENLABS
+      - PLAYHT
+      - OPENAI
+    BackgroundSound:
+      type: string
+      enum:
+      - DEFAULT
+      - 'OFF'
+      - OFFICE
+    UpdateNodeDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          $ref: '#/components/schemas/NodeType'
+        builderPositionX:
+          type: number
+        builderPositionY:
+          type: number
     NodeWithConfigDto:
       type: object
       properties:
@@ -221,6 +380,21 @@ components:
       - builderPositionY
       - error
       - config
+    Model:
+      type: string
+      enum:
+      - GPT_4_O
+      - GPT_3_5_TURBO
+      - GPT_4_TURBO
+      - GPT_4_O_MINI
+      - LLAMA_3_70B
+      - LLAMA_3_8B
+      - LLAMA_3_1_405B_REASONING
+      - MIXTRAL
+      - CLAUDE_3_OPUS
+      - CLAUDE_3_SONNET
+      - CLAUDE_3_HAIKU
+      - CLAUDE_3_5_SONNET
     SmsModel:
       type: string
       enum:
@@ -232,13 +406,12 @@ components:
       - LLAMA_3_8B
       - LLAMA_3_1_405B_REASONING
       - MIXTRAL
-    DeleteNodeDto:
-      type: object
-      properties:
-        id:
-          type: string
-      required:
-      - id
+    Provider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
+      - ANTHROPIC
     VoiceConfiguration:
       type: object
       properties:
@@ -349,38 +522,6 @@ components:
       - callTransferPhoneNumber
       - callTransferCondition
       - callTransferForce
-    SmsProvider:
-      type: string
-      enum:
-      - OPENAI
-      - GROQ
-    PageDto:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: array
-        meta:
-          $ref: '#/components/schemas/PageMetaDto'
-      required:
-      - data
-      - meta
-    Model:
-      type: string
-      enum:
-      - GPT_4_O
-      - GPT_3_5_TURBO
-      - GPT_4_TURBO
-      - GPT_4_O_MINI
-      - LLAMA_3_70B
-      - LLAMA_3_8B
-      - LLAMA_3_1_405B_REASONING
-      - MIXTRAL
-      - CLAUDE_3_OPUS
-      - CLAUDE_3_SONNET
-      - CLAUDE_3_HAIKU
-      - CLAUDE_3_5_SONNET
     ChatConfiguration:
       type: object
       properties:
@@ -429,101 +570,6 @@ components:
       - ragTriggerTopics
       - preserveRagResult
       - functions
-    SmsConfiguration:
-      type: object
-      properties:
-        initialMessage:
-          type: string
-        prompt:
-          type: string
-        resources:
-          type: string
-        provider:
-          $ref: '#/components/schemas/SmsProvider'
-        model:
-          $ref: '#/components/schemas/SmsModel'
-        temperature:
-          type: number
-        maxTokensOutput:
-          type: number
-        smsMode:
-          type: boolean
-        phoneCallbackEnabled:
-          type: boolean
-        keywords:
-          type: string
-        isRagEnabled:
-          type: boolean
-        forceRag:
-          type: boolean
-        ragTriggerTopics:
-          type: string
-        preserveRagResult:
-          type: boolean
-        functions:
-          type: array
-          items:
-            type: object
-      required:
-      - initialMessage
-      - prompt
-      - resources
-      - provider
-      - model
-      - temperature
-      - maxTokensOutput
-      - smsMode
-      - phoneCallbackEnabled
-      - keywords
-      - isRagEnabled
-      - forceRag
-      - ragTriggerTopics
-      - preserveRagResult
-      - functions
-    ChatModel:
-      type: string
-      enum:
-      - GPT_4_O
-      - GPT_3_5_TURBO
-      - GPT_4_TURBO
-      - GPT_4_O_MINI
-      - LLAMA_3_70B
-      - LLAMA_3_8B
-      - LLAMA_3_1_405B_REASONING
-      - MIXTRAL
-    PageMetaDto:
-      type: object
-      properties:
-        page:
-          type: number
-        take:
-          type: number
-        itemCount:
-          type: number
-        pageCount:
-          type: number
-        hasPreviousPage:
-          type: boolean
-        hasNextPage:
-          type: boolean
-      required:
-      - page
-      - take
-      - itemCount
-      - pageCount
-      - hasPreviousPage
-      - hasNextPage
-    BackgroundSound:
-      type: string
-      enum:
-      - DEFAULT
-      - 'OFF'
-      - OFFICE
-    ChatProvider:
-      type: string
-      enum:
-      - OPENAI
-      - GROQ
     NodeType:
       type: string
       enum:
@@ -532,52 +578,6 @@ components:
       - PROMPT
       - ACTION
       - CONDITION
-    NodeDto:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        workflowId:
-          type: string
-        type:
-          $ref: '#/components/schemas/NodeType'
-        builderPositionX:
-          type: number
-        builderPositionY:
-          type: number
-        error:
-          type: string
-      required:
-      - id
-      - name
-      - workflowId
-      - type
-      - builderPositionX
-      - builderPositionY
-      - error
-    UpdateNodeDto:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        type:
-          $ref: '#/components/schemas/NodeType'
-        builderPositionX:
-          type: number
-        builderPositionY:
-          type: number
-    VoiceProvider:
-      type: string
-      enum:
-      - ELEVENLABS
-      - PLAYHT
-      - OPENAI
   securitySchemes:
     api_key:
       type: apiKey

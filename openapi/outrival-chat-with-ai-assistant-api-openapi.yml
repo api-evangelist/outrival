@@ -76,13 +76,6 @@ components:
       - role
       - channel
       - metadata
-    AiChatChannel:
-      type: string
-      description: Message channel (text | voice | video)
-      enum:
-      - SMS
-      - VOICE
-      - TEXT
     AiChatMessageRole:
       type: string
       description: Role of the sender (user | assistant| system | tool)
@@ -91,6 +84,13 @@ components:
       - TOOL
       - USER
       - SYSTEM
+    AiChatChannel:
+      type: string
+      description: Message channel (text | voice | video)
+      enum:
+      - SMS
+      - VOICE
+      - TEXT
     CreateMessageDto_2:
       type: object
       properties:
@@ -108,12 +108,6 @@ components:
       - aiChatId
       - role
       - channel
-    AiChatChannel_2:
-      type: string
-      enum:
-      - SMS
-      - VOICE
-      - TEXT
     AiChatMessageRole_2:
       type: string
       enum:
@@ -121,6 +115,12 @@ components:
       - TOOL
       - USER
       - SYSTEM
+    AiChatChannel_2:
+      type: string
+      enum:
+      - SMS
+      - VOICE
+      - TEXT
   securitySchemes:
     api_key:
       type: apiKey

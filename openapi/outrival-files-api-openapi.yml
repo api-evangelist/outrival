@@ -126,51 +126,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PageDto:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            type: array
-        meta:
-          $ref: '#/components/schemas/PageMetaDto'
-      required:
-      - data
-      - meta
-    FileDownloadLinkDto:
-      type: object
-      properties:
-        url:
-          type: string
-      required:
-      - url
-    File:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        organizationId:
-          type: string
-        size:
-          type: number
-        metadata:
-          type: object
-        mimeType:
-          type: string
-        createdAt:
-          format: date-time
-          type: string
-      required:
-      - id
-      - name
-      - organizationId
-      - size
-      - metadata
-      - mimeType
-      - createdAt
     FileUploadDto:
       type: object
       properties:
@@ -203,6 +158,39 @@ components:
       - pageCount
       - hasPreviousPage
       - hasNextPage
+    File:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        organizationId:
+          type: string
+        size:
+          type: number
+        metadata:
+          type: object
+        mimeType:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+      required:
+      - id
+      - name
+      - organizationId
+      - size
+      - metadata
+      - mimeType
+      - createdAt
+    FileDownloadLinkDto:
+      type: object
+      properties:
+        url:
+          type: string
+      required:
+      - url
     DeletedFile:
       type: object
       properties:
@@ -210,6 +198,18 @@ components:
           type: string
       required:
       - id
+    PageDto:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: array
+        meta:
+          $ref: '#/components/schemas/PageMetaDto'
+      required:
+      - data
+      - meta
   securitySchemes:
     api_key:
       type: apiKey

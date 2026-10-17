@@ -62,11 +62,33 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SmsProvider:
-      type: string
-      enum:
-      - OPENAI
-      - GROQ
+    SmsConfigurationUpdateDto:
+      type: object
+      properties:
+        initialMessage:
+          type: string
+        prompt:
+          type: string
+        resources:
+          type: string
+        provider:
+          $ref: '#/components/schemas/SmsProvider'
+        model:
+          $ref: '#/components/schemas/SmsModel'
+        temperature:
+          type: number
+        maxTokensOutput:
+          type: number
+        smsMode:
+          type: boolean
+        voiceCallMode:
+          type: boolean
+        keywords:
+          type: string
+        functions:
+          type: array
+          items:
+            type: object
     SmsModel:
       type: string
       enum:
@@ -78,6 +100,11 @@ components:
       - LLAMA_3_8B
       - LLAMA_3_1_405B_REASONING
       - MIXTRAL
+    SmsProvider:
+      type: string
+      enum:
+      - OPENAI
+      - GROQ
     SmsConfiguration:
       type: object
       properties:
@@ -129,33 +156,6 @@ components:
       - ragTriggerTopics
       - preserveRagResult
       - functions
-    SmsConfigurationUpdateDto:
-      type: object
-      properties:
-        initialMessage:
-          type: string
-        prompt:
-          type: string
-        resources:
-          type: string
-        provider:
-          $ref: '#/components/schemas/SmsProvider'
-        model:
-          $ref: '#/components/schemas/SmsModel'
-        temperature:
-          type: number
-        maxTokensOutput:
-          type: number
-        smsMode:
-          type: boolean
-        voiceCallMode:
-          type: boolean
-        keywords:
-          type: string
-        functions:
-          type: array
-          items:
-            type: object
   securitySchemes:
     api_key:
       type: apiKey

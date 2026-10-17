@@ -132,15 +132,6 @@ components:
           type: string
         testValue:
           type: string
-    CreateVariableDto:
-      type: object
-      properties:
-        name:
-          type: string
-        testValue:
-          type: string
-      required:
-      - name
     VariableDto:
       type: object
       properties:
@@ -152,6 +143,15 @@ components:
           type: string
       required:
       - id
+      - name
+    CreateVariableDto:
+      type: object
+      properties:
+        name:
+          type: string
+        testValue:
+          type: string
+      required:
       - name
   securitySchemes:
     api_key:

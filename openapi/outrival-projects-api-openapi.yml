@@ -207,12 +207,13 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    WorkflowModality:
-      type: string
-      enum:
-      - TEXT
-      - VOICE
-      - SMS
+    UpdateProjectDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
     WorkflowDeploymentType:
       type: string
       enum:
@@ -225,34 +226,15 @@ components:
       - PHONE_INBOUND
       - SLACK
       - API
-    PageDto:
+    CreateProjectDto:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            type: array
-        meta:
-          $ref: '#/components/schemas/PageMetaDto'
-      required:
-      - data
-      - meta
-    WorkflowDeploymentDto:
-      type: object
-      properties:
-        id:
+        name:
           type: string
-        type:
-          $ref: '#/components/schemas/WorkflowDeploymentType'
-        workflowId:
-          type: string
-        enabled:
-          type: boolean
-        phoneNumberId:
+        description:
           type: string
       required:
-      - id
-      - type
+      - name
     WorkflowDto:
       type: object
       properties:
@@ -276,6 +258,11 @@ components:
       - name
       - type
       - modality
+    WorkflowType:
+      type: string
+      enum:
+      - SIMPLE
+      - ADVANCED
     PageMetaDto:
       type: object
       properties:
@@ -298,27 +285,6 @@ components:
       - pageCount
       - hasPreviousPage
       - hasNextPage
-    WorkflowType:
-      type: string
-      enum:
-      - SIMPLE
-      - ADVANCED
-    UpdateProjectDto:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-    CreateProjectDto:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-      required:
-      - name
     ProjectDto:
       type: object
       properties:
@@ -334,6 +300,40 @@ components:
       required:
       - id
       - name
+    WorkflowDeploymentDto:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/WorkflowDeploymentType'
+        workflowId:
+          type: string
+        enabled:
+          type: boolean
+        phoneNumberId:
+          type: string
+      required:
+      - id
+      - type
+    PageDto:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: array
+        meta:
+          $ref: '#/components/schemas/PageMetaDto'
+      required:
+      - data
+      - meta
+    WorkflowModality:
+      type: string
+      enum:
+      - TEXT
+      - VOICE
+      - SMS
   securitySchemes:
     api_key:
       type: apiKey

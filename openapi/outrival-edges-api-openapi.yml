@@ -121,6 +121,13 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    HandlePosition:
+      type: string
+      enum:
+      - LEFT
+      - RIGHT
+      - TOP
+      - BOTTOM
     UpdateEdgeDto:
       type: object
       properties:
@@ -138,34 +145,6 @@ components:
           $ref: '#/components/schemas/HandlePosition'
         targetHandlePosition:
           $ref: '#/components/schemas/HandlePosition'
-    CreateEdgeDto:
-      type: object
-      properties:
-        workflowId:
-          type: string
-        sourceNodeId:
-          type: string
-        targetNodeId:
-          type: string
-        name:
-          type: string
-        functionCondition:
-          type: string
-        sourceHandlePosition:
-          $ref: '#/components/schemas/HandlePosition'
-        targetHandlePosition:
-          $ref: '#/components/schemas/HandlePosition'
-      required:
-      - workflowId
-      - sourceNodeId
-      - targetNodeId
-    HandlePosition:
-      type: string
-      enum:
-      - LEFT
-      - RIGHT
-      - TOP
-      - BOTTOM
     EdgeDto:
       type: object
       properties:
@@ -187,6 +166,27 @@ components:
           $ref: '#/components/schemas/HandlePosition'
       required:
       - id
+      - workflowId
+      - sourceNodeId
+      - targetNodeId
+    CreateEdgeDto:
+      type: object
+      properties:
+        workflowId:
+          type: string
+        sourceNodeId:
+          type: string
+        targetNodeId:
+          type: string
+        name:
+          type: string
+        functionCondition:
+          type: string
+        sourceHandlePosition:
+          $ref: '#/components/schemas/HandlePosition'
+        targetHandlePosition:
+          $ref: '#/components/schemas/HandlePosition'
+      required:
       - workflowId
       - sourceNodeId
       - targetNodeId

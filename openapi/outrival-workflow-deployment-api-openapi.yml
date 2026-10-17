@@ -108,6 +108,19 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    CreateWorkflowDeploymentDto:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/WorkflowDeploymentType'
+        projectId:
+          type: string
+        enabled:
+          type: boolean
+      required:
+      - type
+      - projectId
+      - enabled
     WorkflowDeploymentUpdateDto:
       type: object
       properties:
@@ -145,19 +158,6 @@ components:
       required:
       - id
       - type
-    CreateWorkflowDeploymentDto:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/WorkflowDeploymentType'
-        projectId:
-          type: string
-        enabled:
-          type: boolean
-      required:
-      - type
-      - projectId
-      - enabled
   securitySchemes:
     api_key:
       type: apiKey
